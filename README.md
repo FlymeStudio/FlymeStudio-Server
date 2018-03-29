@@ -13,14 +13,23 @@
 ### Spring
 - [5.0.4.RELEASE](https://projects.spring.io/spring-framework/#quick-start)
 ```
-<dependencies>
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>5.0.4.RELEASE</version>
-    </dependency>
-</dependencies>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.0.4.RELEASE</version>
+</dependency>
 ```
 
+### Fastjson
+- [1.2.47](http://mvnrepository.com/artifact/com.alibaba/fastjson/1.2.47)
+```
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>fastjson</artifactId>
+    <version>1.2.47</version>
+</dependency>
+```
+
+---
 ## Feedback
 - [Issues](https://github.com/FlymeStudio/FlymeStudio-Server/issues)

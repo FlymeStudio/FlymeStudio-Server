@@ -9,5 +9,6 @@
 
 	<context:annotation-config />
 
-	<!-- Definition for student bean -->
+	<bean id="user" class="bean.User">
+	</bean>
 </beans>
