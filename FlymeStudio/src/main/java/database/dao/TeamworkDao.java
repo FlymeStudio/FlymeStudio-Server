@@ -1,6 +1,10 @@
 package database.dao;
 
+import javax.sql.DataSource;
+
 public interface TeamworkDao {
+	void setDataSource(DataSource dataSource);
+
 	void getTeamInfo(String id);
 
 	void replyMsg(String tel, String messageId, boolean result);
