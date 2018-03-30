@@ -23,13 +23,31 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- springframework -->
+		<!-- spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>5.0.4.RELEASE</version>
 		</dependency>
-		<!-- json -->
+		<!-- spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.0.4.RELEASE</version>
+		</dependency>
+		<!-- spring-transaction -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.0.4.RELEASE</version>
+		</dependency>
+		<!-- mysql-connector -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+		</dependency>
+		<!-- fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>

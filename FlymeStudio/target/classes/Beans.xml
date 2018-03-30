@@ -9,6 +9,36 @@
 
 	<context:annotation-config />
 
-	<bean id="user" class="bean.User">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/flymestudio" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
+	</bean>
+
+	<bean id="accountTemplate"
+		class="database.template.AccountTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="informationTemplate"
+		class="database.template.InformationTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="projectTemplate"
+		class="database.template.ProjectTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="summaryTemplate"
+		class="database.template.SummaryTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="teamworkTemplate"
+		class="database.template.TeamworkTemplate">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>
