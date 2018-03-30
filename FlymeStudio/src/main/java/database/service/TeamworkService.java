@@ -1,4 +1,4 @@
-package database.template;
+package database.service;
 
 import javax.sql.DataSource;
 
@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import database.dao.TeamworkDao;
 
-public class TeamworkTemplate implements TeamworkDao {
+public class TeamworkService implements TeamworkDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 

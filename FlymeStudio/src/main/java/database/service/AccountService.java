@@ -1,12 +1,14 @@
-package database.template;
+package database.service;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import database.dao.AccountDao;
 
-public class AccountTemplate implements AccountDao {
+@Service
+public class AccountService implements AccountDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 

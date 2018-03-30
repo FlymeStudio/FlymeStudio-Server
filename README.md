@@ -22,6 +22,26 @@
 </dependency>
 ```
 
+### Spring Web
+- [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-web/5.0.4.RELEASE)
+```
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>5.0.4.RELEASE</version>
+</dependency>
+```
+
+### Spring Web MVC
+- [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-webmvc/5.0.4.RELEASE)
+```
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.0.4.RELEASE</version>
+</dependency>
+```
+
 ### Spring JDBC
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-jdbc/5.0.4.RELEASE)
 ```

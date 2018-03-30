@@ -1,4 +1,4 @@
-package database.template;
+package database.service;
 
 import javax.sql.DataSource;
 
@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import database.dao.ProjectDao;
 
-public class ProjectTemplate implements ProjectDao {
+public class ProjectService implements ProjectDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 
