@@ -1,33 +1,32 @@
 package database.dao;
 
-import javax.sql.DataSource;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 public interface TeamworkDao {
-	void setDataSource(DataSource dataSource);
+	JSONObject getTeamInfo(String id);
 
-	void getTeamInfo(String id);
+	boolean replyMsg(String tel, String messageId, boolean result);
 
-	void replyMsg(String tel, String messageId, boolean result);
+	JSONArray viewTeams(String tel);
 
-	void viewTeams(String tel);
+	JSONArray searchUser(String tel, String content);
 
-	void searchUser(String tel, String content);
+	boolean invite(String tel, String toTel, String teamId);
 
-	void invite(String tel, String toTel, String teamId);
+	boolean disband(String tel, String teamId);
 
-	void disband(String tel, String teamId);
+	JSONArray viewMemberProjects(String tel, String memberTel);
 
-	void viewMemberProjects(String tel, String memberTel);
+	JSONArray viewMemberSummaries(String tel, String memberTel);
 
-	void viewMemberSummaries(String tel, String memberTel);
+	boolean setPermission(String tel, String memberTel, String teamId, int permission);
 
-	void setPermission(String tel, String memberTel, String teamId, int permission);
+	boolean remove(String tel, String memberTel, String teamId);
 
-	void remove(String tel, String memberTel, String teamId);
+	JSONArray searchTeam(String tel, String content);
 
-	void searchTeam(String tel, String content);
+	boolean join(String tel, String teamId);
 
-	void join(String tel, String teamId);
-
-	void create(String tel, String name);
+	boolean create(String tel, String name);
 }

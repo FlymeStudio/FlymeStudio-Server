@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.List;
+
 public class UserBean {
 	/**
 	 * 用户电话，11位
@@ -20,6 +22,11 @@ public class UserBean {
 	 * 用户密码，最大8位
 	 */
 	private String password;
+
+	/**
+	 * 用户消息
+	 */
+	private List<MessageBean> messages;
 
 	public void setTel(int tel) {
 		this.tel = tel;
@@ -51,5 +58,13 @@ public class UserBean {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setMessages(List<MessageBean> messages) {
+		this.messages = messages;
+	}
+
+	public List<MessageBean> getMessages() {
+		return messages;
 	}
 }

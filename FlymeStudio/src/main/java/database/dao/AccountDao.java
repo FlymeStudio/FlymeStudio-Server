@@ -1,15 +1,13 @@
 package database.dao;
 
-import javax.sql.DataSource;
+import com.alibaba.fastjson.JSONObject;
 
 public interface AccountDao {
-	void setDataSource(DataSource dataSource);
-	
-	void signIn(String id, String password);
+	JSONObject signIn(String id, String password);
 
-	void signUp(String name, String tel, String email, String password);
+	boolean signUp(String name, String tel, String email, String password);
 
-	void signOut(String tel);
+	boolean signOut(String tel);
 
-	void retrieve(String name, String tel, String email);
+	boolean retrieve(String name, String tel, String email);
 }

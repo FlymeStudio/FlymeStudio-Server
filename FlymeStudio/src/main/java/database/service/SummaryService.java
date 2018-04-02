@@ -6,12 +6,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import database.dao.SummaryDao;
 
-public class SummaryService implements SummaryDao {
-	private DataSource dataSource;
+public class SummaryService extends AbstractService implements SummaryDao {
 	private JdbcTemplate jdbcTemplate;
 
+	@Override
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
 
 	}

@@ -1,5 +1,5 @@
 package controller;
 
-public class SummaryController {
+public class SummaryController{
 
 }
