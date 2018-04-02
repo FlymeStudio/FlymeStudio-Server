@@ -4,81 +4,70 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import database.dao.TeamworkDao;
 
-public class TeamworkService implements TeamworkDao {
-	private DataSource dataSource;
+public class TeamworkService extends AbstractService implements TeamworkDao {
 	private JdbcTemplate jdbcTemplate;
 
+	@Override
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
 
 	}
 
-	public void getTeamInfo(String id) {
-		// TODO Auto-generated method stub
-
+	public JSONObject getTeamInfo(String id) {
+		return null;
 	}
 
-	public void replyMsg(String tel, String messageId, boolean result) {
-		// TODO Auto-generated method stub
-
+	public boolean replyMsg(String tel, String messageId, boolean result) {
+		return false;
 	}
 
-	public void viewTeams(String tel) {
-		// TODO Auto-generated method stub
-
+	public JSONArray viewTeams(String tel) {
+		return null;
 	}
 
-	public void searchUser(String tel, String content) {
-		// TODO Auto-generated method stub
-
+	public JSONArray searchUser(String tel, String content) {
+		return null;
 	}
 
-	public void invite(String tel, String toTel, String teamId) {
-		// TODO Auto-generated method stub
-
+	public boolean invite(String tel, String toTel, String teamId) {
+		return false;
 	}
 
-	public void disband(String tel, String teamId) {
-		// TODO Auto-generated method stub
-
+	public boolean disband(String tel, String teamId) {
+		return false;
 	}
 
-	public void viewMemberProjects(String tel, String memberTel) {
-		// TODO Auto-generated method stub
-
+	public JSONArray viewMemberProjects(String tel, String memberTel) {
+		return null;
 	}
 
-	public void viewMemberSummaries(String tel, String memberTel) {
-		// TODO Auto-generated method stub
-
+	public JSONArray viewMemberSummaries(String tel, String memberTel) {
+		return null;
 	}
 
-	public void setPermission(String tel, String memberTel, String teamId, int permission) {
-		// TODO Auto-generated method stub
-
+	public boolean setPermission(String tel, String memberTel, String teamId, int permission) {
+		return false;
 	}
 
-	public void remove(String tel, String memberTel, String teamId) {
-		// TODO Auto-generated method stub
-
+	public boolean remove(String tel, String memberTel, String teamId) {
+		return false;
 	}
 
-	public void searchTeam(String tel, String content) {
-		// TODO Auto-generated method stub
-
+	public JSONArray searchTeam(String tel, String content) {
+		return null;
 	}
 
-	public void join(String tel, String teamId) {
-		// TODO Auto-generated method stub
-
+	public boolean join(String tel, String teamId) {
+		return false;
 	}
 
-	public void create(String tel, String name) {
-		// TODO Auto-generated method stub
-
+	public boolean create(String tel, String name) {
+		return false;
 	}
 
 }

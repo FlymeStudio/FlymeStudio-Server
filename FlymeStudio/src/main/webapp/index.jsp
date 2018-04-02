@@ -30,7 +30,7 @@ html {
 }
 
 </style>
-<title id="title">FlymeStudio</title>
+<title>FlymeStudio</title>
 </head>
 <body>
 <div id="welcome">

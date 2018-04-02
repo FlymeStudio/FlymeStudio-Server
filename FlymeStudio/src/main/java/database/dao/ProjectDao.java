@@ -1,17 +1,15 @@
 package database.dao;
 
-import javax.sql.DataSource;
+import com.alibaba.fastjson.JSONArray;
 
 public interface ProjectDao {
-	void setDataSource(DataSource dataSource);
+	JSONArray get(String tel);
 
-	void get(String tel);
+	boolean create(String tel, String type, String date, String title, String content, String plans);
 
-	void create(String tel, String type, String date, String title, String content, String plans);
+	JSONArray search(String type, String date, String title, String content, String plans);
 
-	void search(String type, String data, String title, String content, String plans);
+	boolean modify(String tel, String id, String type, String date, String title, String content, String plans);
 
-	void modify(String tel, String id, String type, String date, String title, String content, String plans);
-
-	void delete(String tel, String id);
+	boolean delete(String tel, String id);
 }
