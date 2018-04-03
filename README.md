@@ -82,6 +82,16 @@
 </dependency>
 ```
 
+### Log4j
+- [1.2.17](http://mvnrepository.com/artifact/log4j/log4j/1.2.17)
+```
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+```
+
 ---
 ## Feedback
 - [Issues](https://github.com/FlymeStudio/FlymeStudio-Server/issues)
