@@ -12,6 +12,17 @@
 ---
 ## Dependency
 
+### Servlet
+- [2.5](http://www.mvnrepository.com/artifact/javax.servlet/servlet-api/2.5)
+```
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <scope>provided</scope>
+</dependency>
+```
+
 ### Spring Content
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-context/5.0.4.RELEASE)
 ```
@@ -79,6 +90,16 @@
     <groupId>com.alibaba</groupId>
     <artifactId>fastjson</artifactId>
     <version>1.2.47</version>
+</dependency>
+```
+
+### Log4j
+- [1.2.17](http://mvnrepository.com/artifact/log4j/log4j/1.2.17)
+```
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
 </dependency>
 ```
 
