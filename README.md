@@ -33,6 +33,16 @@
 </dependency>
 ```
 
+### Spring Beans
+- [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-beans/5.0.4.RELEASE)
+```
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>5.0.4.RELEASE</version>
+</dependency>
+```
+
 ### Spring Web
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-web/5.0.4.RELEASE)
 ```

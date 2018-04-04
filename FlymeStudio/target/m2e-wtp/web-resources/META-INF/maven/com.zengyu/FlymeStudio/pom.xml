@@ -29,6 +29,12 @@
 			<artifactId>spring-context</artifactId>
 			<version>5.0.4.RELEASE</version>
 		</dependency>
+		<!-- spring-beans -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>5.0.4.RELEASE</version>
+		</dependency>
 		<!-- spring-web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -65,6 +71,7 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.47</version>
 		</dependency>
+		<!-- logger -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
