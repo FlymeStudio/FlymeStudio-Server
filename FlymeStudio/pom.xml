@@ -6,7 +6,7 @@
 	<artifactId>FlymeStudio</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FlymeStudio Maven Webapp</name>
+	<name>Flyme Studio Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<!-- junit -->
