@@ -18,10 +18,12 @@ import com.zengyu.demo.others.Const;
 
 @Service
 public class AccountService extends AbstractService implements AccountDao {
+	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		System.out.println("jdbsTemplate is inited: " + (jdbcTemplate == null));
 	}

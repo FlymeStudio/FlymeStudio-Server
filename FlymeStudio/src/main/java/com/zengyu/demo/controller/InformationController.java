@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
 import com.zengyu.demo.dao.InformationDao;
+import com.zengyu.demo.others.ResponseObject;
 
 @Controller
 @RequestMapping("/Information")
@@ -28,9 +28,9 @@ public class InformationController {
 	public String modify(@RequestParam String name, @RequestParam String tel, @RequestParam String email,
 			@RequestParam String password) {
 		logger.trace("name:\t" + name + "\ttel:\t" + tel + "\temail:\t" + email + "\tpassword:\t" + password);
-		JSONObject jsonObject = new JSONObject();
-		boolean data = informationDao.modify(name, tel, email, password);
-		jsonObject.put("result", data);
-		return jsonObject.toJSONString();
+		ResponseObject responseObject = new ResponseObject();
+		boolean result = informationDao.modify(name, tel, email, password);
+		responseObject.setResult(result);
+		return responseObject.toJSONString();
 	}
 }

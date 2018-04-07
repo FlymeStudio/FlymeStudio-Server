@@ -1,6 +1,5 @@
 package com.zengyu.demo.controller;
 
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zengyu.demo.dao.AccountDao;
+import com.zengyu.demo.others.ResponseObject;
 
 @Controller
 @RequestMapping("/Account")
@@ -28,15 +28,13 @@ public class AccountController {
 	@ResponseBody
 	public String signIn(@RequestParam String id, @RequestParam String password) {
 		logger.trace("id:\t" + id + "\tpassword:\t" + password);
-		JSONObject jsonObject = new JSONObject();
-		boolean isDataExist = false;
+		ResponseObject responseObject = new ResponseObject();
 		JSONObject data = accountDao.signIn(id, password);
 		if (data != null) {
-			isDataExist = true;
-			jsonObject.put("data", data);
+			responseObject.setResult(true);
+			responseObject.setData(data);
 		}
-		jsonObject.put("result", isDataExist);
-		return jsonObject.toJSONString();
+		return responseObject.toJSONString();
 	}
 
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
@@ -44,20 +42,20 @@ public class AccountController {
 	public String signUp(@RequestParam String name, @RequestParam String tel, @RequestParam String email,
 			@RequestParam String password) {
 		logger.trace("name:\t" + name + "\ttel:\t" + tel + "\temail:\t" + email + "\tpassword:\t" + password);
-		JSONObject jsonObject = new JSONObject();
-		boolean data = accountDao.signUp(name, tel, email, password);
-		jsonObject.put("result", data);
-		return jsonObject.toJSONString();
+		ResponseObject responseObject = new ResponseObject();
+		boolean result = accountDao.signUp(name, tel, email, password);
+		responseObject.setResult(result);
+		return responseObject.toJSONString();
 	}
 
 	@RequestMapping(value = "/signOut", method = RequestMethod.POST)
 	@ResponseBody
 	public String signOut(@RequestParam String tel) {
 		logger.trace("tel:\t" + tel);
-		JSONObject jsonObject = new JSONObject();
-		boolean data = accountDao.signOut(tel);
-		jsonObject.put("result", data);
-		return jsonObject.toJSONString();
+		ResponseObject responseObject = new ResponseObject();
+		boolean result = accountDao.signOut(tel);
+		responseObject.setResult(result);
+		return responseObject.toJSONString();
 	}
 
 	@RequestMapping(value = "/retrieve", method = RequestMethod.POST)
