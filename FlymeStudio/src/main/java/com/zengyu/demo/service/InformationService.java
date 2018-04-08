@@ -8,8 +8,6 @@ import com.zengyu.demo.dao.InformationDao;
 
 @Service
 public class InformationService extends AbstractService implements InformationDao {
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {

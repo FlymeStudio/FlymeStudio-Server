@@ -10,8 +10,6 @@ import com.zengyu.demo.dao.ProjectDao;
 
 @Service
 public class ProjectService extends AbstractService implements ProjectDao {
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {

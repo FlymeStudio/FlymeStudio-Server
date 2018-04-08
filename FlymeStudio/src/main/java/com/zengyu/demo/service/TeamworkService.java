@@ -11,8 +11,6 @@ import com.zengyu.demo.dao.TeamworkDao;
 
 @Service
 public class TeamworkService extends AbstractService implements TeamworkDao {
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {
