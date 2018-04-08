@@ -11,8 +11,8 @@ public class MessageMapper implements RowMapper<MessageVO> {
 		MessageVO bean = new MessageVO();
 		bean.setId(arg0.getInt("id"));
 		bean.setType(arg0.getInt("type"));
-		bean.setSender(arg0.getInt("sender"));
-		bean.setReciever(arg0.getInt("receiver"));
+		bean.setSender(arg0.getString("sender"));
+		bean.setReciever(arg0.getString("receiver"));
 		bean.setTeamid(arg0.getInt("teamid"));
 		return bean;
 	}

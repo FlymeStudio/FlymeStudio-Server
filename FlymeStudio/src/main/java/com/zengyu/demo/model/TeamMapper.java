@@ -13,7 +13,7 @@ public class TeamMapper implements RowMapper<TeamVO> {
 		TeamVO bean = new TeamVO();
 		bean.setId(arg0.getInt("id"));
 		bean.setName(arg0.getString("name"));
-		bean.setTel(arg0.getInt("tel"));
+		bean.setTel(arg0.getString("tel"));
 		JSONArray array = JSONArray.parseArray(arg0.getString("members"));
 		bean.setMembers(array.toJavaList(MemberVO.class));
 		return bean;

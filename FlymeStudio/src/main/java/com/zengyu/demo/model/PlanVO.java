@@ -2,7 +2,7 @@ package com.zengyu.demo.model;
 
 public class PlanVO {
 	/**
-	 * 计划编号，11位
+	 * 计划编号
 	 */
 	private int id;
 

@@ -4,7 +4,7 @@ public class MemberVO {
 	/**
 	 * 成员电话，11位
 	 */
-	private int tel;
+	private String tel;
 
 	/**
 	 * 成员姓名，最大4位
@@ -21,11 +21,11 @@ public class MemberVO {
 	 */
 	private int permission;
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 

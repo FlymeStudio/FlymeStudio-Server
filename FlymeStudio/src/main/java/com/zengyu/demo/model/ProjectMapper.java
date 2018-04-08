@@ -12,10 +12,10 @@ public class ProjectMapper implements RowMapper<ProjectVO> {
 	public ProjectVO mapRow(ResultSet arg0, int arg1) throws SQLException {
 		ProjectVO bean = new ProjectVO();
 		bean.setId(arg0.getInt("id"));
-		bean.setTel(arg0.getInt("tel"));
+		bean.setTel(arg0.getString("tel"));
 		bean.setPercent(0);
 		bean.setType(arg0.getInt("type"));
-		bean.setDate(arg0.getDate("date"));
+		bean.setDate(Long.valueOf(arg0.getString("date")));
 		bean.setTitle(arg0.getString("title"));
 		bean.setContent(arg0.getString("content"));
 		JSONArray array = JSONArray.parseArray(arg0.getString("plans"));

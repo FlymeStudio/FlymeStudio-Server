@@ -2,7 +2,7 @@ package com.zengyu.demo.model;
 
 public class MessageVO{
 	/**
-	 * 消息编号，最大11位
+	 * 消息编号，数据库递增产生
 	 */
 	private int id;
 
@@ -14,15 +14,15 @@ public class MessageVO{
 	/**
 	 * 发送人电话，11位
 	 */
-	private int sender;
+	private String sender;
 
 	/**
 	 * 接收人电话，11位
 	 */
-	private int reciever;
+	private String reciever;
 
 	/**
-	 * 团队编号，最大11位
+	 * 团队编号，数据库递增产生
 	 */
 	private int teamid;
 
@@ -42,19 +42,19 @@ public class MessageVO{
 		return type;
 	}
 
-	public void setSender(int sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
 	
-	public int getSender() {
+	public String getSender() {
 		return sender;
 	}
 
-	public void setReciever(int reciever) {
+	public void setReciever(String reciever) {
 		this.reciever = reciever;
 	}
 	
-	public int getReciever() {
+	public String getReciever() {
 		return reciever;
 	}
 

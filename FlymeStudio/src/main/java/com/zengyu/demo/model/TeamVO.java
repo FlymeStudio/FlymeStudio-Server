@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TeamVO {
 	/**
-	 * 团队编号，最大11位
+	 * 团队编号，数据库递增产生
 	 */
 	private int id;
 
@@ -16,7 +16,7 @@ public class TeamVO {
 	/**
 	 * 创建人电话，11位
 	 */
-	private int tel;
+	private String tel;
 
 	/**
 	 * 团队成员
@@ -39,11 +39,11 @@ public class TeamVO {
 		return name;
 	}
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 

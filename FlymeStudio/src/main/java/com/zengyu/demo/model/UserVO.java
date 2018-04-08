@@ -6,7 +6,7 @@ public class UserVO {
 	/**
 	 * 用户电话，11位
 	 */
-	private int tel;
+	private String tel;
 
 	/**
 	 * 用户姓名，最大4位
@@ -28,11 +28,11 @@ public class UserVO {
 	 */
 	private List<MessageVO> messages;
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 

@@ -1,6 +1,5 @@
 package com.zengyu.demo.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,21 +12,19 @@ import com.zengyu.demo.dao.ProjectDao;
 import com.zengyu.demo.others.ResponseObject;
 
 @Controller
-@RequestMapping("/Project")
+@RequestMapping(value = "/Project", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class ProjectController {
-	private Logger logger;
 	private ProjectDao projectDao;
 
 	@Autowired
 	public ProjectController(ProjectDao projectDao) {
 		this.projectDao = projectDao;
-		logger = Logger.getLogger(this.getClass().getSimpleName());
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.POST)
 	@ResponseBody
 	public String get(@RequestParam String tel) {
-		logger.trace("tel:\t" + tel);
+		System.out.println("tel:\t" + tel);
 		ResponseObject responseObject = new ResponseObject();
 		JSONArray data = projectDao.get(tel);
 		if (data != null) {

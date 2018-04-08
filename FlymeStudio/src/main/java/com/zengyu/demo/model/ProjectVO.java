@@ -1,18 +1,17 @@
 package com.zengyu.demo.model;
 
-import java.sql.Date;
 import java.util.List;
 
 public class ProjectVO {
 	/**
-	 * 任务编号，最大11位
+	 * 任务编号，数据库递增产生
 	 */
 	private int id;
 
 	/**
 	 * 创建人电话，11位
 	 */
-	private int tel;
+	private String tel;
 
 	/**
 	 * 任务完成度
@@ -27,7 +26,7 @@ public class ProjectVO {
 	/**
 	 * 任务日期
 	 */
-	private Date date;
+	private long date;
 
 	/**
 	 * 任务标题，最大16位
@@ -52,11 +51,11 @@ public class ProjectVO {
 		return id;
 	}
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 
@@ -76,11 +75,11 @@ public class ProjectVO {
 		return type;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 
-	public Date getDate() {
+	public long getDate() {
 		return date;
 	}
 

@@ -1,6 +1,5 @@
 package com.zengyu.demo.controller;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,21 +13,19 @@ import com.zengyu.demo.dao.TeamworkDao;
 import com.zengyu.demo.others.ResponseObject;
 
 @Controller
-@RequestMapping("/Teamwork")
+@RequestMapping(value = "/Teamwork", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class TeamworkController {
-	private Logger logger;
 	private TeamworkDao teamworkDao;
 
 	@Autowired
 	public TeamworkController(TeamworkDao teamworkDao) {
 		this.teamworkDao = teamworkDao;
-		logger = Logger.getLogger(this.getClass().getSimpleName());
 	}
 
 	@RequestMapping(value = "/getTeamInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String getTeamInfo(@RequestParam String id) {
-		logger.trace("id:\t" + id);
+		System.out.println("id:\t" + id);
 		ResponseObject responseObject = new ResponseObject();
 		JSONObject data = teamworkDao.getTeamInfo(id);
 		if (data != null) {
