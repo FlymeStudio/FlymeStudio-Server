@@ -22,22 +22,22 @@
 
 	<!-- Definition for service bean -->
 	<bean id="accountService"
-		class="com.zengyu.demo.service.AccountService">
+		class="com.zengyu.demo.service.AccountServiceImpl">
 	</bean>
 
 	<bean id="informationService"
-		class="com.zengyu.demo.service.InformationService">
+		class="com.zengyu.demo.service.InformationServiceImpl">
 	</bean>
 
 	<bean id="projectService"
-		class="com.zengyu.demo.service.ProjectService">
+		class="com.zengyu.demo.service.ProjectServiceImpl">
 	</bean>
 
 	<bean id="summaryService"
-		class="com.zengyu.demo.service.SummaryService">
+		class="com.zengyu.demo.service.SummaryServiceImpl">
 	</bean>
 
 	<bean id="teamworkService"
-		class="com.zengyu.demo.service.TeamworkService">
+		class="com.zengyu.demo.service.TeamworkServiceImpl">
 	</bean>
 </beans>

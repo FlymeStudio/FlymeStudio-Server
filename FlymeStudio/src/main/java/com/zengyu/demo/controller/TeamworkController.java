@@ -7,155 +7,94 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.zengyu.demo.dao.TeamworkDao;
-import com.zengyu.demo.others.ResponseObject;
+import com.zengyu.demo.service.TeamworkService;
 
 @Controller
 @RequestMapping(value = "/Teamwork", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class TeamworkController {
-	private TeamworkDao teamworkDao;
+	private TeamworkService teamworkDao;
 
 	@Autowired
-	public TeamworkController(TeamworkDao teamworkDao) {
+	public TeamworkController(TeamworkService teamworkDao) {
 		this.teamworkDao = teamworkDao;
 	}
 
 	@RequestMapping(value = "/getTeamInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String getTeamInfo(@RequestParam String id) {
-		System.out.println("id:\t" + id);
-		ResponseObject responseObject = new ResponseObject();
-		JSONObject data = teamworkDao.getTeamInfo(id);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.getTeamInfo(id);
 	}
 
 	@RequestMapping(value = "/replyMsg", method = RequestMethod.POST)
 	@ResponseBody
 	public String replyMsg(@RequestParam String tel, @RequestParam String messageId, @RequestParam boolean result) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean resultResponse = teamworkDao.replyMsg(tel, messageId, result);
-		responseObject.setResult(resultResponse);
-		return responseObject.toJSONString();
+		return teamworkDao.replyMsg(tel, messageId, result);
 	}
 
 	@RequestMapping(value = "/viewTeams", method = RequestMethod.POST)
 	@ResponseBody
 	public String viewTeams(@RequestParam String tel) {
-		ResponseObject responseObject = new ResponseObject();
-		JSONArray data = teamworkDao.viewTeams(tel);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.viewTeams(tel);
 	}
 
 	@RequestMapping(value = "/searchUser", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchUser(@RequestParam String tel, @RequestParam String content) {
-		ResponseObject responseObject = new ResponseObject();
-		JSONArray data = teamworkDao.searchUser(tel, content);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.searchUser(tel, content);
 	}
 
 	@RequestMapping(value = "/invite", method = RequestMethod.POST)
 	@ResponseBody
 	public String invite(@RequestParam String tel, @RequestParam String toTel, @RequestParam String teamId) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.invite(tel, toTel, teamId);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.invite(tel, toTel, teamId);
 	}
 
 	@RequestMapping(value = "/disband", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String disband(@RequestParam String tel, @RequestParam String teamId) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.disband(tel, teamId);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.disband(tel, teamId);
 	}
 
 	@RequestMapping(value = "/viewMemberProjects", method = RequestMethod.POST)
 	@ResponseBody
 	public String viewMemberProjects(@RequestParam String tel, @RequestParam String memberTel) {
-		ResponseObject responseObject = new ResponseObject();
-		JSONArray data = teamworkDao.viewMemberProjects(tel, memberTel);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.viewMemberProjects(tel, memberTel);
 	}
 
 	@RequestMapping(value = "/viewMemberSummaries", method = RequestMethod.POST)
 	@ResponseBody
 	public String viewMemberSummaries(@RequestParam String tel, @RequestParam String memberTel) {
-		ResponseObject responseObject = new ResponseObject();
-		JSONArray data = teamworkDao.viewMemberSummaries(tel, memberTel);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.viewMemberSummaries(tel, memberTel);
 	}
 
 	@RequestMapping(value = "/setPermission", method = RequestMethod.PUT)
 	@ResponseBody
 	public String setPermission(@RequestParam String tel, @RequestParam String memberTel, @RequestParam String teamId,
 			@RequestParam int permission) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.setPermission(tel, memberTel, teamId, permission);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.setPermission(tel, memberTel, teamId, permission);
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String remove(@RequestParam String tel, @RequestParam String memberTel, @RequestParam String teamId) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.remove(tel, memberTel, teamId);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.remove(tel, memberTel, teamId);
 	}
 
 	@RequestMapping(value = "/searchTeam", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchTeam(@RequestParam String tel, @RequestParam String content) {
-		ResponseObject responseObject = new ResponseObject();
-		JSONArray data = teamworkDao.searchTeam(tel, content);
-		if (data != null) {
-			responseObject.setResult(true);
-			responseObject.setData(data);
-		}
-		return responseObject.toJSONString();
+		return teamworkDao.searchTeam(tel, content);
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
 	public String join(@RequestParam String tel, @RequestParam String teamId) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.join(tel, teamId);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.join(tel, teamId);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam String name) {
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = teamworkDao.create(tel, name);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return teamworkDao.create(tel, name);
 	}
 }

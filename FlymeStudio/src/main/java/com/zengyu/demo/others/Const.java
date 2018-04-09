@@ -8,6 +8,7 @@ public final class Const {
 		public final static String COLUMN_EMAIL = "email";
 		public final static String COLUMN_PASSWORD = "password";
 		public final static String COLUMN_MESSAGES = "messages";
+		public final static String COLUMN_TEAMS = "teams";
 	}
 
 	public static class Message {

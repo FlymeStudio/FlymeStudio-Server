@@ -24,9 +24,9 @@ public class UserVO {
 	private String password;
 
 	/**
-	 * 用户消息
+	 * 所属团队列表
 	 */
-	private List<MessageVO> messages;
+	private List<String> teams;
 
 	public void setTel(String tel) {
 		this.tel = tel;
@@ -60,11 +60,11 @@ public class UserVO {
 		return password;
 	}
 
-	public void setMessages(List<MessageVO> messages) {
-		this.messages = messages;
+	public void setTeams(List<String> teams) {
+		this.teams = teams;
 	}
 
-	public List<MessageVO> getMessages() {
-		return messages;
+	public List<String> getTeams() {
+		return teams;
 	}
 }

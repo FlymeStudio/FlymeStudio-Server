@@ -14,6 +14,7 @@
 
 ### Servlet
 - [2.5](http://www.mvnrepository.com/artifact/javax.servlet/servlet-api/2.5)
+
 ```
 <dependency>
     <groupId>javax.servlet</groupId>
@@ -25,6 +26,7 @@
 
 ### Spring Content
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-context/5.0.4.RELEASE)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -35,6 +37,7 @@
 
 ### Spring Beans
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-beans/5.0.4.RELEASE)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -45,6 +48,7 @@
 
 ### Spring Web
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-web/5.0.4.RELEASE)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -55,6 +59,7 @@
 
 ### Spring Web MVC
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-webmvc/5.0.4.RELEASE)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -65,6 +70,7 @@
 
 ### Spring JDBC
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-jdbc/5.0.4.RELEASE)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -75,6 +81,7 @@
 
 ### Spring Transaction
 - [5.0.4.RELEASE](http://www.mvnrepository.com/artifact/org.springframework/spring-tx)
+
 ```
 <dependency>
     <groupId>org.springframework</groupId>
@@ -85,6 +92,7 @@
 
 ### Mysql Connector
 - [6.0.6](http://www.mvnrepository.com/artifact/mysql/mysql-connector-java/6.0.6)
+
 ```
 <dependency>
     <groupId>mysql</groupId>
@@ -95,6 +103,7 @@
 
 ### Fastjson
 - [1.2.47](http://mvnrepository.com/artifact/com.alibaba/fastjson/1.2.47)
+
 ```
 <dependency>
     <groupId>com.alibaba</groupId>
@@ -105,6 +114,7 @@
 
 ### Log4j
 - [1.2.17](http://mvnrepository.com/artifact/log4j/log4j/1.2.17)
+
 ```
 <dependency>
     <groupId>log4j</groupId>
@@ -112,6 +122,11 @@
     <version>1.2.17</version>
 </dependency>
 ```
+
+---
+## Structure
+
+![](structure.png)
 
 ---
 ## Feedback

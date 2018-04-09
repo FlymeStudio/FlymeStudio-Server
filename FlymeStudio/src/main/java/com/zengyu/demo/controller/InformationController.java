@@ -7,16 +7,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zengyu.demo.dao.InformationDao;
-import com.zengyu.demo.others.ResponseObject;
+import com.zengyu.demo.service.InformationService;
 
 @Controller
 @RequestMapping(value = "/Information", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class InformationController {
-	private InformationDao informationDao;
+	private InformationService informationDao;
 
 	@Autowired
-	public InformationController(InformationDao informationDao) {
+	public InformationController(InformationService informationDao) {
 		this.informationDao = informationDao;
 	}
 
@@ -24,11 +23,6 @@ public class InformationController {
 	@ResponseBody
 	public String modify(@RequestParam String oldTel, @RequestParam String name, @RequestParam String tel,
 			@RequestParam String email, @RequestParam String password) {
-		System.out.println("oldTel:\t" + oldTel + "name:\t" + name + "\ttel:\t" + tel + "\temail:\t" + email
-				+ "\tpassword:\t" + password);
-		ResponseObject responseObject = new ResponseObject();
-		boolean result = informationDao.modify(oldTel, name, tel, email, password);
-		responseObject.setResult(result);
-		return responseObject.toJSONString();
+		return informationDao.modify(oldTel, name, tel, email, password);
 	}
 }
