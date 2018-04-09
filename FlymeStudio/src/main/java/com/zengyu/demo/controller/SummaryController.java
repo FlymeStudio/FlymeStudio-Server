@@ -9,11 +9,11 @@ import com.zengyu.demo.service.SummaryService;
 @Controller
 @RequestMapping(value = "/Summary", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class SummaryController {
-	private SummaryService summaryDao;
+	private SummaryService summaryService;
 
 	@Autowired
-	public SummaryController(SummaryService summaryDao) {
-		this.summaryDao = summaryDao;
+	public SummaryController(SummaryService summaryService) {
+		this.summaryService = summaryService;
 	}
 
 }

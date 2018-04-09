@@ -12,17 +12,17 @@ import com.zengyu.demo.service.InformationService;
 @Controller
 @RequestMapping(value = "/Information", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class InformationController {
-	private InformationService informationDao;
+	private InformationService informationService;
 
 	@Autowired
-	public InformationController(InformationService informationDao) {
-		this.informationDao = informationDao;
+	public InformationController(InformationService informationService) {
+		this.informationService = informationService;
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
 	@ResponseBody
 	public String modify(@RequestParam String oldTel, @RequestParam String name, @RequestParam String tel,
 			@RequestParam String email, @RequestParam String password) {
-		return informationDao.modify(oldTel, name, tel, email, password);
+		return informationService.modify(oldTel, name, tel, email, password);
 	}
 }
