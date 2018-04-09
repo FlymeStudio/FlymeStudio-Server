@@ -126,7 +126,7 @@
 ---
 ## Structure
 
-![](structure.png)
+![](https://github.com/FlymeStudio/FlymeStudio-Server/blob/master/springMVC.png?raw=true)
 
 ---
 ## Feedback
