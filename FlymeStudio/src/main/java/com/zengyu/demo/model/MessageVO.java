@@ -1,6 +1,10 @@
 package com.zengyu.demo.model;
 
-public class MessageVO{
+import java.io.Serializable;
+
+public class MessageVO implements Serializable {
+	private static final long serialVersionUID = -7123198805901902968L;
+
 	/**
 	 * 消息编号，数据库递增产生
 	 */
@@ -29,7 +33,7 @@ public class MessageVO{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -37,7 +41,7 @@ public class MessageVO{
 	public void setType(int type) {
 		this.type = type;
 	}
-	
+
 	public int getType() {
 		return type;
 	}
@@ -45,7 +49,7 @@ public class MessageVO{
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	
+
 	public String getSender() {
 		return sender;
 	}
@@ -53,7 +57,7 @@ public class MessageVO{
 	public void setReciever(String reciever) {
 		this.reciever = reciever;
 	}
-	
+
 	public String getReciever() {
 		return reciever;
 	}
@@ -61,7 +65,7 @@ public class MessageVO{
 	public void setTeamid(int teamid) {
 		this.teamid = teamid;
 	}
-	
+
 	public int getTeamid() {
 		return teamid;
 	}

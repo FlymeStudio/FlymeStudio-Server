@@ -9,12 +9,12 @@ import com.alibaba.fastjson.JSONArray;
 
 public class TeamMapper implements RowMapper<TeamVO> {
 
-	public TeamVO mapRow(ResultSet arg0, int arg1) throws SQLException {
+	public TeamVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		TeamVO bean = new TeamVO();
-		bean.setId(arg0.getInt("id"));
-		bean.setName(arg0.getString("name"));
-		bean.setTel(arg0.getString("tel"));
-		JSONArray array = JSONArray.parseArray(arg0.getString("members"));
+		bean.setId(rs.getInt("id"));
+		bean.setName(rs.getString("name"));
+		bean.setTel(rs.getString("tel"));
+		JSONArray array = JSONArray.parseArray(rs.getString("members"));
 		bean.setMembers(array.toJavaList(MemberVO.class));
 		return bean;
 	}

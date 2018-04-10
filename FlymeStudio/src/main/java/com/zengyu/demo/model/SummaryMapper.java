@@ -5,21 +5,17 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.alibaba.fastjson.JSONArray;
+public class SummaryMapper implements RowMapper<SummaryVO> {
 
-public class ProjectMapper implements RowMapper<ProjectVO> {
-
-	public ProjectVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		ProjectVO bean = new ProjectVO();
+	public SummaryVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		SummaryVO bean = new SummaryVO();
 		bean.setId(rs.getInt("id"));
 		bean.setTel(rs.getString("tel"));
-		bean.setPercent(0);
 		bean.setType(rs.getInt("type"));
 		bean.setDate(Long.valueOf(rs.getString("date")));
 		bean.setTitle(rs.getString("title"));
 		bean.setContent(rs.getString("content"));
-		JSONArray array = JSONArray.parseArray(rs.getString("plans"));
-		bean.setPlans(array.toJavaList(PlanVO.class));
 		return bean;
 	}
+
 }

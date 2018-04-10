@@ -1,6 +1,10 @@
 package com.zengyu.demo.model;
 
-public class MemberVO {
+import java.io.Serializable;
+
+public class MemberVO implements Serializable {
+	private static final long serialVersionUID = 3192970041482110048L;
+
 	/**
 	 * 成员电话，11位
 	 */

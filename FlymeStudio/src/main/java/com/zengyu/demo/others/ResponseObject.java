@@ -1,6 +1,7 @@
 package com.zengyu.demo.others;
 
-import com.alibaba.fastjson.JSONArray;
+import java.io.Serializable;
+
 import com.alibaba.fastjson.JSONObject;
 
 public class ResponseObject extends JSONObject {
@@ -14,11 +15,8 @@ public class ResponseObject extends JSONObject {
 		this.put("result", result);
 	}
 
-	public void setData(JSONObject data) {
+	public void setData(Serializable data) {
 		this.put("data", data);
-	}
-
-	public void setData(JSONArray data) {
-		this.put("data", data);
+		this.put("result", true);
 	}
 }

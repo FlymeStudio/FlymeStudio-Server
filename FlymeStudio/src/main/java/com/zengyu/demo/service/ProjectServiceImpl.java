@@ -1,33 +1,77 @@
 package com.zengyu.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.zengyu.demo.dao.ProjectDao;
+import com.zengyu.demo.dao.ProjectImpl;
+import com.zengyu.demo.model.PlanVO;
+import com.zengyu.demo.model.ProjectVO;
+import com.zengyu.demo.others.ResponseObject;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
 	public String get(String tel) {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseObject responseObject = new ResponseObject();
+		ProjectDao projectDao = new ProjectImpl();
+		List<ProjectVO> projectVOs = projectDao.queryProjects(tel);
+		if (projectVOs != null) {
+			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
+			responseObject.setData(jsonArray);
+		}
+		return responseObject.toJSONString();
 	}
 
-	public String create(String tel, String type, String date, String title, String content, String plans) {
-		// TODO Auto-generated method stub
-		return null;
+	public String create(String tel, int type, String date, String title, String content, String plans) {
+		ResponseObject responseObject = new ResponseObject();
+		ProjectDao projectDao = new ProjectImpl();
+		JSONArray jsonArray = JSONArray.parseArray(plans);
+		if (jsonArray != null) {
+			int count = projectDao.addProject(tel, type, date, title, content, jsonArray.toJavaList(PlanVO.class));
+			if (count > 0) {
+				responseObject.setResult(true);
+			}
+		}
+		return responseObject.toJSONString();
 	}
 
-	public String search(String type, String date, String title, String content, String plans) {
-		// TODO Auto-generated method stub
-		return null;
+	public String search(String tel, int type, String date, String title, String content) {
+		ResponseObject responseObject = new ResponseObject();
+		ProjectDao projectDao = new ProjectImpl();
+		List<ProjectVO> projectVOs = projectDao.queryProjectByDetail(tel, type, date, title, content);
+		if (projectVOs != null) {
+			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
+			responseObject.setData(jsonArray);
+		}
+		return responseObject.toJSONString();
 	}
 
-	public String modify(String tel, String id, String type, String date, String title, String content, String plans) {
-		// TODO Auto-generated method stub
-		return null;
+	public String modify(String tel, int id, int type, String date, String title, String content, String plans) {
+		ResponseObject responseObject = new ResponseObject();
+		ProjectDao projectDao = new ProjectImpl();
+		JSONArray jsonArray = JSONArray.parseArray(plans);
+		if (jsonArray != null) {
+			int count = projectDao.updateProject(tel, id, type, date, title, content,
+					jsonArray.toJavaList(PlanVO.class));
+			if (count > 0) {
+				responseObject.setResult(true);
+			}
+		}
+		return responseObject.toJSONString();
 	}
 
-	public String delete(String tel, String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(String tel, int id) {
+		ResponseObject responseObject = new ResponseObject();
+		ProjectDao projectDao = new ProjectImpl();
+		int count = projectDao.deleteProject(tel, id);
+		if (count > 0) {
+			responseObject.setResult(true);
+		}
+		return responseObject.toJSONString();
 	}
 
 }

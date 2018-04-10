@@ -27,21 +27,21 @@ public class ProjectController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@RequestParam String tel, @RequestParam String type, @RequestParam String date,
+	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans) {
 		return projectService.create(tel, type, date, title, content, plans);
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public String search(@RequestParam String type, @RequestParam String date, @RequestParam String title,
-			@RequestParam String content, @RequestParam String plans) {
-		return projectService.search(type, date, title, content, plans);
+	public String search(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
+			@RequestParam String title, @RequestParam String content) {
+		return projectService.search(tel, type, date, title, content);
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam String tel, @RequestParam String id, @RequestParam String type,
+	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
 			@RequestParam String date, @RequestParam String title, @RequestParam String content,
 			@RequestParam String plans) {
 		return projectService.modify(tel, id, type, date, title, content, plans);
@@ -49,7 +49,7 @@ public class ProjectController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam String tel, @RequestParam String id) {
+	public String delete(@RequestParam String tel, @RequestParam int id) {
 		return projectService.delete(tel, id);
 	}
 }

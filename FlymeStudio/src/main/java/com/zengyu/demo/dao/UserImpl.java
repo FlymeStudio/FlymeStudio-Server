@@ -36,17 +36,43 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		return jdbcTemplate.update(SQL, tel);
 	}
 
+	public UserVO queryUserByIdAndPassword(String id, String password) {
+		String SQL = "select * from " + Const.User.TABLE_NAME + " where (" + Const.User.COLUMN_TEL + " = ? or "
+				+ Const.User.COLUMN_EMAIL + " = ?) and " + Const.User.COLUMN_PASSWORD + " = ?";
+		return jdbcTemplate.queryForObject(SQL, new UserMapper(), id, id, password);
+	}
+
 	public UserVO queryUserByTel(String tel) {
 		String SQL = "select * from " + Const.User.TABLE_NAME + " where " + Const.User.COLUMN_TEL + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new UserMapper(), tel);
+		UserVO userVO = jdbcTemplate.queryForObject(SQL, new UserMapper(), tel);
+		if (userVO != null) {
+			userVO.setPassword("");
+		}
+		return userVO;
 	}
 
 	public UserVO queryUserByEmail(String email) {
 		String SQL = "select * from " + Const.User.TABLE_NAME + " where " + Const.User.COLUMN_EMAIL + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new UserMapper(), email);
+		UserVO userVO = jdbcTemplate.queryForObject(SQL, new UserMapper(), email);
+		if (userVO != null) {
+			userVO.setPassword("");
+		}
+		return userVO;
 	}
 
-	public int updateUserInformation(String oldTel, String tel, String name, String email, String password) {
+	public List<UserVO> queryUserWithoutPassword(String content) {
+		String SQL = "select * from " + Const.User.TABLE_NAME + " where " + Const.User.COLUMN_TEL + " = ? or "
+				+ Const.User.COLUMN_NAME + " like %?%";
+		List<UserVO> userVOs = jdbcTemplate.query(SQL, new UserMapper(), content);
+		if (userVOs != null) {
+			for (int i = 0; i < userVOs.size(); i++) {
+				userVOs.get(i).setPassword("");
+			}
+		}
+		return userVOs;
+	}
+
+	public int updateUserInformation(String old, String tel, String name, String email, String password) {
 		if (queryUserByTel(tel) != null) {
 			return 0;
 		} else if (queryUserByEmail(email) != null) {
@@ -55,7 +81,7 @@ public class UserImpl extends AbstractImpl implements UserDao {
 			String SQL = "update " + Const.User.TABLE_NAME + " set " + Const.User.COLUMN_TEL + " = ?, "
 					+ Const.User.COLUMN_NAME + " = ?, " + Const.User.COLUMN_EMAIL + " = ?, "
 					+ Const.User.COLUMN_PASSWORD + " = ? where " + Const.User.COLUMN_TEL + " = ?";
-			return jdbcTemplate.update(SQL, name, tel, email, password, oldTel);
+			return jdbcTemplate.update(SQL, name, tel, email, password, old);
 		}
 	}
 

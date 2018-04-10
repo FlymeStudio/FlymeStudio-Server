@@ -1,8 +1,11 @@
 package com.zengyu.demo.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TeamVO {
+public class TeamVO implements Serializable {
+	private static final long serialVersionUID = 9176395563244962018L;
+
 	/**
 	 * 团队编号，数据库递增产生
 	 */

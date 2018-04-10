@@ -37,12 +37,12 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		}
 	}
 
-	public int deleteTeam(String id) {
+	public int deleteTeam(int id) {
 		String SQL = "delete from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ?";
 		return jdbcTemplate.update(SQL, id);
 	}
 
-	public TeamVO queryTeamById(String id) {
+	public TeamVO queryTeamById(int id) {
 		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ?";
 		return jdbcTemplate.queryForObject(SQL, new TeamMapper(), id);
 	}
@@ -58,7 +58,13 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		return jdbcTemplate.query(SQL, new TeamMapper(), tel);
 	}
 
-	public int addTeamMember(String id, String tel) {
+	public List<TeamVO> queryTeamsByIdOrName(String content) {
+		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ? or "
+				+ Const.Team.COLUMN_NAME + " like %?%";
+		return jdbcTemplate.query(SQL, new TeamMapper(), content, content);
+	}
+
+	public int addTeamMember(String tel, int id) {
 		TeamVO teamVO = queryTeamById(id);
 		if (teamVO == null) {
 			return 0;
@@ -74,11 +80,11 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		teamVO.getMembers().add(memberVO);
 		String membersString = JSON.toJSONString(teamVO.getMembers());
 		String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
-				+ Const.Team.COLUMN_TEL + " = ?";
-		return jdbcTemplate.update(SQL, membersString, tel);
+				+ Const.Team.COLUMN_ID + " = ?";
+		return jdbcTemplate.update(SQL, membersString, id);
 	}
 
-	public int updateMemberPermission(String id, String tel, int permission) {
+	public int updateMemberPermission(String tel, int id, int permission) {
 		TeamVO teamVO = queryTeamById(id);
 		if (teamVO == null) {
 			return 0;
@@ -95,7 +101,7 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		return jdbcTemplate.update(SQL, membersString, tel);
 	}
 
-	public int deleteTeamMember(String id, String tel) {
+	public int deleteTeamMember(String tel, int id) {
 		TeamVO teamVO = queryTeamById(id);
 		if (teamVO == null) {
 			return 0;
@@ -111,5 +117,4 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 				+ Const.Team.COLUMN_TEL + " = ?";
 		return jdbcTemplate.update(SQL, membersString, tel);
 	}
-
 }

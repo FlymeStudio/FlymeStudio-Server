@@ -1,10 +1,9 @@
 package com.zengyu.demo.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class ProjectVO implements Serializable {
-	private static final long serialVersionUID = 8320958010304016149L;
+public class SummaryVO implements Serializable {
+	private static final long serialVersionUID = 4644202001280685491L;
 
 	/**
 	 * 任务编号，数据库递增产生
@@ -17,34 +16,24 @@ public class ProjectVO implements Serializable {
 	private String tel;
 
 	/**
-	 * 任务完成度
-	 */
-	private int percent;
-
-	/**
-	 * 任务类型，1位
+	 * 总结类型，1位
 	 */
 	private int type;
 
 	/**
-	 * 任务日期
+	 * 总结日期
 	 */
 	private long date;
 
 	/**
-	 * 任务标题，最大16位
+	 * 总结标题，最大16位
 	 */
 	private String title;
 
 	/**
-	 * 任务描述
+	 * 总结描述
 	 */
 	private String content;
-
-	/**
-	 * 任务计划
-	 */
-	private List<PlanVO> plans;
 
 	public void setId(int id) {
 		this.id = id;
@@ -60,14 +49,6 @@ public class ProjectVO implements Serializable {
 
 	public String getTel() {
 		return tel;
-	}
-
-	public void setPercent(int percent) {
-		this.percent = percent;
-	}
-
-	public int getPercent() {
-		return percent;
 	}
 
 	public void setType(int type) {
@@ -100,13 +81,5 @@ public class ProjectVO implements Serializable {
 
 	public String getContent() {
 		return content;
-	}
-
-	public void setPlans(List<PlanVO> plans) {
-		this.plans = plans;
-	}
-
-	public List<PlanVO> getPlans() {
-		return plans;
 	}
 }

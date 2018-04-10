@@ -1,29 +1,27 @@
 package com.zengyu.demo.service;
 
 public interface TeamworkService {
-	String getTeamInfo(String id);
-
-	String replyMsg(String tel, String messageId, boolean result);
+	String getTeamInfo(int id);
 
 	String viewTeams(String tel);
 
-	String searchUser(String tel, String content);
+	String searchUser(String content);
 
-	String invite(String tel, String toTel, String teamId);
+	String invite(String sender, String receiver, int id);
 
-	String disband(String tel, String teamId);
+	String disband(int id);
 
-	String viewMemberProjects(String tel, String memberTel);
+	String viewMemberProjects(String tel);
 
-	String viewMemberSummaries(String tel, String memberTel);
+	String viewMemberSummaries(String tel);
 
-	String setPermission(String tel, String memberTel, String teamId, int permission);
+	String setPermission(String tel, int id, int permission);
 
-	String remove(String tel, String memberTel, String teamId);
+	String remove(String tel, int id);
 
-	String searchTeam(String tel, String content);
+	String searchTeam(String content);
 
-	String join(String tel, String teamId);
+	String join(String sender, int id);
 
 	String create(String tel, String name);
 }

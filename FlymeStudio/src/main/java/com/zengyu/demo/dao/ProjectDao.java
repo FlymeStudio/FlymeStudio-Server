@@ -8,13 +8,13 @@ import com.zengyu.demo.model.ProjectVO;
 public interface ProjectDao {
 	int addProject(String tel, int type, String date, String title, String content, List<PlanVO> plans);
 
-	int deleteProject(String id, String tel);
+	int deleteProject(String tel, int id);
 
-	ProjectVO queryProjectById(String id);
+	ProjectVO queryProjectById(int id);
 
-	ProjectVO queryProjectByDetail(String tel, int type, String date, String title);
+	List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title, String content);
 
 	List<ProjectVO> queryProjects(String tel);
 
-	int updateProject(String id, String tel, int type, String date, String title, String content, List<PlanVO> plans);
+	int updateProject(String tel, int id, int type, String date, String title, String content, List<PlanVO> plans);
 }

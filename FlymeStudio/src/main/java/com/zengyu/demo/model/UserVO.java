@@ -1,8 +1,11 @@
 package com.zengyu.demo.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class UserVO {
+public class UserVO implements Serializable{
+	private static final long serialVersionUID = 6898396310238234346L;
+
 	/**
 	 * 用户电话，11位
 	 */

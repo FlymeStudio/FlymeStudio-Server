@@ -19,7 +19,7 @@ public class MessageImpl extends AbstractImpl implements MessageDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public int addMessage(int type, String sender, String receiver, String teamid) {
+	public int addMessage(int type, String sender, String receiver, int teamid) {
 		if (queryMessageByDetail(type, sender, receiver, teamid) != null) {
 			return 0;
 		}
@@ -27,17 +27,17 @@ public class MessageImpl extends AbstractImpl implements MessageDao {
 		return jdbcTemplate.update(SQL, null, type, sender, receiver, teamid);
 	}
 
-	public int deleteMessage(String id) {
+	public int deleteMessage(int id) {
 		String SQL = "delete from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_ID + " = ?";
 		return jdbcTemplate.update(SQL, id);
 	}
 
-	public MessageVO queryMessageById(String id) {
+	public MessageVO queryMessageById(int id) {
 		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_ID + " = ?";
 		return jdbcTemplate.queryForObject(SQL, new MessageMapper(), id);
 	}
 
-	public MessageVO queryMessageByDetail(int type, String sender, String receiver, String teamid) {
+	public MessageVO queryMessageByDetail(int type, String sender, String receiver, int teamid) {
 		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_TYPE + " = ? and "
 				+ Const.Message.COLUMN_SENDER + " = ? and " + Const.Message.COLUMN_RECEIVER + " = ? and "
 				+ Const.Message.COLUMN_TEAM_ID + " = ?";

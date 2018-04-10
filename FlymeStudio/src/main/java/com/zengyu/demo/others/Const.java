@@ -31,6 +31,16 @@ public final class Const {
 		public final static String COLUMN_PLANS = "plans";
 	}
 
+	public static class Summary {
+		public final static String TABLE_NAME = "summary";
+		public final static String COLUMN_ID = "id";
+		public final static String COLUMN_TEL = "tel";
+		public final static String COLUMN_TYPE = "type";
+		public final static String COLUMN_DATE = "date";
+		public final static String COLUMN_TITLE = "title";
+		public final static String COLUMN_CONTENT = "content";
+	}
+
 	public static class Team {
 		public final static String TABLE_NAME = "team";
 		public final static String COLUMN_ID = "id";
