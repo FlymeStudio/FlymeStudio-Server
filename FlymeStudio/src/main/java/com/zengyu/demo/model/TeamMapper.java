@@ -15,7 +15,9 @@ public class TeamMapper implements RowMapper<TeamVO> {
 		bean.setName(rs.getString("name"));
 		bean.setTel(rs.getString("tel"));
 		JSONArray array = JSONArray.parseArray(rs.getString("members"));
-		bean.setMembers(array.toJavaList(MemberVO.class));
+		if (array != null) {
+			bean.setMembers(array.toJavaList(MemberVO.class));
+		}
 		return bean;
 	}
 }

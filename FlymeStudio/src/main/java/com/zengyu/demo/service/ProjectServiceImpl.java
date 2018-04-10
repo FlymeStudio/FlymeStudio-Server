@@ -2,22 +2,24 @@ package com.zengyu.demo.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.zengyu.demo.dao.ProjectDao;
-import com.zengyu.demo.dao.ProjectImpl;
 import com.zengyu.demo.model.PlanVO;
 import com.zengyu.demo.model.ProjectVO;
 import com.zengyu.demo.others.ResponseObject;
+import com.zengyu.demo.repository.ProjectDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
+	@Resource(name = "projectDao")
+	private ProjectDao projectDao;
 
 	public String get(String tel) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		List<ProjectVO> projectVOs = projectDao.queryProjects(tel);
 		if (projectVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
@@ -28,7 +30,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public String create(String tel, int type, String date, String title, String content, String plans) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		JSONArray jsonArray = JSONArray.parseArray(plans);
 		if (jsonArray != null) {
 			int count = projectDao.addProject(tel, type, date, title, content, jsonArray.toJavaList(PlanVO.class));
@@ -41,7 +42,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public String search(String tel, int type, String date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		List<ProjectVO> projectVOs = projectDao.queryProjectByDetail(tel, type, date, title, content);
 		if (projectVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
@@ -52,7 +52,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public String modify(String tel, int id, int type, String date, String title, String content, String plans) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		JSONArray jsonArray = JSONArray.parseArray(plans);
 		if (jsonArray != null) {
 			int count = projectDao.updateProject(tel, id, type, date, title, content,
@@ -66,12 +65,10 @@ public class ProjectServiceImpl implements ProjectService {
 
 	public String delete(String tel, int id) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		int count = projectDao.deleteProject(tel, id);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
-
 }

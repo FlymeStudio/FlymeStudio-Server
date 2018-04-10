@@ -2,32 +2,42 @@ package com.zengyu.demo.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.zengyu.demo.dao.MessageDao;
-import com.zengyu.demo.dao.MessageImpl;
-import com.zengyu.demo.dao.ProjectDao;
-import com.zengyu.demo.dao.ProjectImpl;
-import com.zengyu.demo.dao.SummaryDao;
-import com.zengyu.demo.dao.SummaryImpl;
-import com.zengyu.demo.dao.TeamDao;
-import com.zengyu.demo.dao.TeamImpl;
-import com.zengyu.demo.dao.UserDao;
-import com.zengyu.demo.dao.UserImpl;
 import com.zengyu.demo.model.ProjectVO;
 import com.zengyu.demo.model.SummaryVO;
 import com.zengyu.demo.model.TeamVO;
 import com.zengyu.demo.model.UserVO;
 import com.zengyu.demo.others.ResponseObject;
+import com.zengyu.demo.repository.MessageDao;
+import com.zengyu.demo.repository.ProjectDao;
+import com.zengyu.demo.repository.SummaryDao;
+import com.zengyu.demo.repository.TeamDao;
+import com.zengyu.demo.repository.UserDao;
 
 @Service
 public class TeamworkServiceImpl implements TeamworkService {
+	@Resource(name = "teamDao")
+	private TeamDao teamDao;
+
+	@Resource(name = "userDao")
+	private UserDao userDao;
+
+	@Resource(name = "messageDao")
+	private MessageDao messageDao;
+
+	@Resource(name = "projectDao")
+	private ProjectDao projectDao;
+
+	@Resource(name = "summaryDao")
+	private SummaryDao summaryDao;
 
 	public String getTeamInfo(int id) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		TeamVO teamVO = teamDao.queryTeamById(id);
 		if (teamVO != null) {
 			responseObject.setData(teamVO);
@@ -37,7 +47,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String viewTeams(String tel) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		List<TeamVO> teamVOs = teamDao.queryTeams(tel);
 		if (teamVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(teamVOs));
@@ -48,7 +57,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String searchUser(String content) {
 		ResponseObject responseObject = new ResponseObject();
-		UserDao userDao = new UserImpl();
 		List<UserVO> userVOs = userDao.queryUserWithoutPassword(content);
 		if (userVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(userVOs));
@@ -59,7 +67,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String invite(String sender, String receiver, int id) {
 		ResponseObject responseObject = new ResponseObject();
-		MessageDao messageDao = new MessageImpl();
 		int count = messageDao.addMessage(1, sender, receiver, id);
 		if (count > 0) {
 			responseObject.setResult(true);
@@ -69,7 +76,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String disband(int id) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		int count = teamDao.deleteTeam(id);
 		if (count > 0) {
 			responseObject.setResult(true);
@@ -79,7 +85,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String viewMemberProjects(String tel) {
 		ResponseObject responseObject = new ResponseObject();
-		ProjectDao projectDao = new ProjectImpl();
 		List<ProjectVO> projectVOs = projectDao.queryProjects(tel);
 		if (projectVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
@@ -90,7 +95,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String viewMemberSummaries(String tel) {
 		ResponseObject responseObject = new ResponseObject();
-		SummaryDao summaryDao = new SummaryImpl();
 		List<SummaryVO> summaryVOs = summaryDao.querySummaries(tel);
 		if (summaryVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
@@ -101,7 +105,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String setPermission(String tel, int id, int permission) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		int count = teamDao.updateMemberPermission(tel, id, permission);
 		if (count > 0) {
 			responseObject.setResult(true);
@@ -111,7 +114,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String remove(String tel, int id) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		int count = teamDao.deleteTeamMember(tel, id);
 		if (count > 0) {
 			responseObject.setResult(true);
@@ -121,7 +123,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String searchTeam(String content) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		List<TeamVO> teamVOs = teamDao.queryTeamsByIdOrName(content);
 		if (teamVOs != null) {
 			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(teamVOs));
@@ -132,10 +133,8 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String join(String sender, int id) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		TeamVO teamVO = teamDao.queryTeamById(id);
 		if (teamVO != null) {
-			MessageDao messageDao = new MessageImpl();
 			int count = messageDao.addMessage(2, sender, teamVO.getTel(), id);
 			if (count > 0) {
 				responseObject.setResult(true);
@@ -146,7 +145,6 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String create(String tel, String name) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamDao teamDao = new TeamImpl();
 		int count = teamDao.addTeam(name, tel);
 		if (count > 0) {
 			responseObject.setResult(true);

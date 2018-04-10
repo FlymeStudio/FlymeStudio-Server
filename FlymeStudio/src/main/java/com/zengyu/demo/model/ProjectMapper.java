@@ -19,7 +19,9 @@ public class ProjectMapper implements RowMapper<ProjectVO> {
 		bean.setTitle(rs.getString("title"));
 		bean.setContent(rs.getString("content"));
 		JSONArray array = JSONArray.parseArray(rs.getString("plans"));
-		bean.setPlans(array.toJavaList(PlanVO.class));
+		if (array != null) {
+			bean.setPlans(array.toJavaList(PlanVO.class));
+		}
 		return bean;
 	}
 }

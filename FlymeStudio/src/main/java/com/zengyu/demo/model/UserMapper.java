@@ -16,7 +16,9 @@ public class UserMapper implements RowMapper<UserVO> {
 		bean.setEmail(rs.getString("email"));
 		bean.setPassword(rs.getString("password"));
 		JSONArray array = JSONArray.parseArray(rs.getString("teams"));
-		bean.setTeams(array.toJavaList(String.class));
+		if (array != null) {
+			bean.setTeams(array.toJavaList(Integer.class));
+		}
 		return bean;
 	}
 }

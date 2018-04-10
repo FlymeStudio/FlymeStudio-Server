@@ -1,4 +1,4 @@
-package com.zengyu.demo.dao;
+package com.zengyu.demo.repository;
 
 import javax.sql.DataSource;
 

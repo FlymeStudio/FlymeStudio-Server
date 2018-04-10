@@ -1,22 +1,28 @@
 package com.zengyu.demo.service;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
-import com.zengyu.demo.dao.MessageDao;
-import com.zengyu.demo.dao.MessageImpl;
-import com.zengyu.demo.dao.TeamDao;
-import com.zengyu.demo.dao.TeamImpl;
-import com.zengyu.demo.dao.UserDao;
-import com.zengyu.demo.dao.UserImpl;
 import com.zengyu.demo.model.MessageVO;
 import com.zengyu.demo.others.ResponseObject;
+import com.zengyu.demo.repository.MessageDao;
+import com.zengyu.demo.repository.TeamDao;
+import com.zengyu.demo.repository.UserDao;
 
 @Service
 public class InformationServiceImpl implements InformationService {
+	@Resource(name = "userDao")
+	private UserDao userDao;
+	
+	@Resource(name = "messageDao")
+	private MessageDao messageDao;
 
+	@Resource(name = "teamDao")
+	private TeamDao teamDao;
+	
 	public String modify(String old, String name, String tel, String email, String password) {
 		ResponseObject responseObject = new ResponseObject();
-		UserDao userDao = new UserImpl();
 		int count = userDao.updateUserInformation(old, tel, name, email, password);
 		if (count > 0) {
 			responseObject.setResult(true);
@@ -26,10 +32,8 @@ public class InformationServiceImpl implements InformationService {
 
 	public String replyMsg(int id, boolean result) {
 		ResponseObject responseObject = new ResponseObject();
-		MessageDao messageDao = new MessageImpl();
 		MessageVO messageVO = messageDao.queryMessageById(id);
 		if (messageVO != null) {
-			TeamDao teamDao = new TeamImpl();
 			int count1 = 0;
 			if (messageVO.getType() == 1) {
 				if (result) {

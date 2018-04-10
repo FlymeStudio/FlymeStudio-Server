@@ -1,4 +1,4 @@
-package com.zengyu.demo.dao;
+package com.zengyu.demo.repository;
 
 import java.util.List;
 
@@ -6,12 +6,14 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
 import com.zengyu.demo.model.UserMapper;
 import com.zengyu.demo.model.UserVO;
 import com.zengyu.demo.others.Const;
 
+@Repository(value="userDao")
 public class UserImpl extends AbstractImpl implements UserDao {
 	@Override
 	@Autowired

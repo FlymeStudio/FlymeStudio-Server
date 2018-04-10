@@ -1,4 +1,4 @@
-package com.zengyu.demo.dao;
+package com.zengyu.demo.repository;
 
 import java.util.List;
 
@@ -6,11 +6,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.zengyu.demo.model.MessageMapper;
 import com.zengyu.demo.model.MessageVO;
 import com.zengyu.demo.others.Const;
 
+@Repository(value="messageDao")
 public class MessageImpl extends AbstractImpl implements MessageDao {
 	@Override
 	@Autowired

@@ -1,4 +1,4 @@
-package com.zengyu.demo.dao;
+package com.zengyu.demo.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
 import com.zengyu.demo.model.MemberVO;
@@ -14,6 +15,7 @@ import com.zengyu.demo.model.TeamMapper;
 import com.zengyu.demo.model.TeamVO;
 import com.zengyu.demo.others.Const;
 
+@Repository(value="teamDao")
 public class TeamImpl extends AbstractImpl implements TeamDao {
 	@Override
 	@Autowired

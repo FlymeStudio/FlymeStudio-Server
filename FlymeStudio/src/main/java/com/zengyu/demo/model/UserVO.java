@@ -29,7 +29,7 @@ public class UserVO implements Serializable{
 	/**
 	 * 所属团队列表
 	 */
-	private List<String> teams;
+	private List<Integer> teams;
 
 	public void setTel(String tel) {
 		this.tel = tel;
@@ -63,11 +63,11 @@ public class UserVO implements Serializable{
 		return password;
 	}
 
-	public void setTeams(List<String> teams) {
+	public void setTeams(List<Integer> teams) {
 		this.teams = teams;
 	}
 
-	public List<String> getTeams() {
+	public List<Integer> getTeams() {
 		return teams;
 	}
 }
