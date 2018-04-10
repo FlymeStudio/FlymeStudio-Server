@@ -19,14 +19,14 @@ public class InformationController {
 		this.informationService = informationService;
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
+	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 	@ResponseBody
 	public String modify(@RequestParam String old, @RequestParam String name, @RequestParam String tel,
 			@RequestParam String email, @RequestParam String password) {
 		return informationService.modify(old, name, tel, email, password);
 	}
 
-	@RequestMapping(value = "/replyMsg", method = RequestMethod.POST)
+	@RequestMapping(value = "/msg", method = RequestMethod.PUT)
 	@ResponseBody
 	public String replyMsg(@RequestParam int id, @RequestParam boolean result) {
 		return informationService.replyMsg(id, result);

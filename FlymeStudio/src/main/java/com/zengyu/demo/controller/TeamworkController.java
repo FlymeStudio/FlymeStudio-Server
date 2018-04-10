@@ -19,73 +19,73 @@ public class TeamworkController {
 		this.teamworkService = teamworkService;
 	}
 
-	@RequestMapping(value = "/getTeamInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/team", method = RequestMethod.GET)
 	@ResponseBody
 	public String getTeamInfo(@RequestParam int id) {
 		return teamworkService.getTeamInfo(id);
 	}
 
-	@RequestMapping(value = "/viewTeams", method = RequestMethod.POST)
+	@RequestMapping(value = "/myteams", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewTeams(@RequestParam String tel) {
 		return teamworkService.viewTeams(tel);
 	}
 
-	@RequestMapping(value = "/searchUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchUser(@RequestParam String content) {
 		return teamworkService.searchUser(content);
 	}
 
-	@RequestMapping(value = "/invite", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ResponseBody
 	public String invite(@RequestParam String sender, @RequestParam String receiver, @RequestParam int id) {
 		return teamworkService.invite(sender, receiver, id);
 	}
 
-	@RequestMapping(value = "/disband", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/myteam", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String disband(@RequestParam int id) {
 		return teamworkService.disband(id);
 	}
 
-	@RequestMapping(value = "/viewMemberProjects", method = RequestMethod.POST)
+	@RequestMapping(value = "/projects", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberProjects(@RequestParam String tel) {
 		return teamworkService.viewMemberProjects(tel);
 	}
 
-	@RequestMapping(value = "/viewMemberSummaries", method = RequestMethod.POST)
+	@RequestMapping(value = "/summaries", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberSummaries(@RequestParam String tel) {
 		return teamworkService.viewMemberSummaries(tel);
 	}
 
-	@RequestMapping(value = "/setPermission", method = RequestMethod.PUT)
+	@RequestMapping(value = "/permission", method = RequestMethod.PUT)
 	@ResponseBody
 	public String setPermission(@RequestParam String tel, @RequestParam int id, @RequestParam int permission) {
 		return teamworkService.setPermission(tel, id, permission);
 	}
 
-	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String remove(@RequestParam String tel, @RequestParam int id) {
 		return teamworkService.remove(tel, id);
 	}
 
-	@RequestMapping(value = "/searchTeam", method = RequestMethod.POST)
+	@RequestMapping(value = "/teams", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchTeam(@RequestParam String content) {
 		return teamworkService.searchTeam(content);
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/team", method = RequestMethod.PUT)
 	@ResponseBody
 	public String join(@RequestParam String sender, @RequestParam int id) {
 		return teamworkService.join(sender, id);
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/myteam", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam String name) {
 		return teamworkService.create(tel, name);
