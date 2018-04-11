@@ -36,6 +36,17 @@ public interface ProjectService {
 	String create(String tel, int type, String date, String title, String content, String plans);
 
 	/**
+	 * 删除任务
+	 * 
+	 * @param tel
+	 *            电话
+	 * @param id
+	 *            编号
+	 * @return
+	 */
+	String delete(String tel, int id);
+	
+	/**
 	 * 查找任务
 	 * 
 	 * @param tel
@@ -72,15 +83,4 @@ public interface ProjectService {
 	 * @return
 	 */
 	String modify(String tel, int id, int type, String date, String title, String content, String plans);
-
-	/**
-	 * 删除任务
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
-	 * @return
-	 */
-	String delete(String tel, int id);
 }

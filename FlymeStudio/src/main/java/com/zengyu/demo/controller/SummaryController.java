@@ -32,7 +32,7 @@ public class SummaryController {
 	 *            电话
 	 * @return
 	 */
-	@RequestMapping(value = "/summaries", method = RequestMethod.GET)
+	@RequestMapping(value = "/summaries/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam String tel) {
 		return summaryService.get(tel);
@@ -53,11 +53,26 @@ public class SummaryController {
 	 *            内容
 	 * @return
 	 */
-	@RequestMapping(value = "/summary", method = RequestMethod.POST)
+	@RequestMapping(value = "/summary/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content) {
 		return summaryService.create(tel, type, date, title, content);
+	}
+
+	/**
+	 * 删除总结
+	 * 
+	 * @param tel
+	 *            电话
+	 * @param id
+	 *            编号
+	 * @return
+	 */
+	@RequestMapping(value = "/summary/my", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String delete(@RequestParam String tel, @RequestParam int id) {
+		return summaryService.delete(tel, id);
 	}
 
 	/**
@@ -75,7 +90,7 @@ public class SummaryController {
 	 *            内容
 	 * @return
 	 */
-	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	@RequestMapping(value = "/summaries/my", method = RequestMethod.GET)
 	@ResponseBody
 	public String search(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content) {
@@ -99,25 +114,10 @@ public class SummaryController {
 	 *            内容
 	 * @return
 	 */
-	@RequestMapping(value = "/summary", method = RequestMethod.PUT)
+	@RequestMapping(value = "/summary/my", method = RequestMethod.PUT)
 	@ResponseBody
 	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
 			@RequestParam String date, @RequestParam String title, @RequestParam String content) {
 		return summaryService.modify(tel, id, type, date, title, content);
-	}
-
-	/**
-	 * 删除总结
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
-	 * @return
-	 */
-	@RequestMapping(value = "/summary", method = RequestMethod.DELETE)
-	@ResponseBody
-	public String delete(@RequestParam String tel, @RequestParam int id) {
-		return summaryService.delete(tel, id);
 	}
 }

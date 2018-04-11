@@ -32,7 +32,7 @@ public class ProjectController {
 	 *            电话
 	 * @return
 	 */
-	@RequestMapping(value = "/projects", method = RequestMethod.GET)
+	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam String tel) {
 		return projectService.get(tel);
@@ -55,11 +55,26 @@ public class ProjectController {
 	 *            计划
 	 * @return
 	 */
-	@RequestMapping(value = "/project", method = RequestMethod.POST)
+	@RequestMapping(value = "/project/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans) {
 		return projectService.create(tel, type, date, title, content, plans);
+	}
+
+	/**
+	 * 删除任务
+	 * 
+	 * @param tel
+	 *            电话
+	 * @param id
+	 *            编号
+	 * @return
+	 */
+	@RequestMapping(value = "/project/my", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String delete(@RequestParam String tel, @RequestParam int id) {
+		return projectService.delete(tel, id);
 	}
 
 	/**
@@ -77,7 +92,7 @@ public class ProjectController {
 	 *            内容
 	 * @return
 	 */
-	@RequestMapping(value = "/project", method = RequestMethod.GET)
+	@RequestMapping(value = "/projects/my", method = RequestMethod.GET)
 	@ResponseBody
 	public String search(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content) {
@@ -103,26 +118,11 @@ public class ProjectController {
 	 *            计划
 	 * @return
 	 */
-	@RequestMapping(value = "/project", method = RequestMethod.PUT)
+	@RequestMapping(value = "/project/my", method = RequestMethod.PUT)
 	@ResponseBody
 	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
 			@RequestParam String date, @RequestParam String title, @RequestParam String content,
 			@RequestParam String plans) {
 		return projectService.modify(tel, id, type, date, title, content, plans);
-	}
-
-	/**
-	 * 删除任务
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
-	 * @return
-	 */
-	@RequestMapping(value = "/project", method = RequestMethod.DELETE)
-	@ResponseBody
-	public String delete(@RequestParam String tel, @RequestParam int id) {
-		return projectService.delete(tel, id);
 	}
 }

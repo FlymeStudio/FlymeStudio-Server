@@ -42,6 +42,15 @@ public class SummaryServiceImpl implements SummaryService {
 		return responseObject.toJSONString();
 	}
 
+	public String delete(String tel, int id) {
+		ResponseObject responseObject = new ResponseObject();
+		int count = summaryDao.deleteSummary(tel, id);
+		if (count > 0) {
+			responseObject.setResult(true);
+		}
+		return responseObject.toJSONString();
+	}
+
 	public String search(String tel, int type, String date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
 		List<SummaryVO> summaryVOs = summaryDao.querySummaryByDetail(tel, type, date, title, content);
@@ -60,14 +69,4 @@ public class SummaryServiceImpl implements SummaryService {
 		}
 		return responseObject.toJSONString();
 	}
-
-	public String delete(String tel, int id) {
-		ResponseObject responseObject = new ResponseObject();
-		int count = summaryDao.deleteSummary(tel, id);
-		if (count > 0) {
-			responseObject.setResult(true);
-		}
-		return responseObject.toJSONString();
-	}
-
 }

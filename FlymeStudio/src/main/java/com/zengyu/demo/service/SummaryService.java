@@ -34,6 +34,17 @@ public interface SummaryService {
 	String create(String tel, int type, String date, String title, String content);
 
 	/**
+	 * 删除总结
+	 * 
+	 * @param tel
+	 *            电话
+	 * @param id
+	 *            编号
+	 * @return
+	 */
+	String delete(String tel, int id);
+	
+	/**
 	 * 查找总结
 	 * 
 	 * @param tel
@@ -68,15 +79,4 @@ public interface SummaryService {
 	 * @return
 	 */
 	String modify(String tel, int id, int type, String date, String title, String content);
-
-	/**
-	 * 删除总结
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
-	 * @return
-	 */
-	String delete(String tel, int id);
 }

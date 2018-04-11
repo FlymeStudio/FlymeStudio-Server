@@ -32,7 +32,7 @@ public class TeamworkController {
 	 *            团队编号
 	 * @return
 	 */
-	@RequestMapping(value = "/team", method = RequestMethod.GET)
+	@RequestMapping(value = "/team/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String getTeamInfo(@RequestParam int id) {
 		return teamworkService.getTeamInfo(id);
@@ -45,7 +45,7 @@ public class TeamworkController {
 	 *            电话
 	 * @return
 	 */
-	@RequestMapping(value = "/myteams", method = RequestMethod.GET)
+	@RequestMapping(value = "/teams/my", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewTeams(@RequestParam String tel) {
 		return teamworkService.viewTeams(tel);
@@ -58,7 +58,7 @@ public class TeamworkController {
 	 *            查找内容
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchUser(@RequestParam String content) {
 		return teamworkService.searchUser(content);
@@ -75,7 +75,7 @@ public class TeamworkController {
 	 *            团队编号
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/all", method = RequestMethod.POST)
 	@ResponseBody
 	public String invite(@RequestParam String sender, @RequestParam String receiver, @RequestParam int id) {
 		return teamworkService.invite(sender, receiver, id);
@@ -88,7 +88,7 @@ public class TeamworkController {
 	 *            团队编号
 	 * @return
 	 */
-	@RequestMapping(value = "/myteam", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/team/my", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String disband(@RequestParam int id) {
 		return teamworkService.disband(id);
@@ -101,7 +101,7 @@ public class TeamworkController {
 	 *            成员电话
 	 * @return
 	 */
-	@RequestMapping(value = "/projects", method = RequestMethod.GET)
+	@RequestMapping(value = "/projects/member", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberProjects(@RequestParam String tel) {
 		return teamworkService.viewMemberProjects(tel);
@@ -114,7 +114,7 @@ public class TeamworkController {
 	 *            电话
 	 * @return
 	 */
-	@RequestMapping(value = "/summaries", method = RequestMethod.GET)
+	@RequestMapping(value = "/summaries/member", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberSummaries(@RequestParam String tel) {
 		return teamworkService.viewMemberSummaries(tel);
@@ -131,7 +131,7 @@ public class TeamworkController {
 	 *            成员权限
 	 * @return
 	 */
-	@RequestMapping(value = "/permission", method = RequestMethod.PUT)
+	@RequestMapping(value = "/permission/member", method = RequestMethod.PUT)
 	@ResponseBody
 	public String setPermission(@RequestParam String tel, @RequestParam int id, @RequestParam int permission) {
 		return teamworkService.setPermission(tel, id, permission);
@@ -146,7 +146,7 @@ public class TeamworkController {
 	 *            团队编号
 	 * @return
 	 */
-	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/team/member", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String remove(@RequestParam String tel, @RequestParam int id) {
 		return teamworkService.remove(tel, id);
@@ -159,7 +159,7 @@ public class TeamworkController {
 	 *            查找内容
 	 * @return
 	 */
-	@RequestMapping(value = "/teams", method = RequestMethod.GET)
+	@RequestMapping(value = "/teams/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchTeam(@RequestParam String content) {
 		return teamworkService.searchTeam(content);
@@ -174,7 +174,7 @@ public class TeamworkController {
 	 *            团队编号
 	 * @return
 	 */
-	@RequestMapping(value = "/team", method = RequestMethod.PUT)
+	@RequestMapping(value = "/team/all", method = RequestMethod.POST)
 	@ResponseBody
 	public String join(@RequestParam String sender, @RequestParam int id) {
 		return teamworkService.join(sender, id);
@@ -189,7 +189,7 @@ public class TeamworkController {
 	 *            团队名
 	 * @return
 	 */
-	@RequestMapping(value = "/myteam", method = RequestMethod.POST)
+	@RequestMapping(value = "/team/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam String name) {
 		return teamworkService.create(tel, name);

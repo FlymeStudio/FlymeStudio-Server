@@ -34,7 +34,7 @@ public class AccountController {
 	 *            密码
 	 * @return
 	 */
-	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String signIn(@RequestParam String id, @RequestParam String password) {
 		return accountService.signIn(id, password);
@@ -53,7 +53,7 @@ public class AccountController {
 	 *            密码
 	 * @return
 	 */
-	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public String signUp(@RequestParam String tel, @RequestParam String name, @RequestParam String email,
 			@RequestParam String password) {
@@ -67,7 +67,7 @@ public class AccountController {
 	 *            电话
 	 * @return
 	 */
-	@RequestMapping(value = "/signOut", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
 	public String signOut(@RequestParam String tel) {
 		return accountService.signOut(tel);

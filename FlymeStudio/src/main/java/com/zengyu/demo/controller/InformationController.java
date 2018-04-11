@@ -56,7 +56,7 @@ public class InformationController {
 	 *            回复结果
 	 * @return
 	 */
-	@RequestMapping(value = "/msg", method = RequestMethod.PUT)
+	@RequestMapping(value = "/message", method = RequestMethod.PUT)
 	@ResponseBody
 	public String replyMsg(@RequestParam int id, @RequestParam boolean result) {
 		return informationService.replyMsg(id, result);
