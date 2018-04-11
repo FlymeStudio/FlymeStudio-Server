@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.zengyu.demo.model.SummaryVO;
 import com.zengyu.demo.others.ResponseObject;
 import com.zengyu.demo.repository.SummaryDao;
@@ -27,8 +28,12 @@ public class SummaryServiceImpl implements SummaryService {
 		ResponseObject responseObject = new ResponseObject();
 		List<SummaryVO> summaryVOs = summaryDao.querySummaries(tel);
 		if (summaryVOs != null) {
-			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
-			responseObject.setData(jsonArray);
+			try {
+				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
+				responseObject.setData(jsonArray);
+			} catch (JSONException e) {
+				// TODO
+			}
 		}
 		return responseObject.toJSONString();
 	}
@@ -55,8 +60,12 @@ public class SummaryServiceImpl implements SummaryService {
 		ResponseObject responseObject = new ResponseObject();
 		List<SummaryVO> summaryVOs = summaryDao.querySummaryByDetail(tel, type, date, title, content);
 		if (summaryVOs != null) {
-			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
-			responseObject.setData(jsonArray);
+			try {
+				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
+				responseObject.setData(jsonArray);
+			} catch (JSONException e) {
+				// TODO
+			}
 		}
 		return responseObject.toJSONString();
 	}

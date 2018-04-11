@@ -1,5 +1,7 @@
 package com.zengyu.demo.controller;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import com.zengyu.demo.service.TeamworkService;
 @Controller
 @RequestMapping(value = "/Teamwork", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class TeamworkController {
+	static Logger logger = Logger.getLogger(TeamworkController.class.getSimpleName());
 	private TeamworkService teamworkService;
 
 	@Autowired

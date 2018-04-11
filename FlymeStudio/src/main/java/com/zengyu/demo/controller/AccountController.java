@@ -1,5 +1,7 @@
 package com.zengyu.demo.controller;
 
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import com.zengyu.demo.service.AccountService;
 @Controller
 @RequestMapping(value = "/Account", produces = { "text/html;charset=UTF-8;", "application/json;" })
 public class AccountController {
+	static Logger logger = Logger.getLogger(AccountController.class.getSimpleName());
 	private AccountService accountService;
 
 	@Autowired
@@ -37,6 +40,7 @@ public class AccountController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public String signIn(@RequestParam String id, @RequestParam String password) {
+		logger.info("signIn:\t id=" + id + "\t password=" + password);
 		return accountService.signIn(id, password);
 	}
 
@@ -57,6 +61,7 @@ public class AccountController {
 	@ResponseBody
 	public String signUp(@RequestParam String tel, @RequestParam String name, @RequestParam String email,
 			@RequestParam String password) {
+		logger.info("signUp:\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password=" + password);
 		return accountService.signUp(tel, name, email, password);
 	}
 
@@ -70,6 +75,7 @@ public class AccountController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
 	public String signOut(@RequestParam String tel) {
+		logger.info("signIn:\t tel=" + tel);
 		return accountService.signOut(tel);
 	}
 
@@ -87,6 +93,7 @@ public class AccountController {
 	@RequestMapping(value = "/retrieve", method = RequestMethod.POST)
 	@ResponseBody
 	public String retrieve(@RequestParam String tel, @RequestParam String name, @RequestParam String email) {
+		logger.info("signUp:\t tel=" + tel + "\t name=" + name + "\t email=" + email);
 		return accountService.retrieve(tel, name, email);
 	}
 }
