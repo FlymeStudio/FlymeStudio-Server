@@ -3,6 +3,12 @@ package com.zengyu.demo.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 团队持久层
+ * 
+ * @author zengyu
+ *
+ */
 public class TeamVO implements Serializable {
 	private static final long serialVersionUID = 9176395563244962018L;
 

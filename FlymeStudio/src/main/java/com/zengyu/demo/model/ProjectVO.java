@@ -3,6 +3,12 @@ package com.zengyu.demo.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 任务持久层
+ * 
+ * @author zengyu
+ *
+ */
 public class ProjectVO implements Serializable {
 	private static final long serialVersionUID = 8320958010304016149L;
 

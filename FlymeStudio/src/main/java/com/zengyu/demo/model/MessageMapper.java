@@ -5,6 +5,12 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+/**
+ * 消息映射
+ * 
+ * @author zengyu
+ *
+ */
 public class MessageMapper implements RowMapper<MessageVO> {
 
 	public MessageVO mapRow(ResultSet rs, int rowNum) throws SQLException {

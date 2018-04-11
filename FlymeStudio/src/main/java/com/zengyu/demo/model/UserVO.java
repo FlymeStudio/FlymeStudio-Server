@@ -3,7 +3,13 @@ package com.zengyu.demo.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserVO implements Serializable{
+/**
+ * 用户持久层
+ * 
+ * @author zengyu
+ *
+ */
+public class UserVO implements Serializable {
 	private static final long serialVersionUID = 6898396310238234346L;
 
 	/**

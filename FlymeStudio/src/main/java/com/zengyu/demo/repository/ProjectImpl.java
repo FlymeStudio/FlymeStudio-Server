@@ -2,10 +2,8 @@ package com.zengyu.demo.repository;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
@@ -14,14 +12,14 @@ import com.zengyu.demo.model.ProjectMapper;
 import com.zengyu.demo.model.ProjectVO;
 import com.zengyu.demo.others.Const;
 
-@Repository(value="projectDao")
+/**
+ * 任务访问层
+ * 
+ * @author zengyu
+ *
+ */
+@Repository(value = "projectDao")
 public class ProjectImpl extends AbstractImpl implements ProjectDao {
-	@Override
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
 
 	public int addProject(String tel, int type, String date, String title, String content, List<PlanVO> plans) {
 		if (queryProjectByDetail(tel, type, date, title, null) != null) {
@@ -41,7 +39,15 @@ public class ProjectImpl extends AbstractImpl implements ProjectDao {
 
 	public ProjectVO queryProjectById(int id) {
 		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_ID + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new ProjectMapper(), id);
+		ProjectVO projectVO = null;
+		try {
+			projectVO = jdbcTemplate.queryForObject(SQL, new ProjectMapper(), id);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO
+		} catch (IncorrectResultSizeDataAccessException e) {
+			// TODO
+		}
+		return projectVO;
 	}
 
 	public List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title, String content) {

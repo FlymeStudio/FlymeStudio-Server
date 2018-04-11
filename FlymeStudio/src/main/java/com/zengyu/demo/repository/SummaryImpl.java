@@ -2,25 +2,22 @@ package com.zengyu.demo.repository;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.zengyu.demo.model.SummaryMapper;
 import com.zengyu.demo.model.SummaryVO;
 import com.zengyu.demo.others.Const;
 
-@Repository(value="summaryDao")
+/**
+ * 总结访问层
+ * 
+ * @author zengyu
+ *
+ */
+@Repository(value = "summaryDao")
 public class SummaryImpl extends AbstractImpl implements SummaryDao {
-
-	@Override
-	@Autowired
-	void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
 
 	public int addSummary(String tel, int type, String date, String title, String content) {
 		if (querySummaryByDetail(tel, type, date, title, null) != null) {
@@ -39,7 +36,15 @@ public class SummaryImpl extends AbstractImpl implements SummaryDao {
 
 	public SummaryVO querySummaryById(int id) {
 		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_ID + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new SummaryMapper(), id);
+		SummaryVO summaryVO = null;
+		try {
+			summaryVO = jdbcTemplate.queryForObject(SQL, new SummaryMapper(), id);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO
+		} catch (IncorrectResultSizeDataAccessException e) {
+			// TODO
+		}
+		return summaryVO;
 	}
 
 	public List<SummaryVO> querySummaryByDetail(String tel, int type, String date, String title, String content) {

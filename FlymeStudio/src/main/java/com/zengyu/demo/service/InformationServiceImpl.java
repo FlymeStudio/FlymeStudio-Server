@@ -10,17 +10,23 @@ import com.zengyu.demo.repository.MessageDao;
 import com.zengyu.demo.repository.TeamDao;
 import com.zengyu.demo.repository.UserDao;
 
+/**
+ * 信息活动层
+ * 
+ * @author zengyu
+ *
+ */
 @Service
 public class InformationServiceImpl implements InformationService {
 	@Resource(name = "userDao")
 	private UserDao userDao;
-	
+
 	@Resource(name = "messageDao")
 	private MessageDao messageDao;
 
 	@Resource(name = "teamDao")
 	private TeamDao teamDao;
-	
+
 	public String modify(String old, String name, String tel, String email, String password) {
 		ResponseObject responseObject = new ResponseObject();
 		int count = userDao.updateUserInformation(old, tel, name, email, password);

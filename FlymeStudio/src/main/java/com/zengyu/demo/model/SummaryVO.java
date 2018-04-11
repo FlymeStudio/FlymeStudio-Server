@@ -2,6 +2,12 @@ package com.zengyu.demo.model;
 
 import java.io.Serializable;
 
+/**
+ * 总结持久层
+ * 
+ * @author zengyu
+ *
+ */
 public class SummaryVO implements Serializable {
 	private static final long serialVersionUID = 4644202001280685491L;
 

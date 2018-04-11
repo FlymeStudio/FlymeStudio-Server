@@ -13,6 +13,12 @@ import com.zengyu.demo.model.ProjectVO;
 import com.zengyu.demo.others.ResponseObject;
 import com.zengyu.demo.repository.ProjectDao;
 
+/**
+ * 任务活动层
+ * 
+ * @author zengyu
+ *
+ */
 @Service
 public class ProjectServiceImpl implements ProjectService {
 	@Resource(name = "projectDao")

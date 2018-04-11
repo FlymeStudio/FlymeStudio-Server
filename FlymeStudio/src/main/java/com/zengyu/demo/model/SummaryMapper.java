@@ -5,6 +5,12 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+/**
+ * 总结映射
+ * 
+ * @author zengyu
+ *
+ */
 public class SummaryMapper implements RowMapper<SummaryVO> {
 
 	public SummaryVO mapRow(ResultSet rs, int rowNum) throws SQLException {

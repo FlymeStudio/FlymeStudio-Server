@@ -2,6 +2,12 @@ package com.zengyu.demo.model;
 
 import java.io.Serializable;
 
+/**
+ * 计划持久层
+ * 
+ * @author zengyu
+ *
+ */
 public class PlanVO implements Serializable {
 	private static final long serialVersionUID = -8112585260663208900L;
 

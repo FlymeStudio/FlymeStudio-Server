@@ -2,6 +2,12 @@ package com.zengyu.demo.model;
 
 import java.io.Serializable;
 
+/**
+ * 团队成员持久层
+ * 
+ * @author zengyu
+ *
+ */
 public class MemberVO implements Serializable {
 	private static final long serialVersionUID = 3192970041482110048L;
 

@@ -1,5 +1,11 @@
 package com.zengyu.demo.others;
 
+/**
+ * 数据库字段常量
+ * 
+ * @author zengyu
+ *
+ */
 public final class Const {
 	public static class User {
 		public final static String TABLE_NAME = "user";

@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.alibaba.fastjson.JSONArray;
 
+/**
+ * 用户映射
+ * 
+ * @author zengyu
+ *
+ */
 public class UserMapper implements RowMapper<UserVO> {
 
 	public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.alibaba.fastjson.JSONArray;
 
+/**
+ * 团队映射
+ * 
+ * @author zengyu
+ *
+ */
 public class TeamMapper implements RowMapper<TeamVO> {
 
 	public TeamVO mapRow(ResultSet rs, int rowNum) throws SQLException {

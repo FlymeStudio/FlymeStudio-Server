@@ -1,12 +1,15 @@
 package com.zengyu.demo.repository;
 
-import javax.sql.DataSource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * 访问层公共属性
+ * 
+ * @author zengyu
+ *
+ */
 public abstract class AbstractImpl {
-	protected DataSource dataSource;
+	@Autowired
 	protected JdbcTemplate jdbcTemplate;
-	
-	abstract void setDataSource(DataSource dataSource);
 }

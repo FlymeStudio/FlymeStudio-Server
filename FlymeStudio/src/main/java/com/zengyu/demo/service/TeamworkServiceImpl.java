@@ -19,6 +19,12 @@ import com.zengyu.demo.repository.SummaryDao;
 import com.zengyu.demo.repository.TeamDao;
 import com.zengyu.demo.repository.UserDao;
 
+/**
+ * 团队活动层
+ * 
+ * @author zengyu
+ *
+ */
 @Service
 public class TeamworkServiceImpl implements TeamworkService {
 	@Resource(name = "teamDao")

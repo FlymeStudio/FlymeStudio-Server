@@ -3,10 +3,8 @@ package com.zengyu.demo.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
@@ -15,14 +13,14 @@ import com.zengyu.demo.model.TeamMapper;
 import com.zengyu.demo.model.TeamVO;
 import com.zengyu.demo.others.Const;
 
-@Repository(value="teamDao")
+/**
+ * 团队访问层
+ * 
+ * @author zengyu
+ *
+ */
+@Repository(value = "teamDao")
 public class TeamImpl extends AbstractImpl implements TeamDao {
-	@Override
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
 
 	public int addTeam(String name, String tel) {
 		if (queryTeamByName(tel, name) != null) {
@@ -46,13 +44,29 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 
 	public TeamVO queryTeamById(int id) {
 		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new TeamMapper(), id);
+		TeamVO teamVO = null;
+		try {
+			teamVO = jdbcTemplate.queryForObject(SQL, new TeamMapper(), id);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO
+		} catch (IncorrectResultSizeDataAccessException e) {
+			// TODO
+		}
+		return teamVO;
 	}
 
 	public TeamVO queryTeamByName(String tel, String name) {
 		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_TEL + " = ? and "
 				+ Const.Team.COLUMN_NAME + " = ?";
-		return jdbcTemplate.queryForObject(SQL, new TeamMapper(), tel, name);
+		TeamVO teamVO = null;
+		try {
+			teamVO = jdbcTemplate.queryForObject(SQL, new TeamMapper(), tel, name);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO
+		} catch (IncorrectResultSizeDataAccessException e) {
+			// TODO
+		}
+		return teamVO;
 	}
 
 	public List<TeamVO> queryTeams(String tel) {
