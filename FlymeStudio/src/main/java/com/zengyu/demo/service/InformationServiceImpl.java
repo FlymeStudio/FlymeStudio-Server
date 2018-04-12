@@ -36,7 +36,7 @@ public class InformationServiceImpl implements InformationService {
 		return responseObject.toJSONString();
 	}
 
-	public String replyMsg(int id, boolean result) {
+	public String reply(int id, boolean result) {
 		ResponseObject responseObject = new ResponseObject();
 		MessageVO messageVO = messageDao.queryMessageById(id);
 		if (messageVO != null) {

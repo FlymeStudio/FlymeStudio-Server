@@ -47,6 +47,8 @@ public class InformationController {
 	@ResponseBody
 	public String modify(@RequestParam String old, @RequestParam String tel, @RequestParam String name,
 			@RequestParam String email, @RequestParam String password) {
+		logger.info("modify:\t old=" + old + "\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password="
+				+ password);
 		return informationService.modify(old, tel, name, email, password);
 	}
 
@@ -61,7 +63,8 @@ public class InformationController {
 	 */
 	@RequestMapping(value = "/message", method = RequestMethod.PUT)
 	@ResponseBody
-	public String replyMsg(@RequestParam int id, @RequestParam boolean result) {
-		return informationService.replyMsg(id, result);
+	public String reply(@RequestParam int id, @RequestParam boolean result) {
+		logger.info("reply:\t id=" + id + "\t result=" + result);
+		return informationService.reply(id, result);
 	}
 }

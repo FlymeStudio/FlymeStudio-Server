@@ -33,5 +33,5 @@ public interface InformationService {
 	 *            回复结果
 	 * @return
 	 */
-	String replyMsg(int id, boolean result);
+	String reply(int id, boolean result);
 }

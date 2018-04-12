@@ -38,6 +38,7 @@ public class SummaryController {
 	@RequestMapping(value = "/summaries/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam String tel) {
+		logger.info("get:\t tel=" + tel);
 		return summaryService.get(tel);
 	}
 
@@ -60,6 +61,8 @@ public class SummaryController {
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content) {
+		logger.info("create:\t tel=" + tel + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
+				+ content);
 		return summaryService.create(tel, type, date, title, content);
 	}
 
@@ -75,29 +78,8 @@ public class SummaryController {
 	@RequestMapping(value = "/summary/my", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String delete(@RequestParam String tel, @RequestParam int id) {
+		logger.info("delete:\t tel=" + tel + "\t id=" + id);
 		return summaryService.delete(tel, id);
-	}
-
-	/**
-	 * 查找总结
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param type
-	 *            类型
-	 * @param date
-	 *            日期
-	 * @param title
-	 *            标题
-	 * @param content
-	 *            内容
-	 * @return
-	 */
-	@RequestMapping(value = "/summaries/my", method = RequestMethod.GET)
-	@ResponseBody
-	public String search(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
-			@RequestParam String title, @RequestParam String content) {
-		return summaryService.search(tel, type, date, title, content);
 	}
 
 	/**
@@ -121,6 +103,8 @@ public class SummaryController {
 	@ResponseBody
 	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
 			@RequestParam String date, @RequestParam String title, @RequestParam String content) {
+		logger.info("modify:\t tel=" + tel + "\t id=" + id + "\t type=" + type + "\t date=" + date + "\t title=" + title
+				+ "\t content=" + content);
 		return summaryService.modify(tel, id, type, date, title, content);
 	}
 }

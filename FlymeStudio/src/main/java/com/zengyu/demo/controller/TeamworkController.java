@@ -38,6 +38,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/team/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String getTeamInfo(@RequestParam int id) {
+		logger.info("getTeamInfo:\t id=" + id);
 		return teamworkService.getTeamInfo(id);
 	}
 
@@ -51,6 +52,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/teams/my", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewTeams(@RequestParam String tel) {
+		logger.info("viewTeams:\t tel=" + tel);
 		return teamworkService.viewTeams(tel);
 	}
 
@@ -64,6 +66,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchUser(@RequestParam String content) {
+		logger.info("searchUser:\t content=" + content);
 		return teamworkService.searchUser(content);
 	}
 
@@ -81,6 +84,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/user/all", method = RequestMethod.POST)
 	@ResponseBody
 	public String invite(@RequestParam String sender, @RequestParam String receiver, @RequestParam int id) {
+		logger.info("invite:\t sender=" + sender + "\t receiver=" + receiver+ "\t id=" + id);
 		return teamworkService.invite(sender, receiver, id);
 	}
 
@@ -94,6 +98,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/team/my", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String disband(@RequestParam int id) {
+		logger.info("disband:\t id=" + id);
 		return teamworkService.disband(id);
 	}
 
@@ -107,6 +112,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/projects/member", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberProjects(@RequestParam String tel) {
+		logger.info("viewMemberProjects:\t tel=" + tel);
 		return teamworkService.viewMemberProjects(tel);
 	}
 
@@ -120,6 +126,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/summaries/member", method = RequestMethod.GET)
 	@ResponseBody
 	public String viewMemberSummaries(@RequestParam String tel) {
+		logger.info("viewMemberSummaries:\t tel=" + tel);
 		return teamworkService.viewMemberSummaries(tel);
 	}
 
@@ -137,6 +144,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/permission/member", method = RequestMethod.PUT)
 	@ResponseBody
 	public String setPermission(@RequestParam String tel, @RequestParam int id, @RequestParam int permission) {
+		logger.info("setPermission:\t tel=" + tel + "\t id=" + id+ "\t permission=" + permission);
 		return teamworkService.setPermission(tel, id, permission);
 	}
 
@@ -152,6 +160,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/team/member", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String remove(@RequestParam String tel, @RequestParam int id) {
+		logger.info("remove:\t tel=" + tel + "\t id=" + id);
 		return teamworkService.remove(tel, id);
 	}
 
@@ -165,6 +174,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/teams/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchTeam(@RequestParam String content) {
+		logger.info("searchTeam:\t content=" + content );
 		return teamworkService.searchTeam(content);
 	}
 
@@ -180,6 +190,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/team/all", method = RequestMethod.POST)
 	@ResponseBody
 	public String join(@RequestParam String sender, @RequestParam int id) {
+		logger.info("join:\t sender=" + sender + "\t id=" + id);
 		return teamworkService.join(sender, id);
 	}
 
@@ -195,6 +206,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/team/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam String name) {
+		logger.info("create:\t tel=" + tel + "\t name=" + name);
 		return teamworkService.create(tel, name);
 	}
 }

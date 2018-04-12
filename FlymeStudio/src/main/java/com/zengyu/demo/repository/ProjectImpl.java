@@ -22,7 +22,7 @@ import com.zengyu.demo.others.Const;
 public class ProjectImpl extends AbstractImpl implements ProjectDao {
 
 	public int addProject(String tel, int type, String date, String title, String content, List<PlanVO> plans) {
-		if (queryProjectByDetail(tel, type, date, title, null) != null) {
+		if (queryProjectByDetail(tel, type, date, title) != null) {
 			return 0;
 		} else {
 			String plansStrign = JSON.toJSONString(plans);
@@ -50,11 +50,11 @@ public class ProjectImpl extends AbstractImpl implements ProjectDao {
 		return projectVO;
 	}
 
-	public List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title, String content) {
+	public List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title) {
 		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_TEL + " = ? and "
 				+ Const.Project.COLUMN_TYPE + " = ? and " + Const.Project.COLUMN_DATE + " = ? and "
-				+ Const.Project.COLUMN_TITLE + " like %?% and " + Const.Project.COLUMN_CONTENT + " like %?%";
-		return jdbcTemplate.query(SQL, new ProjectMapper(), tel, type, date, title, content);
+				+ Const.Project.COLUMN_TITLE + " = ?";
+		return jdbcTemplate.query(SQL, new ProjectMapper(), tel, type, date, title);
 	}
 
 	public List<ProjectVO> queryProjects(String tel) {

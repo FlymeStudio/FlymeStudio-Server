@@ -1,5 +1,6 @@
 package com.zengyu.demo.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,7 +28,14 @@ public class UserImpl extends AbstractImpl implements UserDao {
 			return 0;
 		} else {
 			String SQL = "insert into " + Const.User.TABLE_NAME + " values(?,?,?,?,?)";
-			return jdbcTemplate.update(SQL, tel, name, email, password, null);
+			int count = 0;
+			try {
+				count = jdbcTemplate.update(SQL, tel, name, email, password, null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+			return count;
 		}
 	}
 

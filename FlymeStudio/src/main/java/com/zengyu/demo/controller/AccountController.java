@@ -47,10 +47,12 @@ public class AccountController {
 	/**
 	 * 注册
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param num
+	 *            工号
 	 * @param name
 	 *            姓名
+	 * @param tel
+	 *            电话
 	 * @param email
 	 *            邮箱
 	 * @param password
@@ -59,9 +61,9 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public String signUp(@RequestParam String tel, @RequestParam String name, @RequestParam String email,
-			@RequestParam String password) {
-		logger.info("signUp:\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password=" + password);
+	public String signUp(@RequestParam String num, @RequestParam String name, @RequestParam String tel,
+			@RequestParam String email, @RequestParam String password) {
+		logger.info("signUp:\t num=" + num + "\t name=" + name + "=\t tel=" + tel + "\t email=" + email + "\t password=" + password);
 		return accountService.signUp(tel, name, email, password);
 	}
 
@@ -75,7 +77,7 @@ public class AccountController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
 	public String signOut(@RequestParam String tel) {
-		logger.info("signIn:\t tel=" + tel);
+		logger.info("signOut:\t tel=" + tel);
 		return accountService.signOut(tel);
 	}
 
@@ -93,7 +95,7 @@ public class AccountController {
 	@RequestMapping(value = "/retrieve", method = RequestMethod.POST)
 	@ResponseBody
 	public String retrieve(@RequestParam String tel, @RequestParam String name, @RequestParam String email) {
-		logger.info("signUp:\t tel=" + tel + "\t name=" + name + "\t email=" + email);
+		logger.info("retrieve:\t tel=" + tel + "\t name=" + name + "\t email=" + email);
 		return accountService.retrieve(tel, name, email);
 	}
 }

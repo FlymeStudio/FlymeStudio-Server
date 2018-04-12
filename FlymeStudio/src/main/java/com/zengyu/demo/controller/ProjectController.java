@@ -38,6 +38,7 @@ public class ProjectController {
 	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam String tel) {
+		logger.info("get:\t tel=" + tel);
 		return projectService.get(tel);
 	}
 
@@ -62,6 +63,8 @@ public class ProjectController {
 	@ResponseBody
 	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans) {
+		logger.info("create:\t tel=" + tel + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
+				+ content + "\t plans=" + plans);
 		return projectService.create(tel, type, date, title, content, plans);
 	}
 
@@ -77,29 +80,8 @@ public class ProjectController {
 	@RequestMapping(value = "/project/my", method = RequestMethod.DELETE)
 	@ResponseBody
 	public String delete(@RequestParam String tel, @RequestParam int id) {
+		logger.info("delete:\t tel=" + tel + "\t id=" + id);
 		return projectService.delete(tel, id);
-	}
-
-	/**
-	 * 查找任务
-	 * 
-	 * @param tel
-	 *            电话
-	 * @param type
-	 *            类型
-	 * @param date
-	 *            日期
-	 * @param title
-	 *            标题
-	 * @param content
-	 *            内容
-	 * @return
-	 */
-	@RequestMapping(value = "/projects/my", method = RequestMethod.GET)
-	@ResponseBody
-	public String search(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
-			@RequestParam String title, @RequestParam String content) {
-		return projectService.search(tel, type, date, title, content);
 	}
 
 	/**
@@ -126,6 +108,8 @@ public class ProjectController {
 	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
 			@RequestParam String date, @RequestParam String title, @RequestParam String content,
 			@RequestParam String plans) {
+		logger.info("modify:\t tel=" + tel + "\t id=" + id + "\t type=" + type + "\t date=" + date + "\t title=" + title
+				+ "\t content=" + content + "\t plans=" + plans);
 		return projectService.modify(tel, id, type, date, title, content, plans);
 	}
 }

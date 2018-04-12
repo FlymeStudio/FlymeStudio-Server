@@ -51,6 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
 			}
 		} catch (JSONException e) {
 			// TODO
+			e.printStackTrace();
 		}
 		return responseObject.toJSONString();
 	}
@@ -60,20 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
 		int count = projectDao.deleteProject(tel, id);
 		if (count > 0) {
 			responseObject.setResult(true);
-		}
-		return responseObject.toJSONString();
-	}
-
-	public String search(String tel, int type, String date, String title, String content) {
-		ResponseObject responseObject = new ResponseObject();
-		List<ProjectVO> projectVOs = projectDao.queryProjectByDetail(tel, type, date, title, content);
-		if (projectVOs != null) {
-			try {
-				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
-				responseObject.setData(jsonArray);
-			} catch (JSONException e) {
-				// TODO
-			}
 		}
 		return responseObject.toJSONString();
 	}

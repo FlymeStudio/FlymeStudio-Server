@@ -56,20 +56,6 @@ public class SummaryServiceImpl implements SummaryService {
 		return responseObject.toJSONString();
 	}
 
-	public String search(String tel, int type, String date, String title, String content) {
-		ResponseObject responseObject = new ResponseObject();
-		List<SummaryVO> summaryVOs = summaryDao.querySummaryByDetail(tel, type, date, title, content);
-		if (summaryVOs != null) {
-			try {
-				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
-				responseObject.setData(jsonArray);
-			} catch (JSONException e) {
-				// TODO
-			}
-		}
-		return responseObject.toJSONString();
-	}
-
 	public String modify(String tel, int id, int type, String date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
 		int count = summaryDao.updateSummary(tel, id, type, date, title, content);

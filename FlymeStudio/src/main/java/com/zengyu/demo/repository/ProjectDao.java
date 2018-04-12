@@ -66,7 +66,7 @@ public interface ProjectDao {
 	 *            内容
 	 * @return
 	 */
-	List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title, String content);
+	List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title);
 
 	/**
 	 * 查询个人任务
