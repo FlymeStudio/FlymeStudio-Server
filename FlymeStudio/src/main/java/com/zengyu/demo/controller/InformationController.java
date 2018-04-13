@@ -2,6 +2,8 @@ package com.zengyu.demo.controller;
 
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +48,13 @@ public class InformationController {
 	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 	@ResponseBody
 	public String modify(@RequestParam int id, @RequestParam String tel, @RequestParam String name,
-			@RequestParam String email, @RequestParam String password) {
+			@RequestParam String email, @RequestParam String password, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("modify:\t id=" + id + "\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password="
 				+ password);
-		return informationService.modify(id, tel, name, email, password);
+		String responseStr = informationService.modify(id, tel, name, email, password);
+		logger.info("modify response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -63,8 +68,11 @@ public class InformationController {
 	 */
 	@RequestMapping(value = "/message", method = RequestMethod.PUT)
 	@ResponseBody
-	public String reply(@RequestParam int id, @RequestParam boolean result) {
+	public String reply(@RequestParam int id, @RequestParam boolean result, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("reply:\t id=" + id + "\t result=" + result);
-		return informationService.reply(id, result);
+		String responseStr = informationService.reply(id, result);
+		logger.info("reply response:\t" + responseStr);
+		return responseStr;
 	}
 }

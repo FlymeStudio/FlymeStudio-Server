@@ -2,6 +2,8 @@ package com.zengyu.demo.controller;
 
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +35,16 @@ public class TeamworkController {
 	 * 
 	 * @param id
 	 *            团队编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/team/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String getTeamInfo(@RequestParam int id) {
+	public String getTeamInfo(@RequestParam int id, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("getTeamInfo:\t id=" + id);
-		return teamworkService.getTeamInfo(id);
+		String responseStr = teamworkService.getTeamInfo(id);
+		logger.info("getTeamInfo response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -47,13 +52,16 @@ public class TeamworkController {
 	 * 
 	 * @param user
 	 *            用户编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/teams/my", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewTeams(@RequestParam int user) {
+	public String viewTeams(@RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("viewTeams:\t user=" + user);
-		return teamworkService.viewTeams(user);
+		String responseStr = teamworkService.viewTeams(user);
+		logger.info("viewTeams response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -61,13 +69,16 @@ public class TeamworkController {
 	 * 
 	 * @param content
 	 *            查找内容
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchUser(@RequestParam String content) {
+	public String searchUser(@RequestParam String content, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("searchUser:\t content=" + content);
-		return teamworkService.searchUser(content);
+		String responseStr = teamworkService.searchUser(content);
+		logger.info("searchUser response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -79,13 +90,17 @@ public class TeamworkController {
 	 *            接收方
 	 * @param id
 	 *            团队编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/user/all", method = RequestMethod.POST)
 	@ResponseBody
-	public String invite(@RequestParam int sender, @RequestParam int receiver, @RequestParam int id) {
+	public String invite(@RequestParam int sender, @RequestParam int receiver, @RequestParam int id,
+			HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("invite:\t sender=" + sender + "\t receiver=" + receiver + "\t id=" + id);
-		return teamworkService.invite(sender, receiver, id);
+		String responseStr = teamworkService.invite(sender, receiver, id);
+		logger.info("invite response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -93,13 +108,16 @@ public class TeamworkController {
 	 * 
 	 * @param id
 	 *            团队编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/team/my", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String disband(@RequestParam int id) {
+	public String disband(@RequestParam int id, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("disband:\t id=" + id);
-		return teamworkService.disband(id);
+		String responseStr = teamworkService.disband(id);
+		logger.info("disband response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -107,13 +125,16 @@ public class TeamworkController {
 	 * 
 	 * @param user
 	 *            用户编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/projects/member", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewMemberProjects(@RequestParam int user) {
+	public String viewMemberProjects(@RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("viewMemberProjects:\t user=" + user);
-		return teamworkService.viewMemberProjects(user);
+		String responseStr = teamworkService.viewMemberProjects(user);
+		logger.info("viewMemberProjects response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -121,13 +142,16 @@ public class TeamworkController {
 	 * 
 	 * @param user
 	 *            用户编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/summaries/member", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewMemberSummaries(@RequestParam int user) {
+	public String viewMemberSummaries(@RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("viewMemberSummaries:\t user=" + user);
-		return teamworkService.viewMemberSummaries(user);
+		String responseStr = teamworkService.viewMemberSummaries(user);
+		logger.info("viewMemberSummaries response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -139,13 +163,17 @@ public class TeamworkController {
 	 *            成员编号
 	 * @param permission
 	 *            成员权限
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/permission/member", method = RequestMethod.PUT)
 	@ResponseBody
-	public String setPermission(@RequestParam int id, @RequestParam int user, @RequestParam int permission) {
+	public String setPermission(@RequestParam int id, @RequestParam int user, @RequestParam int permission,
+			HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("setPermission:\t id=" + id + "\t user=" + user + "\t permission=" + permission);
-		return teamworkService.setPermission(id, user, permission);
+		String responseStr = teamworkService.setPermission(id, user, permission);
+		logger.info("setPermission response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -155,13 +183,16 @@ public class TeamworkController {
 	 *            团队编号
 	 * @param user
 	 *            成员编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/team/member", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String remove(@RequestParam int id, @RequestParam int user) {
+	public String remove(@RequestParam int id, @RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("remove:\t id=" + id + "\t user=" + user);
-		return teamworkService.remove(id, user);
+		String responseStr = teamworkService.remove(id, user);
+		logger.info("remove response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -169,13 +200,16 @@ public class TeamworkController {
 	 * 
 	 * @param content
 	 *            查找内容
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/teams/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchTeam(@RequestParam String content) {
+	public String searchTeam(@RequestParam String content, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("searchTeam:\t content=" + content);
-		return teamworkService.searchTeam(content);
+		String responseStr = teamworkService.searchTeam(content);
+		logger.info("searchTeam response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -185,13 +219,16 @@ public class TeamworkController {
 	 *            发送方
 	 * @param id
 	 *            团队编号
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/team/all", method = RequestMethod.POST)
 	@ResponseBody
-	public String join(@RequestParam int sender, @RequestParam int id) {
+	public String join(@RequestParam int sender, @RequestParam int id, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("join:\t sender=" + sender + "\t id=" + id);
-		return teamworkService.join(sender, id);
+		String responseStr = teamworkService.join(sender, id);
+		logger.info("join response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -201,12 +238,15 @@ public class TeamworkController {
 	 *            用户编号
 	 * @param name
 	 *            团队名
-	 * @return
+	 * @String responseStr =
 	 */
 	@RequestMapping(value = "/team/my", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@RequestParam int user, @RequestParam String name) {
+	public String create(@RequestParam int user, @RequestParam String name, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("create:\t user=" + user + "\t name=" + name);
-		return teamworkService.create(user, name);
+		String responseStr = teamworkService.create(user, name);
+		logger.info("create response:\t" + responseStr);
+		return responseStr;
 	}
 }

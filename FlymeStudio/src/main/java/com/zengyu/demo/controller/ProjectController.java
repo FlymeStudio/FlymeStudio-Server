@@ -2,6 +2,8 @@ package com.zengyu.demo.controller;
 
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +39,12 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String get(@RequestParam int user) {
+	public String get(@RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("get:\t user=" + user);
-		return projectService.get(user);
+		String responseStr = projectService.get(user);
+		logger.info("get response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -62,10 +67,14 @@ public class ProjectController {
 	@RequestMapping(value = "/project/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam int user, @RequestParam int type, @RequestParam long date,
-			@RequestParam String title, @RequestParam String content, @RequestParam String plans) {
-		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
-				+ content + "\t plans=" + plans);
-		return projectService.create(user, type, date, title, content, plans);
+			@RequestParam String title, @RequestParam String content, @RequestParam String plans,
+			HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
+				+ "\t content=" + content + "\t plans=" + plans);
+		String responseStr = projectService.create(user, type, date, title, content, plans);
+		logger.info("create response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -79,9 +88,12 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam int id, @RequestParam int user) {
+	public String delete(@RequestParam int id, @RequestParam int user, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("delete:\t id=" + id + "\t user=" + user);
-		return projectService.delete(id, user);
+		String responseStr = projectService.delete(id, user);
+		logger.info("delete response:\t" + responseStr);
+		return responseStr;
 	}
 
 	/**
@@ -105,11 +117,14 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam int id, @RequestParam int user, @RequestParam int type,
-			@RequestParam long date, @RequestParam String title, @RequestParam String content,
-			@RequestParam String plans) {
-		logger.info("modify:\t id=" + id + "\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
-				+ "\t content=" + content + "\t plans=" + plans);
-		return projectService.modify(id, user, type, date, title, content, plans);
+	public String modify(@RequestParam int id, @RequestParam int user, @RequestParam int type, @RequestParam long date,
+			@RequestParam String title, @RequestParam String content, @RequestParam String plans,
+			HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		logger.info("modify:\t id=" + id + "\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title="
+				+ title + "\t content=" + content + "\t plans=" + plans);
+		String responseStr = projectService.modify(id, user, type, date, title, content, plans);
+		logger.info("modify response:\t" + responseStr);
+		return responseStr;
 	}
 }

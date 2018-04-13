@@ -47,9 +47,9 @@ public class SummaryImpl extends AbstractImpl implements SummaryDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new SummaryMapper(), summaryId);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

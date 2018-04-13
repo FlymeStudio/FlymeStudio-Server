@@ -58,9 +58,9 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new TeamMapper(), teamId);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,9 +73,9 @@ public class TeamImpl extends AbstractImpl implements TeamDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new TeamMapper(), userId, name);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

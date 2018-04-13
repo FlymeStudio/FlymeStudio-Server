@@ -25,7 +25,7 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		if (queryUserByNum(num) == null && queryUserByTel(tel) == null && queryUserByEmail(email) == null) {
 			String SQL = "insert into " + Const.User.TABLE_NAME + " values(?,?,?,?,?,?,?)";
 			try {
-				return jdbcTemplate.update(SQL, null, num, tel, name, email, password, null);
+				return jdbcTemplate.update(SQL, 0, num, tel, name, email, password, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -50,9 +50,9 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new UserMapper(), user, user, user, password);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,9 +64,9 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new UserMapper(), id);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,9 +78,9 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new UserMapper(), num);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,9 +92,9 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new UserMapper(), tel);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,9 +106,9 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new UserMapper(), email);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

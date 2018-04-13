@@ -46,9 +46,9 @@ public class MessageImpl extends AbstractImpl implements MessageDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new MessageMapper(), messageId);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,9 +62,9 @@ public class MessageImpl extends AbstractImpl implements MessageDao {
 		try {
 			return jdbcTemplate.queryForObject(SQL, new MessageMapper(), messageType, senderId, receiverId, teamId);
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (IncorrectResultSizeDataAccessException e) {
-			e.printStackTrace();
+			// TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
