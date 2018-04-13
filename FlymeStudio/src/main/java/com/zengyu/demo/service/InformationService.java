@@ -10,8 +10,8 @@ public interface InformationService {
 	/**
 	 * 修改信息
 	 * 
-	 * @param old
-	 *            旧电话
+	 * @param id
+	 *            用户编号
 	 * @param tel
 	 *            新电话
 	 * @param name
@@ -22,16 +22,16 @@ public interface InformationService {
 	 *            新密码
 	 * @return
 	 */
-	String modify(String old, String tel, String name, String email, String password);
+	String modify(int id, String tel, String name, String email, String password);
 
 	/**
 	 * 回复消息
 	 * 
-	 * @param id
+	 * @param messageId
 	 *            编号
 	 * @param result
 	 *            回复结果
 	 * @return
 	 */
-	String reply(int id, boolean result);
+	String reply(int messageId, boolean result);
 }

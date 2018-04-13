@@ -31,8 +31,8 @@ public class InformationController {
 	/**
 	 * 修改信息
 	 * 
-	 * @param old
-	 *            旧电话
+	 * @param id
+	 *            用户编号
 	 * @param tel
 	 *            新电话
 	 * @param name
@@ -45,11 +45,11 @@ public class InformationController {
 	 */
 	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam String old, @RequestParam String tel, @RequestParam String name,
+	public String modify(@RequestParam int id, @RequestParam String tel, @RequestParam String name,
 			@RequestParam String email, @RequestParam String password) {
-		logger.info("modify:\t old=" + old + "\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password="
+		logger.info("modify:\t id=" + id + "\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password="
 				+ password);
-		return informationService.modify(old, tel, name, email, password);
+		return informationService.modify(id, tel, name, email, password);
 	}
 
 	/**

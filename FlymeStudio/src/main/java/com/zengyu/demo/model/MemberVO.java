@@ -12,21 +12,21 @@ public class MemberVO implements Serializable {
 	private static final long serialVersionUID = 3192970041482110048L;
 
 	/**
-	 * 成员电话，11位
+	 * 成员编号
 	 */
-	private String tel;
+	private int id;
 
 	/**
 	 * 成员权限，1位
 	 */
 	private int permission;
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public String getTel() {
-		return tel;
+	
+	public int getId() {
+		return id;
 	}
 
 	public void setPermission(int permission) {

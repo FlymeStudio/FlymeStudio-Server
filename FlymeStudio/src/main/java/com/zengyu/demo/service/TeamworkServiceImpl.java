@@ -43,18 +43,18 @@ public class TeamworkServiceImpl implements TeamworkService {
 	@Resource(name = "summaryDao")
 	private SummaryDao summaryDao;
 
-	public String getTeamInfo(int id) {
+	public String getTeamInfo(int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamVO teamVO = teamDao.queryTeamById(id);
+		TeamVO teamVO = teamDao.queryTeamById(teamId);
 		if (teamVO != null) {
 			responseObject.setData(teamVO);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String viewTeams(String tel) {
+	public String viewTeams(int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		List<TeamVO> teamVOs = teamDao.queryTeams(tel);
+		List<TeamVO> teamVOs = teamDao.queryTeams(userId);
 		if (teamVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(teamVOs));
@@ -68,7 +68,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String searchUser(String content) {
 		ResponseObject responseObject = new ResponseObject();
-		List<UserVO> userVOs = userDao.queryUserWithoutPassword(content);
+		List<UserVO> userVOs = userDao.queryUser(content);
 		if (userVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(userVOs));
@@ -80,27 +80,27 @@ public class TeamworkServiceImpl implements TeamworkService {
 		return responseObject.toJSONString();
 	}
 
-	public String invite(String sender, String receiver, int id) {
+	public String invite(int senderId, int receiverId, int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = messageDao.addMessage(1, sender, receiver, id);
+		int count = messageDao.addMessage(1, senderId, receiverId, teamId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String disband(int id) {
+	public String disband(int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = teamDao.deleteTeam(id);
+		int count = teamDao.deleteTeam(teamId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String viewMemberProjects(String tel) {
+	public String viewMemberProjects(int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		List<ProjectVO> projectVOs = projectDao.queryProjects(tel);
+		List<ProjectVO> projectVOs = projectDao.queryProjects(userId);
 		if (projectVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
@@ -112,9 +112,9 @@ public class TeamworkServiceImpl implements TeamworkService {
 		return responseObject.toJSONString();
 	}
 
-	public String viewMemberSummaries(String tel) {
+	public String viewMemberSummaries(int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		List<SummaryVO> summaryVOs = summaryDao.querySummaries(tel);
+		List<SummaryVO> summaryVOs = summaryDao.querySummaries(userId);
 		if (summaryVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
@@ -126,18 +126,18 @@ public class TeamworkServiceImpl implements TeamworkService {
 		return responseObject.toJSONString();
 	}
 
-	public String setPermission(String tel, int id, int permission) {
+	public String setPermission(int teamId, int userId, int permission) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = teamDao.updateMemberPermission(tel, id, permission);
+		int count = teamDao.updateMemberPermission(teamId, userId, permission);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String remove(String tel, int id) {
+	public String remove(int teamId, int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = teamDao.deleteTeamMember(tel, id);
+		int count = teamDao.deleteTeamMember(teamId, userId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
@@ -158,11 +158,11 @@ public class TeamworkServiceImpl implements TeamworkService {
 		return responseObject.toJSONString();
 	}
 
-	public String join(String sender, int id) {
+	public String join(int senderId, int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		TeamVO teamVO = teamDao.queryTeamById(id);
+		TeamVO teamVO = teamDao.queryTeamById(teamId);
 		if (teamVO != null) {
-			int count = messageDao.addMessage(2, sender, teamVO.getTel(), id);
+			int count = messageDao.addMessage(2, senderId, teamVO.getUserId(), senderId);
 			if (count > 0) {
 				responseObject.setResult(true);
 			}
@@ -170,13 +170,12 @@ public class TeamworkServiceImpl implements TeamworkService {
 		return responseObject.toJSONString();
 	}
 
-	public String create(String tel, String name) {
+	public String create(int userId, String name) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = teamDao.addTeam(name, tel);
+		int count = teamDao.addTeam(name, userId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
-
 }

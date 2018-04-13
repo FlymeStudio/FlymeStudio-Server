@@ -14,8 +14,8 @@ public interface SummaryDao {
 	/**
 	 * 添加总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -26,33 +26,33 @@ public interface SummaryDao {
 	 *            内容
 	 * @return
 	 */
-	int addSummary(String tel, int type, String date, String title, String content);
+	int addSummary(int userId, int type, long date, String title, String content);
 
 	/**
 	 * 删除总结
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param summaryId
+	 *            总结编号
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	int deleteSummary(String tel, int id);
+	int deleteSummary(int summaryId, int userId);
 
 	/**
 	 * 通过编号查询总结
 	 * 
-	 * @param id
+	 * @param summaryId
 	 *            编号
 	 * @return
 	 */
-	SummaryVO querySummaryById(int id);
+	SummaryVO querySummaryById(int summaryId);
 
 	/**
 	 * 通过详情查找总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -63,24 +63,24 @@ public interface SummaryDao {
 	 *            内容
 	 * @return
 	 */
-	List<SummaryVO> querySummaryByDetail(String tel, int type, String date, String title, String content);
+	List<SummaryVO> querySummaryByDetail(int userId, int type, long date, String title);
 
 	/**
 	 * 查询个人总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	List<SummaryVO> querySummaries(String tel);
+	List<SummaryVO> querySummaries(int userId);
 
 	/**
 	 * 更新总结
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
+	 * @param summaryId
 	 *            编号
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -91,5 +91,5 @@ public interface SummaryDao {
 	 *            内容
 	 * @return
 	 */
-	int updateSummary(String tel, int id, int type, String date, String title, String content);
+	int updateSummary(int summaryId, int userId, int type, long date, String title, String content);
 }

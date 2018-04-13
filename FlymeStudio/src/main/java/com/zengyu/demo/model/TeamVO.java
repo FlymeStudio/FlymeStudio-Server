@@ -23,9 +23,9 @@ public class TeamVO implements Serializable {
 	private String name;
 
 	/**
-	 * 创建人电话，11位
+	 * 创建人编号
 	 */
-	private String tel;
+	private int userId;
 
 	/**
 	 * 团队成员
@@ -48,14 +48,14 @@ public class TeamVO implements Serializable {
 		return name;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setUserId(int user) {
+		this.userId = user;
 	}
 
-	public String getTel() {
-		return tel;
+	public int getUserId() {
+		return userId;
 	}
-
+	
 	public void setMembers(List<MemberVO> members) {
 		this.members = members;
 	}

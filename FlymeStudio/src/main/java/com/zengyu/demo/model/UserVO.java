@@ -13,6 +13,16 @@ public class UserVO implements Serializable {
 	private static final long serialVersionUID = 6898396310238234346L;
 
 	/**
+	 * 用户编号，数据库递增产生
+	 */
+	private int id;
+
+	/**
+	 * 用户工号
+	 */
+	private String num;
+	
+	/**
 	 * 用户电话，11位
 	 */
 	private String tel;
@@ -37,6 +47,22 @@ public class UserVO implements Serializable {
 	 */
 	private List<Integer> teams;
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setNum(String num) {
+		this.num = num;
+	}
+	
+	public String getNum() {
+		return num;
+	}
+	
 	public void setTel(String tel) {
 		this.tel = tel;
 	}

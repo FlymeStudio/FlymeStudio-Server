@@ -12,9 +12,9 @@ public class PlanVO implements Serializable {
 	private static final long serialVersionUID = -8112585260663208900L;
 
 	/**
-	 * 计划编号
+	 * 计划编号，时间戳生成
 	 */
-	private int id;
+	private String id;
 
 	/**
 	 * 计划标签，最大8位
@@ -31,11 +31,11 @@ public class PlanVO implements Serializable {
 	 */
 	private int percent;
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 

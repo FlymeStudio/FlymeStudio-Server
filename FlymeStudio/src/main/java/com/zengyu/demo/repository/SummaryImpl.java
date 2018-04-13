@@ -19,52 +19,75 @@ import com.zengyu.demo.others.Const;
 @Repository(value = "summaryDao")
 public class SummaryImpl extends AbstractImpl implements SummaryDao {
 
-	public int addSummary(String tel, int type, String date, String title, String content) {
-		if (querySummaryByDetail(tel, type, date, title, null) != null) {
-			return 0;
-		} else {
+	public int addSummary(int userId, int type, long date, String title, String content) {
+		if (querySummaryByDetail(userId, type, date, title) == null) {
 			String SQL = "insert into " + Const.Summary.TABLE_NAME + " values(?,?,?,?,?,?)";
-			return jdbcTemplate.update(SQL, null, tel, type, date, title, content);
+			try {
+				return jdbcTemplate.update(SQL, null, userId, type, date, title, content);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return 0;
 	}
 
-	public int deleteSummary(String tel, int id) {
-		String SQL = "delete from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_TEL + " = ? and "
-				+ Const.Project.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, tel, id);
-	}
-
-	public SummaryVO querySummaryById(int id) {
-		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_ID + " = ?";
-		SummaryVO summaryVO = null;
+	public int deleteSummary(int summaryId, int userId) {
+		String SQL = "delete from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_ID + " = ? and "
+				+ Const.Project.COLUMN_USER_ID + " = ?";
 		try {
-			summaryVO = jdbcTemplate.queryForObject(SQL, new SummaryMapper(), id);
-		} catch (EmptyResultDataAccessException e) {
-			// TODO
-		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			return jdbcTemplate.update(SQL, summaryId, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return summaryVO;
+		return 0;
 	}
 
-	public List<SummaryVO> querySummaryByDetail(String tel, int type, String date, String title, String content) {
-		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_TEL + " = ? and "
-				+ Const.Summary.COLUMN_TYPE + " = ? and " + Const.Summary.COLUMN_DATE + " = ? and "
-				+ Const.Summary.COLUMN_TITLE + " like %?% and " + Const.Summary.COLUMN_CONTENT + " like %?%";
-		return jdbcTemplate.query(SQL, new SummaryMapper(), tel, type, date, title, content);
+	public SummaryVO querySummaryById(int summaryId) {
+		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_ID + " = ?";
+		try {
+			return jdbcTemplate.queryForObject(SQL, new SummaryMapper(), summaryId);
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+		} catch (IncorrectResultSizeDataAccessException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public List<SummaryVO> querySummaries(String tel) {
-		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_TEL + " = ?";
-		return jdbcTemplate.query(SQL, new SummaryMapper(), tel);
+	public List<SummaryVO> querySummaryByDetail(int userId, int type, long date, String title) {
+		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_USER_ID
+				+ " = ? and " + Const.Summary.COLUMN_TYPE + " = ? and " + Const.Summary.COLUMN_DATE + " = ? and "
+				+ Const.Summary.COLUMN_TITLE + " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new SummaryMapper(), userId, type, date, title);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public int updateSummary(String tel, int id, int type, String date, String title, String content) {
+	public List<SummaryVO> querySummaries(int userId) {
+		String SQL = "select * from " + Const.Summary.TABLE_NAME + " where " + Const.Summary.COLUMN_USER_ID + " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new SummaryMapper(), userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int updateSummary(int summaryId, int userId, int type, long date, String title, String content) {
 		String SQL = "update " + Const.Project.TABLE_NAME + " set " + Const.Project.COLUMN_TYPE + " = ?, "
 				+ Const.Project.COLUMN_DATE + " = ?, " + Const.Project.COLUMN_TITLE + " = ?, "
-				+ Const.Project.COLUMN_CONTENT + " = ?, " + Const.Project.COLUMN_TEL + " = ? and "
-				+ Const.Project.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, type, date, title, content, tel, id);
+				+ Const.Project.COLUMN_CONTENT + " = ?, " + Const.Project.COLUMN_ID + " = ? and "
+				+ Const.Project.COLUMN_USER_ID + " = ?";
+		try {
+			return jdbcTemplate.update(SQL, type, date, title, content, summaryId, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
-
 }

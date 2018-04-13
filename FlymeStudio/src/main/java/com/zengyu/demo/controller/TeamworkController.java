@@ -45,15 +45,15 @@ public class TeamworkController {
 	/**
 	 * 查看个人团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/teams/my", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewTeams(@RequestParam String tel) {
-		logger.info("viewTeams:\t tel=" + tel);
-		return teamworkService.viewTeams(tel);
+	public String viewTeams(@RequestParam int user) {
+		logger.info("viewTeams:\t user=" + user);
+		return teamworkService.viewTeams(user);
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class TeamworkController {
 	 */
 	@RequestMapping(value = "/user/all", method = RequestMethod.POST)
 	@ResponseBody
-	public String invite(@RequestParam String sender, @RequestParam String receiver, @RequestParam int id) {
-		logger.info("invite:\t sender=" + sender + "\t receiver=" + receiver+ "\t id=" + id);
+	public String invite(@RequestParam int sender, @RequestParam int receiver, @RequestParam int id) {
+		logger.info("invite:\t sender=" + sender + "\t receiver=" + receiver + "\t id=" + id);
 		return teamworkService.invite(sender, receiver, id);
 	}
 
@@ -105,63 +105,63 @@ public class TeamworkController {
 	/**
 	 * 查看成员任务
 	 * 
-	 * @param tel
-	 *            成员电话
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/projects/member", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewMemberProjects(@RequestParam String tel) {
-		logger.info("viewMemberProjects:\t tel=" + tel);
-		return teamworkService.viewMemberProjects(tel);
+	public String viewMemberProjects(@RequestParam int user) {
+		logger.info("viewMemberProjects:\t user=" + user);
+		return teamworkService.viewMemberProjects(user);
 	}
 
 	/**
 	 * 查看成员总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/summaries/member", method = RequestMethod.GET)
 	@ResponseBody
-	public String viewMemberSummaries(@RequestParam String tel) {
-		logger.info("viewMemberSummaries:\t tel=" + tel);
-		return teamworkService.viewMemberSummaries(tel);
+	public String viewMemberSummaries(@RequestParam int user) {
+		logger.info("viewMemberSummaries:\t user=" + user);
+		return teamworkService.viewMemberSummaries(user);
 	}
 
 	/**
 	 * 设置权限
 	 * 
-	 * @param tel
-	 *            成员电话
 	 * @param id
 	 *            团队编号
+	 * @param user
+	 *            成员编号
 	 * @param permission
 	 *            成员权限
 	 * @return
 	 */
 	@RequestMapping(value = "/permission/member", method = RequestMethod.PUT)
 	@ResponseBody
-	public String setPermission(@RequestParam String tel, @RequestParam int id, @RequestParam int permission) {
-		logger.info("setPermission:\t tel=" + tel + "\t id=" + id+ "\t permission=" + permission);
-		return teamworkService.setPermission(tel, id, permission);
+	public String setPermission(@RequestParam int id, @RequestParam int user, @RequestParam int permission) {
+		logger.info("setPermission:\t id=" + id + "\t user=" + user + "\t permission=" + permission);
+		return teamworkService.setPermission(id, user, permission);
 	}
 
 	/**
 	 * 移除成员
 	 * 
-	 * @param tel
-	 *            成员电话
 	 * @param id
 	 *            团队编号
+	 * @param user
+	 *            成员编号
 	 * @return
 	 */
 	@RequestMapping(value = "/team/member", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String remove(@RequestParam String tel, @RequestParam int id) {
-		logger.info("remove:\t tel=" + tel + "\t id=" + id);
-		return teamworkService.remove(tel, id);
+	public String remove(@RequestParam int id, @RequestParam int user) {
+		logger.info("remove:\t id=" + id + "\t user=" + user);
+		return teamworkService.remove(id, user);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class TeamworkController {
 	@RequestMapping(value = "/teams/all", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchTeam(@RequestParam String content) {
-		logger.info("searchTeam:\t content=" + content );
+		logger.info("searchTeam:\t content=" + content);
 		return teamworkService.searchTeam(content);
 	}
 
@@ -189,7 +189,7 @@ public class TeamworkController {
 	 */
 	@RequestMapping(value = "/team/all", method = RequestMethod.POST)
 	@ResponseBody
-	public String join(@RequestParam String sender, @RequestParam int id) {
+	public String join(@RequestParam int sender, @RequestParam int id) {
 		logger.info("join:\t sender=" + sender + "\t id=" + id);
 		return teamworkService.join(sender, id);
 	}
@@ -197,16 +197,16 @@ public class TeamworkController {
 	/**
 	 * 创建团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @param name
 	 *            团队名
 	 * @return
 	 */
 	@RequestMapping(value = "/team/my", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@RequestParam String tel, @RequestParam String name) {
-		logger.info("create:\t tel=" + tel + "\t name=" + name);
-		return teamworkService.create(tel, name);
+	public String create(@RequestParam int user, @RequestParam String name) {
+		logger.info("create:\t user=" + user + "\t name=" + name);
+		return teamworkService.create(user, name);
 	}
 }

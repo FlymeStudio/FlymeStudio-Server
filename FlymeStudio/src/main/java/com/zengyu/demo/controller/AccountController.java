@@ -31,17 +31,17 @@ public class AccountController {
 	/**
 	 * 登录
 	 * 
-	 * @param id
-	 *            电话或者邮箱
+	 * @param user
+	 *            工号或电话或邮箱
 	 * @param password
 	 *            密码
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public String signIn(@RequestParam String id, @RequestParam String password) {
-		logger.info("signIn:\t id=" + id + "\t password=" + password);
-		return accountService.signIn(id, password);
+	public String signIn(@RequestParam String user, @RequestParam String password) {
+		logger.info("signIn:\t id=" + user + "\t password=" + password);
+		return accountService.signIn(user, password);
 	}
 
 	/**
@@ -63,27 +63,30 @@ public class AccountController {
 	@ResponseBody
 	public String signUp(@RequestParam String num, @RequestParam String name, @RequestParam String tel,
 			@RequestParam String email, @RequestParam String password) {
-		logger.info("signUp:\t num=" + num + "\t name=" + name + "=\t tel=" + tel + "\t email=" + email + "\t password=" + password);
-		return accountService.signUp(tel, name, email, password);
+		logger.info("signUp:\t num=" + num + "\t name=" + name + "=\t tel=" + tel + "\t email=" + email + "\t password="
+				+ password);
+		return accountService.signUp(num, tel, name, email, password);
 	}
 
 	/**
 	 * 注销
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param id
+	 *            编号
 	 * @return
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
-	public String signOut(@RequestParam String tel) {
-		logger.info("signOut:\t tel=" + tel);
-		return accountService.signOut(tel);
+	public String signOut(@RequestParam int id) {
+		logger.info("signOut:\t tel=" + id);
+		return accountService.signOut(id);
 	}
 
 	/**
 	 * 找回
 	 * 
+	 * @param num
+	 *            工号
 	 * @param tel
 	 *            电话
 	 * @param name
@@ -94,8 +97,9 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/retrieve", method = RequestMethod.POST)
 	@ResponseBody
-	public String retrieve(@RequestParam String tel, @RequestParam String name, @RequestParam String email) {
-		logger.info("retrieve:\t tel=" + tel + "\t name=" + name + "\t email=" + email);
-		return accountService.retrieve(tel, name, email);
+	public String retrieve(@RequestParam String num, @RequestParam String tel, @RequestParam String name,
+			@RequestParam String email) {
+		logger.info("retrieve:\t num=" + num + "\t tel=" + tel + "\t name=" + name + "\t email=" + email);
+		return accountService.retrieve(num, tel, name, email);
 	}
 }

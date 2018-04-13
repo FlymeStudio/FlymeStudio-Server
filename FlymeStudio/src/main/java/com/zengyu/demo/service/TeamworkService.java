@@ -10,20 +10,20 @@ public interface TeamworkService {
 	/**
 	 * 获取团队信息
 	 * 
-	 * @param id
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	String getTeamInfo(int id);
+	String getTeamInfo(int teamId);
 
 	/**
 	 * 查看个人团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	String viewTeams(String tel);
+	String viewTeams(int userId);
 
 	/**
 	 * 查找用户
@@ -37,66 +37,66 @@ public interface TeamworkService {
 	/**
 	 * 邀请加入团队
 	 * 
-	 * @param sender
+	 * @param senderId
 	 *            发送方
-	 * @param receiver
+	 * @param receiverId
 	 *            接收方
-	 * @param id
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	String invite(String sender, String receiver, int id);
+	String invite(int senderId, int receiverId, int teamId);
 
 	/**
 	 * 解散团队
 	 * 
-	 * @param id
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	String disband(int id);
+	String disband(int teamId);
 
 	/**
 	 * 查看成员任务
 	 * 
-	 * @param tel
-	 *            成员电话
+	 * @param userId
+	 *            成员编号
 	 * @return
 	 */
-	String viewMemberProjects(String tel);
+	String viewMemberProjects(int userId);
 
 	/**
 	 * 查看成员总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            成员编号
 	 * @return
 	 */
-	String viewMemberSummaries(String tel);
+	String viewMemberSummaries(int userId);
 
 	/**
 	 * 设置权限
 	 * 
-	 * @param tel
-	 *            成员电话
-	 * @param id
+	 * @param teamId
 	 *            团队编号
+	 * @param userId
+	 *            成员编号
 	 * @param permission
 	 *            成员权限
 	 * @return
 	 */
-	String setPermission(String tel, int id, int permission);
+	String setPermission(int teamId, int userId, int permission);
 
 	/**
 	 * 移除成员
 	 * 
-	 * @param tel
-	 *            成员电话
-	 * @param id
+	 * @param teamId
 	 *            团队编号
+	 * @param userId
+	 *            成员编号
 	 * @return
 	 */
-	String remove(String tel, int id);
+	String remove(int teamId, int userId);
 
 	/**
 	 * 查找团队
@@ -112,20 +112,20 @@ public interface TeamworkService {
 	 * 
 	 * @param sender
 	 *            发送方
-	 * @param id
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	String join(String sender, int id);
+	String join(int senderId, int teamId);
 
 	/**
 	 * 创建团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param name
 	 *            团队名
 	 * @return
 	 */
-	String create(String tel, String name);
+	String create(int userId, String name);
 }

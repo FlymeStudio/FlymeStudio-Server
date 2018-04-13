@@ -15,8 +15,8 @@ public interface ProjectDao {
 	/**
 	 * 添加任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -29,33 +29,33 @@ public interface ProjectDao {
 	 *            计划
 	 * @return
 	 */
-	int addProject(String tel, int type, String date, String title, String content, List<PlanVO> plans);
+	int addProject(int userId, int type, long date, String title, String content, List<PlanVO> plans);
 
 	/**
 	 * 删除任务
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param projectId
+	 *            任务编号
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	int deleteProject(String tel, int id);
+	int deleteProject(int projectId, int userId);
 
 	/**
 	 * 通过编号查询任务
 	 * 
-	 * @param id
-	 *            编号
+	 * @param projectId
+	 *            任务编号
 	 * @return
 	 */
-	ProjectVO queryProjectById(int id);
+	ProjectVO queryProjectById(int projectId);
 
 	/**
 	 * 通过详情查找任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -66,24 +66,24 @@ public interface ProjectDao {
 	 *            内容
 	 * @return
 	 */
-	List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title);
+	List<ProjectVO> queryProjectByDetail(int userId, int type, long date, String title);
 
 	/**
 	 * 查询个人任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	List<ProjectVO> queryProjects(String tel);
+	List<ProjectVO> queryProjects(int userId);
 
 	/**
 	 * 更新任务
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param projectId
+	 *            任务编号
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -96,5 +96,5 @@ public interface ProjectDao {
 	 *            计划
 	 * @return
 	 */
-	int updateProject(String tel, int id, int type, String date, String title, String content, List<PlanVO> plans);
+	int updateProject(int projectId, int userId, int type, long date, String title, String content, List<PlanVO> plans);
 }

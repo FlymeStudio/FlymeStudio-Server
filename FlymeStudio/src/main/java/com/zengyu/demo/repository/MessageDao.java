@@ -14,57 +14,57 @@ public interface MessageDao {
 	/**
 	 * 添加消息
 	 * 
-	 * @param type
+	 * @param messageType
 	 *            消息类型
-	 * @param sender
-	 *            发送方
-	 * @param receiver
-	 *            接收方
-	 * @param teamid
+	 * @param senderId
+	 *            发送方编号
+	 * @param receiverId
+	 *            接收方编号
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	int addMessage(int type, String sender, String receiver, int teamid);
+	int addMessage(int messageType, int senderId, int receiverId, int teamId);
 
 	/**
 	 * 删除消息
 	 * 
-	 * @param id
+	 * @param messageId
 	 *            消息编号
 	 * @return
 	 */
-	int deleteMessage(int id);
+	int deleteMessage(int messageId);
 
 	/**
 	 * 通过编号查找消息
 	 * 
-	 * @param id
+	 * @param messageId
 	 *            消息编号
 	 * @return
 	 */
-	MessageVO queryMessageById(int id);
+	MessageVO queryMessageById(int messageId);
 
 	/**
 	 * 通过详情查找消息
 	 * 
-	 * @param type
+	 * @param messageType
 	 *            消息类型
-	 * @param sender
-	 *            发送方
-	 * @param receiver
-	 *            接收方
-	 * @param teamid
+	 * @param senderId
+	 *            发送方编号
+	 * @param receiverId
+	 *            接收方编号
+	 * @param teamId
 	 *            团队编号
 	 * @return
 	 */
-	MessageVO queryMessageByDetail(int type, String sender, String receiver, int teamid);
+	MessageVO queryMessageByDetail(int messageType, int senderId, int receiverId, int teamId);
 
 	/**
 	 * 查询个人消息
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	List<MessageVO> queryMessages(String tel);
+	List<MessageVO> queryMessages(int userId);
 }

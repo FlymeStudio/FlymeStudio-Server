@@ -10,17 +10,17 @@ public interface ProjectService {
 	/**
 	 * 获取个人任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	String get(String tel);
+	String get(int userId);
 
 	/**
 	 * 创建任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -33,26 +33,26 @@ public interface ProjectService {
 	 *            计划
 	 * @return
 	 */
-	String create(String tel, int type, String date, String title, String content, String plans);
+	String create(int userId, int type, long date, String title, String content, String plans);
 
 	/**
 	 * 删除任务
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param projectId
+	 *            任务编号
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	String delete(String tel, int id);
+	String delete(int projectId, int userId);
 
 	/**
 	 * 修改任务
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param projectId
+	 *            任务编号
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -65,5 +65,5 @@ public interface ProjectService {
 	 *            计划
 	 * @return
 	 */
-	String modify(String tel, int id, int type, String date, String title, String content, String plans);
+	String modify(int projectId, int userId, int type, long date, String title, String content, String plans);
 }

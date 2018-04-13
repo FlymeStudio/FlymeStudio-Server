@@ -7,6 +7,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.zengyu.demo.model.PlanVO;
 import com.zengyu.demo.model.ProjectMapper;
 import com.zengyu.demo.model.ProjectVO;
@@ -21,54 +22,82 @@ import com.zengyu.demo.others.Const;
 @Repository(value = "projectDao")
 public class ProjectImpl extends AbstractImpl implements ProjectDao {
 
-	public int addProject(String tel, int type, String date, String title, String content, List<PlanVO> plans) {
-		if (queryProjectByDetail(tel, type, date, title) != null) {
-			return 0;
-		} else {
-			String plansStrign = JSON.toJSONString(plans);
-			String SQL = "insert into " + Const.Project.TABLE_NAME + " values(?,?,?,?,?,?,?)";
-			return jdbcTemplate.update(SQL, null, tel, type, date, title, content, plansStrign);
+	public int addProject(int userId, int type, long date, String title, String content, List<PlanVO> plans) {
+		if (queryProjectByDetail(userId, type, date, title) == null) {
+			try {
+				String plansStrign = JSON.toJSONString(plans);
+				String SQL = "insert into " + Const.Project.TABLE_NAME + " values(?,?,?,?,?,?,?)";
+				return jdbcTemplate.update(SQL, null, userId, type, date, title, content, plansStrign);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return 0;
 	}
 
-	public int deleteProject(String tel, int id) {
-		String SQL = "delete from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_TEL + " = ? and "
-				+ Const.Project.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, tel, id);
-	}
-
-	public ProjectVO queryProjectById(int id) {
-		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_ID + " = ?";
-		ProjectVO projectVO = null;
+	public int deleteProject(int projectId, int userId) {
+		String SQL = "delete from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_ID + " = ? and "
+				+ Const.Project.COLUMN_USER_ID + " = ?";
 		try {
-			projectVO = jdbcTemplate.queryForObject(SQL, new ProjectMapper(), id);
-		} catch (EmptyResultDataAccessException e) {
-			// TODO
-		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			return jdbcTemplate.update(SQL, projectId, userId);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return projectVO;
+		return 0;
 	}
 
-	public List<ProjectVO> queryProjectByDetail(String tel, int type, String date, String title) {
-		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_TEL + " = ? and "
-				+ Const.Project.COLUMN_TYPE + " = ? and " + Const.Project.COLUMN_DATE + " = ? and "
+	public ProjectVO queryProjectById(int projectId) {
+		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_ID + " = ?";
+		try {
+			return jdbcTemplate.queryForObject(SQL, new ProjectMapper(), projectId);
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+		} catch (IncorrectResultSizeDataAccessException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<ProjectVO> queryProjectByDetail(int userId, int type, long date, String title) {
+		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_USER_ID
+				+ " = ? and " + Const.Project.COLUMN_TYPE + " = ? and " + Const.Project.COLUMN_DATE + " = ? and "
 				+ Const.Project.COLUMN_TITLE + " = ?";
-		return jdbcTemplate.query(SQL, new ProjectMapper(), tel, type, date, title);
+		try {
+			return jdbcTemplate.query(SQL, new ProjectMapper(), userId, type, date, title);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public List<ProjectVO> queryProjects(String tel) {
-		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_TEL + " = ?";
-		return jdbcTemplate.query(SQL, new ProjectMapper(), tel);
+	public List<ProjectVO> queryProjects(int userId) {
+		String SQL = "select * from " + Const.Project.TABLE_NAME + " where " + Const.Project.COLUMN_USER_ID + " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new ProjectMapper(), userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public int updateProject(String tel, int id, int type, String date, String title, String content,
+	public int updateProject(int projectId, int userId, int type, long date, String title, String content,
 			List<PlanVO> plans) {
-		String plansStrign = JSON.toJSONString(plans);
-		String SQL = "update " + Const.Project.TABLE_NAME + " set " + Const.Project.COLUMN_TYPE + " = ?, "
-				+ Const.Project.COLUMN_DATE + " = ?, " + Const.Project.COLUMN_TITLE + " = ?, "
-				+ Const.Project.COLUMN_CONTENT + " = ?, " + Const.Project.COLUMN_PLANS + " = ? where "
-				+ Const.Project.COLUMN_TEL + " = ? and " + Const.Project.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, type, date, title, content, plansStrign, tel, id);
+		try {
+			String plansStrign = JSON.toJSONString(plans);
+			String SQL = "update " + Const.Project.TABLE_NAME + " set " + Const.Project.COLUMN_TYPE + " = ?, "
+					+ Const.Project.COLUMN_DATE + " = ?, " + Const.Project.COLUMN_TITLE + " = ?, "
+					+ Const.Project.COLUMN_CONTENT + " = ?, " + Const.Project.COLUMN_PLANS + " = ? where "
+					+ Const.Project.COLUMN_ID + " = ? and " + Const.Project.COLUMN_USER_ID + " = ?";
+			return jdbcTemplate.update(SQL, type, date, title, content, plansStrign, projectId, userId);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

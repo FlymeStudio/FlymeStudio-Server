@@ -31,22 +31,22 @@ public class ProjectController {
 	/**
 	 * 获取个人任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String get(@RequestParam String tel) {
-		logger.info("get:\t tel=" + tel);
-		return projectService.get(tel);
+	public String get(@RequestParam int user) {
+		logger.info("get:\t user=" + user);
+		return projectService.get(user);
 	}
 
 	/**
 	 * 创建任务
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -61,36 +61,36 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
+	public String create(@RequestParam int user, @RequestParam int type, @RequestParam long date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans) {
-		logger.info("create:\t tel=" + tel + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
+		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
 				+ content + "\t plans=" + plans);
-		return projectService.create(tel, type, date, title, content, plans);
+		return projectService.create(user, type, date, title, content, plans);
 	}
 
 	/**
 	 * 删除任务
 	 * 
-	 * @param tel
-	 *            电话
 	 * @param id
-	 *            编号
+	 *            任务编号
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam String tel, @RequestParam int id) {
-		logger.info("delete:\t tel=" + tel + "\t id=" + id);
-		return projectService.delete(tel, id);
+	public String delete(@RequestParam int id, @RequestParam int user) {
+		logger.info("delete:\t id=" + id + "\t user=" + user);
+		return projectService.delete(id, user);
 	}
 
 	/**
 	 * 修改任务
 	 * 
-	 * @param tel
-	 *            电话
 	 * @param id
-	 *            编号
+	 *            任务编号
+	 * @param user
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -105,11 +105,11 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
-			@RequestParam String date, @RequestParam String title, @RequestParam String content,
+	public String modify(@RequestParam int id, @RequestParam int user, @RequestParam int type,
+			@RequestParam long date, @RequestParam String title, @RequestParam String content,
 			@RequestParam String plans) {
-		logger.info("modify:\t tel=" + tel + "\t id=" + id + "\t type=" + type + "\t date=" + date + "\t title=" + title
+		logger.info("modify:\t id=" + id + "\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
 				+ "\t content=" + content + "\t plans=" + plans);
-		return projectService.modify(tel, id, type, date, title, content, plans);
+		return projectService.modify(id, user, type, date, title, content, plans);
 	}
 }

@@ -25,9 +25,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Resource(name = "projectDao")
 	private ProjectDao projectDao;
 
-	public String get(String tel) {
+	public String get(int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		List<ProjectVO> projectVOs = projectDao.queryProjects(tel);
+		List<ProjectVO> projectVOs = projectDao.queryProjects(userId);
 		if (projectVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(projectVOs));
@@ -39,12 +39,12 @@ public class ProjectServiceImpl implements ProjectService {
 		return responseObject.toJSONString();
 	}
 
-	public String create(String tel, int type, String date, String title, String content, String plans) {
+	public String create(int userId, int type, long date, String title, String content, String plans) {
 		ResponseObject responseObject = new ResponseObject();
 		try {
 			JSONArray jsonArray = JSONArray.parseArray(plans);
 			if (jsonArray != null) {
-				int count = projectDao.addProject(tel, type, date, title, content, jsonArray.toJavaList(PlanVO.class));
+				int count = projectDao.addProject(userId, type, date, title, content, jsonArray.toJavaList(PlanVO.class));
 				if (count > 0) {
 					responseObject.setResult(true);
 				}
@@ -56,21 +56,21 @@ public class ProjectServiceImpl implements ProjectService {
 		return responseObject.toJSONString();
 	}
 
-	public String delete(String tel, int id) {
+	public String delete(int id, int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = projectDao.deleteProject(tel, id);
+		int count = projectDao.deleteProject(id, userId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String modify(String tel, int id, int type, String date, String title, String content, String plans) {
+	public String modify(int id, int userId, int type, long date, String title, String content, String plans) {
 		ResponseObject responseObject = new ResponseObject();
 		try {
 			JSONArray jsonArray = JSONArray.parseArray(plans);
 			if (jsonArray != null) {
-				int count = projectDao.updateProject(tel, id, type, date, title, content,
+				int count = projectDao.updateProject(id, userId, type, date, title, content,
 						jsonArray.toJavaList(PlanVO.class));
 				if (count > 0) {
 					responseObject.setResult(true);

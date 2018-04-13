@@ -14,6 +14,8 @@ public interface UserDao {
 	/**
 	 * 添加用户
 	 * 
+	 * @param num
+	 *            工号
 	 * @param tel
 	 *            电话
 	 * @param name
@@ -24,26 +26,45 @@ public interface UserDao {
 	 *            密码
 	 * @return
 	 */
-	int addUser(String tel, String name, String email, String password);
+	int addUser(String num, String tel, String name, String email, String password);
 
 	/**
 	 * 删除用户
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param id
+	 *            编号
 	 * @return
 	 */
-	int deleteUser(String tel);
+	int deleteUser(int id);
 
 	/**
 	 * 通过帐号和密码查找用户
 	 * 
-	 * @param id
+	 * @param user
+	 *            工号或电话或邮箱
 	 * @param password
 	 *            密码
 	 * @return
 	 */
-	UserVO queryUserByIdAndPassword(String id, String password);
+	UserVO queryUserByAccountAndPassword(String user, String password);
+
+	/**
+	 * 通过编号查找用户
+	 * 
+	 * @param num
+	 *            编号
+	 * @return
+	 */
+	UserVO queryUserById(int id);
+
+	/**
+	 * 通过工号查找用户
+	 * 
+	 * @param num
+	 *            工号
+	 * @return
+	 */
+	UserVO queryUserByNum(String num);
 
 	/**
 	 * 通过电话查找用户
@@ -64,19 +85,19 @@ public interface UserDao {
 	UserVO queryUserByEmail(String email);
 
 	/**
-	 * 查找用户过滤密码
+	 * 查找用户
 	 * 
 	 * @param content
 	 *            查找内容
 	 * @return
 	 */
-	List<UserVO> queryUserWithoutPassword(String content);
+	List<UserVO> queryUser(String content);
 
 	/**
 	 * 更新用户信息
 	 * 
-	 * @param old
-	 *            旧电话
+	 * @param id
+	 *            编号
 	 * @param tel
 	 *            新电话
 	 * @param name
@@ -87,16 +108,16 @@ public interface UserDao {
 	 *            新密码
 	 * @return
 	 */
-	int updateUserInformation(String old, String tel, String name, String email, String password);
+	int updateUserInformation(int id, String tel, String name, String email, String password);
 
 	/**
 	 * 更新用户所属团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param id
+	 *            编号
 	 * @param teams
 	 *            所属团队
 	 * @return
 	 */
-	int updateUserTeams(String tel, List<String> teams);
+	int updateUserTeams(int id, List<String> teams);
 }

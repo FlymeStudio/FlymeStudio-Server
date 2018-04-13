@@ -27,35 +27,35 @@ public class InformationServiceImpl implements InformationService {
 	@Resource(name = "teamDao")
 	private TeamDao teamDao;
 
-	public String modify(String old, String name, String tel, String email, String password) {
+	public String modify(int id, String tel, String name, String email, String password) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = userDao.updateUserInformation(old, tel, name, email, password);
+		int count = userDao.updateUserInformation(id, tel, name, email, password);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String reply(int id, boolean result) {
+	public String reply(int messageId, boolean result) {
 		ResponseObject responseObject = new ResponseObject();
-		MessageVO messageVO = messageDao.queryMessageById(id);
+		MessageVO messageVO = messageDao.queryMessageById(messageId);
 		if (messageVO != null) {
 			int count1 = 0;
 			if (messageVO.getType() == 1) {
 				if (result) {
-					count1 = teamDao.addTeamMember(messageVO.getReciever(), messageVO.getTeamid());
+					count1 = teamDao.addTeamMember(messageVO.getRecieverId(), messageVO.getTeamId());
 				} else {
 					count1 = 1;
 				}
 			} else if (messageVO.getType() == 2) {
 				if (result) {
-					count1 = teamDao.addTeamMember(messageVO.getSender(), messageVO.getTeamid());
+					count1 = teamDao.addTeamMember(messageVO.getSenderId(), messageVO.getTeamId());
 				} else {
 					count1 = 1;
 				}
 			}
 			if (count1 == 1) {
-				int count2 = messageDao.deleteMessage(id);
+				int count2 = messageDao.deleteMessage(messageId);
 				if (count2 > 0) {
 					responseObject.setResult(true);
 				}

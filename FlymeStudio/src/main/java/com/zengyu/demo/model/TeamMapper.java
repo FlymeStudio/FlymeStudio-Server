@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.alibaba.fastjson.JSONArray;
+import com.zengyu.demo.others.Const;
 
 /**
  * 团队映射
@@ -17,10 +18,10 @@ public class TeamMapper implements RowMapper<TeamVO> {
 
 	public TeamVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		TeamVO bean = new TeamVO();
-		bean.setId(rs.getInt("id"));
-		bean.setName(rs.getString("name"));
-		bean.setTel(rs.getString("tel"));
-		JSONArray array = JSONArray.parseArray(rs.getString("members"));
+		bean.setId(rs.getInt(Const.Team.COLUMN_ID));
+		bean.setName(rs.getString(Const.Team.COLUMN_NAME));
+		bean.setUserId(rs.getInt(Const.Team.COLUMN_USER_ID));
+		JSONArray array = JSONArray.parseArray(rs.getString(Const.Team.COLUMN_MEMBERS));
 		if (array != null) {
 			bean.setMembers(array.toJavaList(MemberVO.class));
 		}

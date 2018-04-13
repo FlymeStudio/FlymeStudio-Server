@@ -10,17 +10,17 @@ public interface SummaryService {
 	/**
 	 * 获取个人总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	String get(String tel);
+	String get(int userId);
 
 	/**
 	 * 创建总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -31,26 +31,26 @@ public interface SummaryService {
 	 *            内容
 	 * @return
 	 */
-	String create(String tel, int type, String date, String title, String content);
+	String create(int userId, int type, long date, String title, String content);
 
 	/**
 	 * 删除总结
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param summaryId
+	 *            总结编号
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	String delete(String tel, int id);
-	
+	String delete(int summaryId, int userId);
+
 	/**
 	 * 修改总结
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param summaryId
+	 *            总结编号
+	 * @param userId
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -61,5 +61,5 @@ public interface SummaryService {
 	 *            内容
 	 * @return
 	 */
-	String modify(String tel, int id, int type, String date, String title, String content);
+	String modify(int summaryId, int userId, int type, long date, String title, String content);
 }

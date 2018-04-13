@@ -24,9 +24,9 @@ public class SummaryServiceImpl implements SummaryService {
 	@Resource(name = "summaryDao")
 	private SummaryDao summaryDao;
 
-	public String get(String tel) {
+	public String get(int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		List<SummaryVO> summaryVOs = summaryDao.querySummaries(tel);
+		List<SummaryVO> summaryVOs = summaryDao.querySummaries(userId);
 		if (summaryVOs != null) {
 			try {
 				JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(summaryVOs));
@@ -38,27 +38,27 @@ public class SummaryServiceImpl implements SummaryService {
 		return responseObject.toJSONString();
 	}
 
-	public String create(String tel, int type, String date, String title, String content) {
+	public String create(int userId, int type, long date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = summaryDao.addSummary(tel, type, date, title, content);
+		int count = summaryDao.addSummary(userId, type, date, title, content);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String delete(String tel, int id) {
+	public String delete(int id, int userId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = summaryDao.deleteSummary(tel, id);
+		int count = summaryDao.deleteSummary(id, userId);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String modify(String tel, int id, int type, String date, String title, String content) {
+	public String modify(int id, int userId, int type, long date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = summaryDao.updateSummary(tel, id, type, date, title, content);
+		int count = summaryDao.updateSummary(id, userId, type, date, title, content);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}

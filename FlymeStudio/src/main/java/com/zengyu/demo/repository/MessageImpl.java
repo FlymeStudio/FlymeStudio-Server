@@ -19,49 +19,66 @@ import com.zengyu.demo.others.Const;
 @Repository(value = "messageDao")
 public class MessageImpl extends AbstractImpl implements MessageDao {
 
-	public int addMessage(int type, String sender, String receiver, int teamid) {
-		if (queryMessageByDetail(type, sender, receiver, teamid) != null) {
-			return 0;
+	public int addMessage(int messageType, int senderId, int receiverId, int teamId) {
+		if (queryMessageByDetail(messageType, senderId, receiverId, teamId) == null) {
+			String SQL = "insert into " + Const.Message.TABLE_NAME + " values(?,?,?,?,?)";
+			try {
+				return jdbcTemplate.update(SQL, null, messageType, senderId, receiverId, teamId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		String SQL = "insert into " + Const.Message.TABLE_NAME + " values(?,?,?,?,?)";
-		return jdbcTemplate.update(SQL, null, type, sender, receiver, teamid);
+		return 0;
 	}
 
-	public int deleteMessage(int id) {
+	public int deleteMessage(int messageId) {
 		String SQL = "delete from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, id);
+		try {
+			return jdbcTemplate.update(SQL, messageId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
-	public MessageVO queryMessageById(int id) {
+	public MessageVO queryMessageById(int messageId) {
 		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_ID + " = ?";
-		MessageVO messageVO = null;
 		try {
-			messageVO = jdbcTemplate.queryForObject(SQL, new MessageMapper(), id);
+			return jdbcTemplate.queryForObject(SQL, new MessageMapper(), messageId);
 		} catch (EmptyResultDataAccessException e) {
-			// TODO
+			e.printStackTrace();
 		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return messageVO;
+		return null;
 	}
 
-	public MessageVO queryMessageByDetail(int type, String sender, String receiver, int teamid) {
+	public MessageVO queryMessageByDetail(int messageType, int senderId, int receiverId, int teamId) {
 		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_TYPE + " = ? and "
-				+ Const.Message.COLUMN_SENDER + " = ? and " + Const.Message.COLUMN_RECEIVER + " = ? and "
+				+ Const.Message.COLUMN_SENDER_ID + " = ? and " + Const.Message.COLUMN_RECEIVER_ID + " = ? and "
 				+ Const.Message.COLUMN_TEAM_ID + " = ?";
-		MessageVO messageVO = null;
 		try {
-			messageVO = jdbcTemplate.queryForObject(SQL, new MessageMapper(), type, sender, receiver, teamid);
+			return jdbcTemplate.queryForObject(SQL, new MessageMapper(), messageType, senderId, receiverId, teamId);
 		} catch (EmptyResultDataAccessException e) {
-			// TODO
+			e.printStackTrace();
 		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return messageVO;
+		return null;
 	}
 
-	public List<MessageVO> queryMessages(String tel) {
-		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_RECEIVER + " = ?";
-		return jdbcTemplate.query(SQL, new MessageMapper(), tel);
+	public List<MessageVO> queryMessages(int userId) {
+		String SQL = "select * from " + Const.Message.TABLE_NAME + " where " + Const.Message.COLUMN_RECEIVER_ID
+				+ " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new MessageMapper(), userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

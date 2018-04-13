@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.zengyu.demo.others.Const;
+
 /**
  * 总结映射
  * 
@@ -15,13 +17,12 @@ public class SummaryMapper implements RowMapper<SummaryVO> {
 
 	public SummaryVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		SummaryVO bean = new SummaryVO();
-		bean.setId(rs.getInt("id"));
-		bean.setTel(rs.getString("tel"));
-		bean.setType(rs.getInt("type"));
-		bean.setDate(Long.valueOf(rs.getString("date")));
-		bean.setTitle(rs.getString("title"));
-		bean.setContent(rs.getString("content"));
+		bean.setId(rs.getInt(Const.Summary.COLUMN_ID));
+		bean.setUserId(rs.getInt(Const.Project.COLUMN_USER_ID));
+		bean.setType(rs.getInt(Const.Project.COLUMN_TYPE));
+		bean.setDate(rs.getLong(Const.Project.COLUMN_DATE));
+		bean.setTitle(rs.getString(Const.Project.COLUMN_DATE));
+		bean.setContent(rs.getString(Const.Project.COLUMN_CONTENT));
 		return bean;
 	}
-
 }

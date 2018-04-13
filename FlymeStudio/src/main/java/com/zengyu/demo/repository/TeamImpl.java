@@ -8,6 +8,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.zengyu.demo.model.MemberVO;
 import com.zengyu.demo.model.TeamMapper;
 import com.zengyu.demo.model.TeamVO;
@@ -22,115 +23,155 @@ import com.zengyu.demo.others.Const;
 @Repository(value = "teamDao")
 public class TeamImpl extends AbstractImpl implements TeamDao {
 
-	public int addTeam(String name, String tel) {
-		if (queryTeamByName(tel, name) != null) {
-			return 0;
-		} else {
+	public int addTeam(String name, int userId) {
+		if (queryTeamByName(userId, name) == null) {
 			List<MemberVO> members = new ArrayList<MemberVO>();
 			MemberVO memberVO = new MemberVO();
-			memberVO.setTel(tel);
+			memberVO.setId(userId);
 			memberVO.setPermission(2);
 			members.add(memberVO);
-			String membersString = JSON.toJSONString(members);
-			String SQL = "insert into " + Const.Team.TABLE_NAME + " values(?,?,?,?)";
-			return jdbcTemplate.update(SQL, null, name, tel, membersString);
+			try {
+				String membersString = JSON.toJSONString(members);
+				String SQL = "insert into " + Const.Team.TABLE_NAME + " values(?,?,?,?)";
+				return jdbcTemplate.update(SQL, null, name, userId, membersString);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return 0;
 	}
 
-	public int deleteTeam(int id) {
+	public int deleteTeam(int teamId) {
 		String SQL = "delete from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, id);
+		try {
+			return jdbcTemplate.update(SQL, teamId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
-	public TeamVO queryTeamById(int id) {
+	public TeamVO queryTeamById(int teamId) {
 		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ?";
-		TeamVO teamVO = null;
 		try {
-			teamVO = jdbcTemplate.queryForObject(SQL, new TeamMapper(), id);
+			return jdbcTemplate.queryForObject(SQL, new TeamMapper(), teamId);
 		} catch (EmptyResultDataAccessException e) {
-			// TODO
+			e.printStackTrace();
 		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return teamVO;
+		return null;
 	}
 
-	public TeamVO queryTeamByName(String tel, String name) {
-		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_TEL + " = ? and "
+	public TeamVO queryTeamByName(int userId, String name) {
+		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_USER_ID + " = ? and "
 				+ Const.Team.COLUMN_NAME + " = ?";
-		TeamVO teamVO = null;
 		try {
-			teamVO = jdbcTemplate.queryForObject(SQL, new TeamMapper(), tel, name);
+			return jdbcTemplate.queryForObject(SQL, new TeamMapper(), userId, name);
 		} catch (EmptyResultDataAccessException e) {
-			// TODO
+			e.printStackTrace();
 		} catch (IncorrectResultSizeDataAccessException e) {
-			// TODO
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return teamVO;
+		return null;
 	}
 
-	public List<TeamVO> queryTeams(String tel) {
-		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_TEL + " = ?";
-		return jdbcTemplate.query(SQL, new TeamMapper(), tel);
+	public List<TeamVO> queryTeams(int userId) {
+		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_USER_ID + " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new TeamMapper(), userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public List<TeamVO> queryTeamsByIdOrName(String content) {
 		String SQL = "select * from " + Const.Team.TABLE_NAME + " where " + Const.Team.COLUMN_ID + " = ? or "
-				+ Const.Team.COLUMN_NAME + " like %?%";
-		return jdbcTemplate.query(SQL, new TeamMapper(), content, content);
+				+ Const.Team.COLUMN_NAME + " = ?";
+		try {
+			return jdbcTemplate.query(SQL, new TeamMapper(), content, content);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public int addTeamMember(String tel, int id) {
-		TeamVO teamVO = queryTeamById(id);
-		if (teamVO == null) {
-			return 0;
-		}
-		MemberVO memberVO = new MemberVO();
-		memberVO.setTel(tel);
-		memberVO.setPermission(0);
-		for (int i = 0; i < teamVO.getMembers().size(); i++) {
-			if (teamVO.getMembers().get(i).getTel() == tel) {
-				return 0;
+	public int addTeamMember(int teamId, int userId) {
+		TeamVO teamVO = queryTeamById(teamId);
+		if (teamVO != null) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setId(userId);
+			memberVO.setPermission(0);
+			for (int i = 0; i < teamVO.getMembers().size(); i++) {
+				if (teamVO.getMembers().get(i).getId() == userId) {
+					return 0;
+				}
+			}
+			teamVO.getMembers().add(memberVO);
+			try {
+				String membersString = JSON.toJSONString(teamVO.getMembers());
+				String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
+						+ Const.Team.COLUMN_ID + " = ?";
+				return jdbcTemplate.update(SQL, membersString, teamId);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		teamVO.getMembers().add(memberVO);
-		String membersString = JSON.toJSONString(teamVO.getMembers());
-		String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
-				+ Const.Team.COLUMN_ID + " = ?";
-		return jdbcTemplate.update(SQL, membersString, id);
+		return 0;
 	}
 
-	public int updateMemberPermission(String tel, int id, int permission) {
-		TeamVO teamVO = queryTeamById(id);
-		if (teamVO == null) {
-			return 0;
-		}
-		for (int i = 0; i < teamVO.getMembers().size(); i++) {
-			if (teamVO.getMembers().get(i).getTel() == tel) {
-				teamVO.getMembers().get(i).setPermission(permission);
-				break;
+	public int updateMemberPermission(int teamId, int userId, int permission) {
+		TeamVO teamVO = queryTeamById(teamId);
+		if (teamVO != null) {
+			for (int i = 0; i < teamVO.getMembers().size(); i++) {
+				if (teamVO.getMembers().get(i).getId() == userId) {
+					teamVO.getMembers().get(i).setPermission(permission);
+					break;
+				}
+			}
+			try {
+				String membersString = JSON.toJSONString(teamVO.getMembers());
+				String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
+						+ Const.Team.COLUMN_ID + " = ?";
+				return jdbcTemplate.update(SQL, membersString, teamId);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		String membersString = JSON.toJSONString(teamVO.getMembers());
-		String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
-				+ Const.Team.COLUMN_TEL + " = ?";
-		return jdbcTemplate.update(SQL, membersString, tel);
+		return 0;
 	}
 
-	public int deleteTeamMember(String tel, int id) {
-		TeamVO teamVO = queryTeamById(id);
-		if (teamVO == null) {
-			return 0;
-		}
-		for (int i = 0; i < teamVO.getMembers().size(); i++) {
-			if (teamVO.getMembers().get(i).getTel() == tel) {
-				teamVO.getMembers().remove(i);
-				break;
+	public int deleteTeamMember(int teamId, int userId) {
+		TeamVO teamVO = queryTeamById(teamId);
+		if (teamVO != null) {
+			for (int i = 0; i < teamVO.getMembers().size(); i++) {
+				if (teamVO.getMembers().get(i).getId() == userId) {
+					teamVO.getMembers().remove(i);
+					break;
+				}
+			}
+			try {
+				String membersString = JSON.toJSONString(teamVO.getMembers());
+				String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
+						+ Const.Team.COLUMN_ID + " = ?";
+				return jdbcTemplate.update(SQL, membersString, teamId);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		String membersString = JSON.toJSONString(teamVO.getMembers());
-		String SQL = "update " + Const.Team.TABLE_NAME + " set " + Const.Team.COLUMN_MEMBERS + " = ? where "
-				+ Const.Team.COLUMN_TEL + " = ?";
-		return jdbcTemplate.update(SQL, membersString, tel);
+		return 0;
 	}
 }

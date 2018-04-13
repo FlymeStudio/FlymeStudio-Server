@@ -19,18 +19,18 @@ public class AccountServiceImpl implements AccountService {
 	@Resource(name = "userDao")
 	private UserDao userDao;
 
-	public String signIn(String id, String password) {
+	public String signIn(String user, String password) {
 		ResponseObject responseObject = new ResponseObject();
-		UserVO userVO = userDao.queryUserByIdAndPassword(id, password);
+		UserVO userVO = userDao.queryUserByAccountAndPassword(user, password);
 		if (userVO != null) {
 			responseObject.setData(userVO);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String signUp(String tel, String name, String email, String password) {
+	public String signUp(String num, String tel, String name, String email, String password) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = userDao.addUser(tel, name, email, password);
+		int count = userDao.addUser(num, tel, name, email, password);
 		if (count > 0) {
 			responseObject.setResult(true);
 		}
@@ -38,16 +38,16 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	// TEST
-	public String signOut(String tel) {
+	public String signOut(int id) {
 		ResponseObject responseObject = new ResponseObject();
-		UserVO userVO = userDao.queryUserByTel(tel);
+		UserVO userVO = userDao.queryUserById(id);
 		if (userVO != null) {
 			responseObject.setResult(true);
 		}
 		return responseObject.toJSONString();
 	}
 
-	public String retrieve(String tel, String name, String email) {
+	public String retrieve(String num, String tel, String name, String email) {
 		// TODO
 		return null;
 	}

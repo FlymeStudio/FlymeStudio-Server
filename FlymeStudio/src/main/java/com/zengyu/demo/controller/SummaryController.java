@@ -31,22 +31,22 @@ public class SummaryController {
 	/**
 	 * 获取个人总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/summaries/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String get(@RequestParam String tel) {
-		logger.info("get:\t tel=" + tel);
-		return summaryService.get(tel);
+	public String get(@RequestParam int user) {
+		logger.info("get:\t user=" + user);
+		return summaryService.get(user);
 	}
 
 	/**
 	 * 创建总结
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param user
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -59,36 +59,36 @@ public class SummaryController {
 	 */
 	@RequestMapping(value = "/summary/my", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@RequestParam String tel, @RequestParam int type, @RequestParam String date,
+	public String create(@RequestParam int user, @RequestParam int type, @RequestParam long date,
 			@RequestParam String title, @RequestParam String content) {
-		logger.info("create:\t tel=" + tel + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
+		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title + "\t content="
 				+ content);
-		return summaryService.create(tel, type, date, title, content);
+		return summaryService.create(user, type, date, title, content);
 	}
 
 	/**
 	 * 删除总结
 	 * 
-	 * @param tel
-	 *            电话
 	 * @param id
-	 *            编号
+	 *            任务编号
+	 * @param user
+	 *            用户编号
 	 * @return
 	 */
 	@RequestMapping(value = "/summary/my", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam String tel, @RequestParam int id) {
-		logger.info("delete:\t tel=" + tel + "\t id=" + id);
-		return summaryService.delete(tel, id);
+	public String delete(@RequestParam int id, @RequestParam int user) {
+		logger.info("delete:\t id=" + id + "\t user=" + user);
+		return summaryService.delete(id, user);
 	}
 
 	/**
 	 * 修改总结
 	 * 
-	 * @param tel
-	 *            电话
 	 * @param id
-	 *            编号
+	 *            任务编号
+	 * @param user
+	 *            用户编号
 	 * @param type
 	 *            类型
 	 * @param date
@@ -101,10 +101,10 @@ public class SummaryController {
 	 */
 	@RequestMapping(value = "/summary/my", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam String tel, @RequestParam int id, @RequestParam int type,
-			@RequestParam String date, @RequestParam String title, @RequestParam String content) {
-		logger.info("modify:\t tel=" + tel + "\t id=" + id + "\t type=" + type + "\t date=" + date + "\t title=" + title
+	public String modify(@RequestParam int id, @RequestParam int user, @RequestParam int type,
+			@RequestParam long date, @RequestParam String title, @RequestParam String content) {
+		logger.info("modify:\t id=" + id + "\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
 				+ "\t content=" + content);
-		return summaryService.modify(tel, id, type, date, title, content);
+		return summaryService.modify(id, user, type, date, title, content);
 	}
 }

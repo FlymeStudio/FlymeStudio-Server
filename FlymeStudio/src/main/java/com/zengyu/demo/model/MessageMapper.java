@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.zengyu.demo.others.Const;
+
 /**
  * 消息映射
  * 
@@ -15,11 +17,11 @@ public class MessageMapper implements RowMapper<MessageVO> {
 
 	public MessageVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		MessageVO bean = new MessageVO();
-		bean.setId(rs.getInt("id"));
-		bean.setType(rs.getInt("type"));
-		bean.setSender(rs.getString("sender"));
-		bean.setReciever(rs.getString("receiver"));
-		bean.setTeamid(rs.getInt("teamid"));
+		bean.setId(rs.getInt(Const.Message.COLUMN_ID));
+		bean.setType(rs.getInt(Const.Message.COLUMN_TYPE));
+		bean.setSenderId(rs.getInt(Const.Message.COLUMN_SENDER_ID));
+		bean.setRecieverId(rs.getInt(Const.Message.COLUMN_RECEIVER_ID));
+		bean.setTeamId(rs.getInt(Const.Message.COLUMN_TEAM_ID));
 		return bean;
 	}
 }

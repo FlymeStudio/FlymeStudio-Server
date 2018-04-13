@@ -16,49 +16,49 @@ public interface TeamDao {
 	 * 
 	 * @param name
 	 *            团队名
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	int addTeam(String name, String tel);
+	int addTeam(String name, int userId);
 
 	/**
 	 * 删除团队
 	 * 
-	 * @param id
+	 * @param teamId
 	 *            编号
 	 * @return
 	 */
-	int deleteTeam(int id);
+	int deleteTeam(int teamId);
 
 	/**
 	 * 通过编号查询团队
 	 * 
-	 * @param id
+	 * @param teamId
 	 *            编号
 	 * @return
 	 */
-	TeamVO queryTeamById(int id);
+	TeamVO queryTeamById(int teamId);
 
 	/**
 	 * 通过名称查询团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @param name
 	 *            团队名
 	 * @return
 	 */
-	TeamVO queryTeamByName(String tel, String name);
+	TeamVO queryTeamByName(int userId, String name);
 
 	/**
 	 * 查询个人团队
 	 * 
-	 * @param tel
-	 *            电话
+	 * @param userId
+	 *            用户编号
 	 * @return
 	 */
-	List<TeamVO> queryTeams(String tel);
+	List<TeamVO> queryTeams(int userId);
 
 	/**
 	 * 通过编号或名称查找团队
@@ -72,35 +72,36 @@ public interface TeamDao {
 	/**
 	 * 添加团队成员
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
-	 *            编号
+	 * @param teamId
+	 *            团队编号
+	 * @param userId
+	 *            成员编号
 	 * @return
 	 */
-	int addTeamMember(String tel, int id);
+	int addTeamMember(int teamId, int userId);
 
 	/**
 	 * 更新团队成员权限
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
+	 * @param teamId
 	 *            编号
+	 * @param userId
+	 *            成员编号
 	 * @param permission
 	 *            权限
 	 * @return
 	 */
-	int updateMemberPermission(String tel, int id, int permission);
+	int updateMemberPermission(int teamId, int userId, int permission);
 
 	/**
 	 * 删除团队成员
 	 * 
-	 * @param tel
-	 *            电话
-	 * @param id
+	 * 
+	 * @param teamId
 	 *            编号
+	 * @param userId
+	 *            成员编号
 	 * @return
 	 */
-	int deleteTeamMember(String tel, int id);
+	int deleteTeamMember(int teamId, int userId);
 }

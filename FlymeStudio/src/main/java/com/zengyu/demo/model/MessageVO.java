@@ -22,19 +22,19 @@ public class MessageVO implements Serializable {
 	private int type;
 
 	/**
-	 * 发送人电话，11位
+	 * 发送人编号
 	 */
-	private String sender;
+	private int senderId;
 
 	/**
-	 * 接收人电话，11位
+	 * 接收人编号
 	 */
-	private String reciever;
+	private int recieverId;
 
 	/**
-	 * 团队编号，数据库递增产生
+	 * 团队编号
 	 */
-	private int teamid;
+	private int teamId;
 
 	public void setId(int id) {
 		this.id = id;
@@ -52,27 +52,27 @@ public class MessageVO implements Serializable {
 		return type;
 	}
 
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setSenderId(int senderId) {
+		this.senderId = senderId;
 	}
 
-	public String getSender() {
-		return sender;
+	public int getSenderId() {
+		return senderId;
 	}
 
-	public void setReciever(String reciever) {
-		this.reciever = reciever;
+	public void setRecieverId(int recieverId) {
+		this.recieverId = recieverId;
 	}
 
-	public String getReciever() {
-		return reciever;
+	public int getRecieverId() {
+		return recieverId;
 	}
 
-	public void setTeamid(int teamid) {
-		this.teamid = teamid;
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
 	}
 
-	public int getTeamid() {
-		return teamid;
+	public int getTeamId() {
+		return teamId;
 	}
 }

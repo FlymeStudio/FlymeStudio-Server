@@ -17,9 +17,9 @@ public class SummaryVO implements Serializable {
 	private int id;
 
 	/**
-	 * 创建人电话，11位
+	 * 创建人编号
 	 */
-	private String tel;
+	private int userId;
 
 	/**
 	 * 总结类型，1位
@@ -49,12 +49,12 @@ public class SummaryVO implements Serializable {
 		return id;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setUserId(int user) {
+		this.userId = user;
 	}
-
-	public String getTel() {
-		return tel;
+	
+	public int getUserId() {
+		return userId;
 	}
 
 	public void setType(int type) {
