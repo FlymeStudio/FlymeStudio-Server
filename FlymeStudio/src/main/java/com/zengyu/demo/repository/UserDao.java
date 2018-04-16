@@ -119,5 +119,5 @@ public interface UserDao {
 	 *            所属团队
 	 * @return
 	 */
-	int updateUserTeams(int id, List<String> teams);
+	int updateUserTeams(int id, List<Integer> teams);
 }

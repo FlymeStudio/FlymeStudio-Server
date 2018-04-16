@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,8 @@ import com.zengyu.demo.service.ProjectService;
  *
  */
 @Controller
-@RequestMapping(value = "/Project", produces = { "text/html;charset=UTF-8;", "application/json;" })
+@RequestMapping(value = "/Project", produces = { "text/html;charset=UTF-8;", "application/json;charset=UTF-8;" })
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProjectController {
 	static Logger logger = Logger.getLogger(ProjectController.class.getSimpleName());
 	private ProjectService projectService;
@@ -39,8 +41,7 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/projects/all", method = RequestMethod.GET)
 	@ResponseBody
-	public String get(@RequestParam int user, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public String get(@RequestParam int user) {
 		logger.info("get:\t user=" + user);
 		String responseStr = projectService.get(user);
 		logger.info("get response:\t" + responseStr);
@@ -69,7 +70,6 @@ public class ProjectController {
 	public String create(@RequestParam int user, @RequestParam int type, @RequestParam long date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans,
 			HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
 				+ "\t content=" + content + "\t plans=" + plans);
 		String responseStr = projectService.create(user, type, date, title, content, plans);
@@ -88,8 +88,7 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/project/my", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String delete(@RequestParam int id, @RequestParam int user, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public String delete(@RequestParam int id, @RequestParam int user) {
 		logger.info("delete:\t id=" + id + "\t user=" + user);
 		String responseStr = projectService.delete(id, user);
 		logger.info("delete response:\t" + responseStr);
@@ -120,7 +119,6 @@ public class ProjectController {
 	public String modify(@RequestParam int id, @RequestParam int user, @RequestParam int type, @RequestParam long date,
 			@RequestParam String title, @RequestParam String content, @RequestParam String plans,
 			HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		logger.info("modify:\t id=" + id + "\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title="
 				+ title + "\t content=" + content + "\t plans=" + plans);
 		String responseStr = projectService.modify(id, user, type, date, title, content, plans);

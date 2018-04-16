@@ -25,7 +25,7 @@ public class UserImpl extends AbstractImpl implements UserDao {
 		if (queryUserByNum(num) == null && queryUserByTel(tel) == null && queryUserByEmail(email) == null) {
 			String SQL = "insert into " + Const.User.TABLE_NAME + " values(?,?,?,?,?,?,?)";
 			try {
-				return jdbcTemplate.update(SQL, 0, num, tel, name, email, password, null);
+				return jdbcTemplate.update(SQL, null, num, tel, name, email, password, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -132,14 +132,14 @@ public class UserImpl extends AbstractImpl implements UserDao {
 				+ Const.User.COLUMN_NAME + " = ?, " + Const.User.COLUMN_EMAIL + " = ?, " + Const.User.COLUMN_PASSWORD
 				+ " = ? where " + Const.User.COLUMN_ID + " = ?";
 		try {
-			return jdbcTemplate.update(SQL, tel, name, email, password);
+			return jdbcTemplate.update(SQL, tel, name, email, password, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
-	public int updateUserTeams(int id, List<String> teams) {
+	public int updateUserTeams(int id, List<Integer> teams) {
 		try {
 			String teamsString = JSON.toJSONString(teams);
 			String SQL = "update " + Const.User.TABLE_NAME + " set " + Const.User.COLUMN_TEAMS + " = ? where "

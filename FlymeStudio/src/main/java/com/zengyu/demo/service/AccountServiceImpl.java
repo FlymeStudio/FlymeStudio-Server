@@ -56,11 +56,12 @@ public class AccountServiceImpl implements AccountService {
 				object.put("senderName", sender.getName());
 
 				TeamVO teamVO = teamDao.queryTeamById(messageVOs.get(i).getTeamId());
+				object.put("teamId", messageVOs.get(i).getTeamId());
 				object.put("teamName", teamVO.getName());
 
 				jsonArray.add(object);
 			}
-			jsonObject.put("messages", jsonArray.toJSONString());
+			jsonObject.put("messages", jsonArray);
 			responseObject.setData(jsonObject);
 		}
 		return responseObject.toJSONString();
