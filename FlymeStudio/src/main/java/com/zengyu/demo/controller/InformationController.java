@@ -47,9 +47,8 @@ public class InformationController {
 	 */
 	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 	@ResponseBody
-	public String modify(@RequestParam int id, @RequestParam(required = false) String tel,
-			@RequestParam(required = false) String name, @RequestParam(required = false) String email,
-			@RequestParam(required = false) String password) {
+	public String modify(@RequestParam int id, @RequestParam String tel, @RequestParam String name,
+			@RequestParam String email, @RequestParam String password) {
 		logger.info("modify:\t id=" + id + "\t tel=" + tel + "\t name=" + name + "\t email=" + email + "\t password="
 				+ password);
 		String responseStr = informationService.modify(Integer.valueOf(id), tel, name, email, password);

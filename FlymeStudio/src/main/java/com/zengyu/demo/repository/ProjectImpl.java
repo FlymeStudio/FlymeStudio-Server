@@ -23,16 +23,14 @@ import com.zengyu.demo.others.Const;
 public class ProjectImpl extends AbstractImpl implements ProjectDao {
 
 	public int addProject(int userId, int type, long date, String title, String content, List<PlanVO> plans) {
-		if (queryProjectByDetail(userId, type, date, title) == null) {
-			try {
-				String plansStrign = JSON.toJSONString(plans);
-				String SQL = "insert into " + Const.Project.TABLE_NAME + " values(?,?,?,?,?,?,?)";
-				return jdbcTemplate.update(SQL, null, userId, type, date, title, content, plansStrign);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try {
+			String plansStrign = JSON.toJSONString(plans);
+			String SQL = "insert into " + Const.Project.TABLE_NAME + " values(?,?,?,?,?,?,?)";
+			return jdbcTemplate.update(SQL, null, userId, type, date, title, content, plansStrign);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -87,7 +85,10 @@ public class ProjectImpl extends AbstractImpl implements ProjectDao {
 	public int updateProject(int projectId, int userId, int type, long date, String title, String content,
 			List<PlanVO> plans) {
 		try {
-			String plansStrign = JSON.toJSONString(plans);
+			String plansStrign = null;
+			if (plans != null) {
+				plansStrign = JSON.toJSONString(plans);
+			}
 			String SQL = "update " + Const.Project.TABLE_NAME + " set " + Const.Project.COLUMN_TYPE + " = ?, "
 					+ Const.Project.COLUMN_DATE + " = ?, " + Const.Project.COLUMN_TITLE + " = ?, "
 					+ Const.Project.COLUMN_CONTENT + " = ?, " + Const.Project.COLUMN_PLANS + " = ? where "

@@ -68,7 +68,7 @@ public class ProjectController {
 	@RequestMapping(value = "/project/my", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam int user, @RequestParam int type, @RequestParam long date,
-			@RequestParam String title, @RequestParam String content, @RequestParam String plans,
+			@RequestParam String title, @RequestParam String content, @RequestParam(required = false) String plans,
 			HttpServletResponse response) {
 		logger.info("create:\t user=" + user + "\t type=" + type + "\t date=" + date + "\t title=" + title
 				+ "\t content=" + content + "\t plans=" + plans);

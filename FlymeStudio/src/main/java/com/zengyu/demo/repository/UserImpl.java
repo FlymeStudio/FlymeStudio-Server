@@ -22,13 +22,11 @@ import com.zengyu.demo.others.Const;
 public class UserImpl extends AbstractImpl implements UserDao {
 
 	public int addUser(String num, String tel, String name, String email, String password) {
-		if (queryUserByNum(num) == null && queryUserByTel(tel) == null && queryUserByEmail(email) == null) {
-			String SQL = "insert into " + Const.User.TABLE_NAME + " values(?,?,?,?,?,?,?)";
-			try {
-				return jdbcTemplate.update(SQL, null, num, tel, name, email, password, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		String SQL = "insert into " + Const.User.TABLE_NAME + " values(?,?,?,?,?,?,?)";
+		try {
+			return jdbcTemplate.update(SQL, null, num, tel, name, email, password, null);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}

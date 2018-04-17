@@ -20,13 +20,11 @@ import com.zengyu.demo.others.Const;
 public class SummaryImpl extends AbstractImpl implements SummaryDao {
 
 	public int addSummary(int userId, int type, long date, String title, String content) {
-		if (querySummaryByDetail(userId, type, date, title) == null) {
-			String SQL = "insert into " + Const.Summary.TABLE_NAME + " values(?,?,?,?,?,?)";
-			try {
-				return jdbcTemplate.update(SQL, null, userId, type, date, title, content);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		String SQL = "insert into " + Const.Summary.TABLE_NAME + " values(?,?,?,?,?,?)";
+		try {
+			return jdbcTemplate.update(SQL, null, userId, type, date, title, content);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}

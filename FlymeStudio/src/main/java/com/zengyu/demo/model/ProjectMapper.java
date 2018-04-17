@@ -23,7 +23,7 @@ public class ProjectMapper implements RowMapper<ProjectVO> {
 		bean.setPercent(0);
 		bean.setType(rs.getInt(Const.Project.COLUMN_TYPE));
 		bean.setDate(rs.getLong(Const.Project.COLUMN_DATE));
-		bean.setTitle(rs.getString(Const.Project.COLUMN_DATE));
+		bean.setTitle(rs.getString(Const.Project.COLUMN_TITLE));
 		bean.setContent(rs.getString(Const.Project.COLUMN_CONTENT));
 		JSONArray array = JSONArray.parseArray(rs.getString(Const.Project.COLUMN_PLANS));
 		if (array != null) {

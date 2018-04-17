@@ -121,9 +121,11 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String invite(int senderId, int receiverId, int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = messageDao.addMessage(1, senderId, receiverId, teamId);
-		if (count > 0) {
-			responseObject.setResult(true);
+		if (messageDao.queryMessageByDetail(1, senderId, receiverId, teamId)==null) {
+			int count = messageDao.addMessage(1, senderId, receiverId, teamId);
+			if (count > 0) {
+				responseObject.setResult(true);
+			}
 		}
 		return responseObject.toJSONString();
 	}
@@ -227,9 +229,11 @@ public class TeamworkServiceImpl implements TeamworkService {
 				}
 			}
 			if (!isMember) {
-				int count = messageDao.addMessage(2, senderId, teamVO.getUserId(), teamId);
-				if (count > 0) {
-					responseObject.setResult(true);
+				if (messageDao.queryMessageByDetail(2, senderId, teamVO.getUserId(), teamId)==null) {
+					int count = messageDao.addMessage(2, senderId, teamVO.getUserId(), teamId);
+					if (count > 0) {
+						responseObject.setResult(true);
+					}
 				}
 			}
 		}
@@ -239,18 +243,20 @@ public class TeamworkServiceImpl implements TeamworkService {
 	public String create(int userId, String name) {
 		ResponseObject responseObject = new ResponseObject();
 		if (teamDao.queryTeamByName(userId, name) == null) {
-			int count1 = teamDao.addTeam(name, userId);
-			if (count1 > 0) {
-				TeamVO teamVO = teamDao.queryTeamByName(userId, name);
-				UserVO user = userDao.queryUserById(userId);
-				List<Integer> teams = user.getTeams();
-				if (teams == null) {
-					teams = new ArrayList<Integer>();
-				}
-				teams.add(teamVO.getId());
-				int count2 = userDao.updateUserTeams(userId, teams);
-				if (count2 > 0) {
-					responseObject.setResult(true);
+			if (teamDao.queryTeamByName(userId, name)==null) {
+				int count1 = teamDao.addTeam(name, userId);
+				if (count1 > 0) {
+					TeamVO teamVO = teamDao.queryTeamByName(userId, name);
+					UserVO user = userDao.queryUserById(userId);
+					List<Integer> teams = user.getTeams();
+					if (teams == null) {
+						teams = new ArrayList<Integer>();
+					}
+					teams.add(teamVO.getId());
+					int count2 = userDao.updateUserTeams(userId, teams);
+					if (count2 > 0) {
+						responseObject.setResult(true);
+					}
 				}
 			}
 		}

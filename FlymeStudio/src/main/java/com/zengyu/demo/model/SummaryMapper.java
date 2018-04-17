@@ -21,7 +21,7 @@ public class SummaryMapper implements RowMapper<SummaryVO> {
 		bean.setUserId(rs.getInt(Const.Project.COLUMN_USER_ID));
 		bean.setType(rs.getInt(Const.Project.COLUMN_TYPE));
 		bean.setDate(rs.getLong(Const.Project.COLUMN_DATE));
-		bean.setTitle(rs.getString(Const.Project.COLUMN_DATE));
+		bean.setTitle(rs.getString(Const.Project.COLUMN_TITLE));
 		bean.setContent(rs.getString(Const.Project.COLUMN_CONTENT));
 		return bean;
 	}

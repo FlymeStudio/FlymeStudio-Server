@@ -20,13 +20,11 @@ import com.zengyu.demo.others.Const;
 public class MessageImpl extends AbstractImpl implements MessageDao {
 
 	public int addMessage(int messageType, int senderId, int receiverId, int teamId) {
-		if (queryMessageByDetail(messageType, senderId, receiverId, teamId) == null) {
-			String SQL = "insert into " + Const.Message.TABLE_NAME + " values(?,?,?,?,?)";
-			try {
-				return jdbcTemplate.update(SQL, null, messageType, senderId, receiverId, teamId);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		String SQL = "insert into " + Const.Message.TABLE_NAME + " values(?,?,?,?,?)";
+		try {
+			return jdbcTemplate.update(SQL, null, messageType, senderId, receiverId, teamId);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}
