@@ -38,7 +38,7 @@ body, html {
 	<div id="welcome">
 		<div class="div-item">Welcome to Flyme Studio!</div>
 		<div class="div-item">
-			<a href="http://localhost:12102/" style="color: #5cadff;">Click
+			<a href="http://localhost:8080/FlymeStudio/pages/index.html" style="color: #5cadff;">Click
 				here to turn to home page.</a>
 		</div>
 	</div>

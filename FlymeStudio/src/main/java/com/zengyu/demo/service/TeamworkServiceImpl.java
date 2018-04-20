@@ -77,8 +77,8 @@ public class TeamworkServiceImpl implements TeamworkService {
 				JSONArray members = new JSONArray();
 				boolean isManaged = false;
 				for (int j = 0; j < teamVO.getMembers().size(); j++) {
-					int id = teamVO.getMembers().get(i).getId();
-					if (id == userId) {
+					int id = teamVO.getMembers().get(j).getId();
+					if (id == userId && teamVO.getMembers().get(j).getPermission() > 0) {
 						isManaged = true;
 					}
 					JSONObject memberObj = new JSONObject();
@@ -88,7 +88,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 					memberObj.put("tel", member.getTel());
 					memberObj.put("name", member.getName());
 					memberObj.put("email", member.getEmail());
-					memberObj.put("permission", teamVO.getMembers().get(i).getPermission());
+					memberObj.put("permission", teamVO.getMembers().get(j).getPermission());
 					members.add(memberObj);
 				}
 				team.put("members", members);
