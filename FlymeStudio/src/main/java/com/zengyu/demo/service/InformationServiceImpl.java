@@ -1,10 +1,14 @@
 package com.zengyu.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.zengyu.demo.model.MessageVO;
+import com.zengyu.demo.model.UserVO;
 import com.zengyu.demo.others.ResponseObject;
 import com.zengyu.demo.repository.MessageDao;
 import com.zengyu.demo.repository.TeamDao;
@@ -43,18 +47,40 @@ public class InformationServiceImpl implements InformationService {
 			int count1 = 0;
 			if (messageVO.getType() == 1) {
 				if (result) {
-					count1 = teamDao.addTeamMember(messageVO.getRecieverId(), messageVO.getTeamId());
+					count1 += teamDao.addTeamMember(messageVO.getTeamId(), messageVO.getRecieverId());
+					UserVO userVO = userDao.queryUserById(messageVO.getRecieverId());
+					List<Integer> teams = userVO.getTeams();
+					if (teams == null) {
+						teams = new ArrayList<Integer>();
+						teams.add(messageVO.getTeamId());
+					} else {
+						if (!teams.contains(messageVO.getTeamId())) {
+							teams.add(messageVO.getTeamId());
+						}
+					}
+					count1 += userDao.updateUserTeams(messageVO.getRecieverId(), teams);
 				} else {
-					count1 = 1;
+					count1 = 2;
 				}
 			} else if (messageVO.getType() == 2) {
 				if (result) {
-					count1 = teamDao.addTeamMember(messageVO.getSenderId(), messageVO.getTeamId());
+					count1 += teamDao.addTeamMember(messageVO.getTeamId(), messageVO.getSenderId());
+					UserVO userVO = userDao.queryUserById(messageVO.getSenderId());
+					List<Integer> teams = userVO.getTeams();
+					if (teams == null) {
+						teams = new ArrayList<Integer>();
+						teams.add(messageVO.getTeamId());
+					} else {
+						if (!teams.contains(messageVO.getTeamId())) {
+							teams.add(messageVO.getTeamId());
+						}
+					}
+					count1 += userDao.updateUserTeams(messageVO.getSenderId(), teams);
 				} else {
-					count1 = 1;
+					count1 = 2;
 				}
 			}
-			if (count1 == 1) {
+			if (count1 == 2) {
 				int count2 = messageDao.deleteMessage(messageId);
 				if (count2 > 0) {
 					responseObject.setResult(true);

@@ -24,21 +24,19 @@ import com.zengyu.demo.others.Const;
 public class TeamImpl extends AbstractImpl implements TeamDao {
 
 	public int addTeam(String name, int userId) {
-		if (queryTeamByName(userId, name) == null) {
-			List<MemberVO> members = new ArrayList<MemberVO>();
-			MemberVO memberVO = new MemberVO();
-			memberVO.setId(userId);
-			memberVO.setPermission(2);
-			members.add(memberVO);
-			try {
-				String membersString = JSON.toJSONString(members);
-				String SQL = "insert into " + Const.Team.TABLE_NAME + " values(?,?,?,?)";
-				return jdbcTemplate.update(SQL, null, name, userId, membersString);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		List<MemberVO> members = new ArrayList<MemberVO>();
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(userId);
+		memberVO.setPermission(2);
+		members.add(memberVO);
+		try {
+			String membersString = JSON.toJSONString(members);
+			String SQL = "insert into " + Const.Team.TABLE_NAME + " values(?,?,?,?)";
+			return jdbcTemplate.update(SQL, null, name, userId, membersString);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
 	}

@@ -1,5 +1,6 @@
 package com.zengyu.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,11 +44,15 @@ public class ProjectServiceImpl implements ProjectService {
 		ResponseObject responseObject = new ResponseObject();
 		try {
 			JSONArray jsonArray = JSONArray.parseArray(plans);
+			List<PlanVO> planVOs = null;
 			if (jsonArray != null) {
-				int count = projectDao.addProject(userId, type, date, title, content, jsonArray.toJavaList(PlanVO.class));
-				if (count > 0) {
-					responseObject.setResult(true);
-				}
+				planVOs = jsonArray.toJavaList(PlanVO.class);
+			} else {
+				planVOs = new ArrayList<PlanVO>();
+			}
+			int count = projectDao.addProject(userId, type, date, title, content, planVOs);
+			if (count > 0) {
+				responseObject.setResult(true);
 			}
 		} catch (JSONException e) {
 			// TODO

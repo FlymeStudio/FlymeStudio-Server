@@ -56,11 +56,12 @@ public class AccountServiceImpl implements AccountService {
 				object.put("senderName", sender.getName());
 
 				TeamVO teamVO = teamDao.queryTeamById(messageVOs.get(i).getTeamId());
+				object.put("teamId", messageVOs.get(i).getTeamId());
 				object.put("teamName", teamVO.getName());
 
 				jsonArray.add(object);
 			}
-			jsonObject.put("messages", jsonArray.toJSONString());
+			jsonObject.put("messages", jsonArray);
 			responseObject.setData(jsonObject);
 		}
 		return responseObject.toJSONString();
@@ -68,9 +69,12 @@ public class AccountServiceImpl implements AccountService {
 
 	public String signUp(String num, String tel, String name, String email, String password) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = userDao.addUser(num, tel, name, email, password);
-		if (count > 0) {
-			responseObject.setResult(true);
+		if (userDao.queryUserByNum(num) == null && userDao.queryUserByTel(tel) == null
+				&& userDao.queryUserByEmail(email) == null) {
+			int count = userDao.addUser(num, tel, name, email, password);
+			if (count > 0) {
+				responseObject.setResult(true);
+			}
 		}
 		return responseObject.toJSONString();
 	}

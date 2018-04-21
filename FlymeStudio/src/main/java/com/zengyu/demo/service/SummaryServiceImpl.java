@@ -40,9 +40,11 @@ public class SummaryServiceImpl implements SummaryService {
 
 	public String create(int userId, int type, long date, String title, String content) {
 		ResponseObject responseObject = new ResponseObject();
-		int count = summaryDao.addSummary(userId, type, date, title, content);
-		if (count > 0) {
-			responseObject.setResult(true);
+		if (summaryDao.querySummaryByDetail(userId, type, date, title)==null) {
+			int count = summaryDao.addSummary(userId, type, date, title, content);
+			if (count > 0) {
+				responseObject.setResult(true);
+			}
 		}
 		return responseObject.toJSONString();
 	}

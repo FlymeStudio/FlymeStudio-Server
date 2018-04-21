@@ -2,10 +2,9 @@ package com.zengyu.demo.controller;
 
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,8 @@ import com.zengyu.demo.service.AccountService;
  *
  */
 @Controller
-@RequestMapping(value = "/Account", produces = { "text/html;charset=UTF-8;", "application/json;" })
+@RequestMapping(value = "/Account", produces = { "text/html;charset=UTF-8;", "application/json;charset=UTF-8;" })
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AccountController {
 	static Logger logger = Logger.getLogger(AccountController.class.getSimpleName());
 	private AccountService accountService;
@@ -39,11 +39,9 @@ public class AccountController {
 	 *            密码
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = { "text/html;charset=UTF-8;", "application/json;charset=UTF-8;" })
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public String signIn(@RequestParam String user, @RequestParam String password, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Expose-Headers", "Authorization");
+	public String signIn(@RequestParam String user, @RequestParam String password) {
 		logger.info("signIn:\t id=" + user + "\t password=" + password);
 		String responseStr = accountService.signIn(user, password);
 		logger.info("signIn response:\t" + responseStr);
@@ -68,8 +66,7 @@ public class AccountController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public String signUp(@RequestParam String num, @RequestParam String name, @RequestParam String tel,
-			@RequestParam String email, @RequestParam String password, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+			@RequestParam String email, @RequestParam String password) {
 		logger.info("signUp:\t num=" + num + "\t name=" + name + "\t tel=" + tel + "\t email=" + email + "\t password="
 				+ password);
 		String responseStr = accountService.signUp(num, tel, name, email, password);
@@ -86,9 +83,8 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
-	public String signOut(@RequestParam int id, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		logger.info("signOut:\t tel=" + id);
+	public String signOut(@RequestParam int id) {
+		logger.info("signOut:\t id=" + id);
 		String responseStr = accountService.signOut(id);
 		logger.info("signOut response:\t" + responseStr);
 		return responseStr;
@@ -110,8 +106,7 @@ public class AccountController {
 	@RequestMapping(value = "/retrieve", method = RequestMethod.POST)
 	@ResponseBody
 	public String retrieve(@RequestParam String num, @RequestParam String tel, @RequestParam String name,
-			@RequestParam String email, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+			@RequestParam String email) {
 		logger.info("retrieve:\t num=" + num + "\t tel=" + tel + "\t name=" + name + "\t email=" + email);
 		String responseStr = accountService.retrieve(num, tel, name, email);
 		logger.info("retrieve response:\t" + responseStr);
