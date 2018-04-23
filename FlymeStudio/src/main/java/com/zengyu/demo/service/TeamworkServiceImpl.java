@@ -121,7 +121,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 
 	public String invite(int senderId, int receiverId, int teamId) {
 		ResponseObject responseObject = new ResponseObject();
-		if (messageDao.queryMessageByDetail(1, senderId, receiverId, teamId)==null) {
+		if (messageDao.queryMessageByDetail(1, senderId, receiverId, teamId) == null) {
 			int count = messageDao.addMessage(1, senderId, receiverId, teamId);
 			if (count > 0) {
 				responseObject.setResult(true);
@@ -141,6 +141,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 				for (int i = 0; i < teams.size(); i++) {
 					if (teams.get(i) == teamId) {
 						teams.remove(i);
+						break;
 					}
 				}
 				int count2 = userDao.updateUserTeams(userVO.getId(), teams);
@@ -193,7 +194,18 @@ public class TeamworkServiceImpl implements TeamworkService {
 		ResponseObject responseObject = new ResponseObject();
 		int count = teamDao.deleteTeamMember(teamId, userId);
 		if (count > 0) {
-			responseObject.setResult(true);
+			UserVO userVO = userDao.queryUserById(userId);
+			List<Integer> teams = userVO.getTeams();
+			for (int i = 0; i < teams.size(); i++) {
+				if (teams.get(i) == teamId) {
+					teams.remove(i);
+					break;
+				}
+			}
+			int count2 = userDao.updateUserTeams(userVO.getId(), teams);
+			if (count2 > 0) {
+				responseObject.setResult(true);
+			}
 		}
 		return responseObject.toJSONString();
 	}
@@ -229,7 +241,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 				}
 			}
 			if (!isMember) {
-				if (messageDao.queryMessageByDetail(2, senderId, teamVO.getUserId(), teamId)==null) {
+				if (messageDao.queryMessageByDetail(2, senderId, teamVO.getUserId(), teamId) == null) {
 					int count = messageDao.addMessage(2, senderId, teamVO.getUserId(), teamId);
 					if (count > 0) {
 						responseObject.setResult(true);
@@ -243,7 +255,7 @@ public class TeamworkServiceImpl implements TeamworkService {
 	public String create(int userId, String name) {
 		ResponseObject responseObject = new ResponseObject();
 		if (teamDao.queryTeamByName(userId, name) == null) {
-			if (teamDao.queryTeamByName(userId, name)==null) {
+			if (teamDao.queryTeamByName(userId, name) == null) {
 				int count1 = teamDao.addTeam(name, userId);
 				if (count1 > 0) {
 					TeamVO teamVO = teamDao.queryTeamByName(userId, name);
